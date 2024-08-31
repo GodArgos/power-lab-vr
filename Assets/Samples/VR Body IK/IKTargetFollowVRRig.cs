@@ -30,7 +30,8 @@ public class IKTargetFollowVRRig : MonoBehaviour
     {
         transform.position = head.ikTarget.position + headBodyPositionOffset;
         float yaw = head.vrTarget.eulerAngles.y;
-        transform.rotation = Quaternion.Lerp(transform.rotation,Quaternion.Euler(transform.eulerAngles.x, yaw, transform.eulerAngles.z),turnSmoothness);
+        Quaternion targetRotation = Quaternion.Euler(transform.eulerAngles.x, yaw, transform.eulerAngles.z);
+        transform.rotation = targetRotation;
 
         head.Map();
         leftHand.Map();
