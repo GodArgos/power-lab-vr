@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VRRigReferences : MonoBehaviour
+public class VRRigReferencesBORIS : MonoBehaviour
 {
-    public static VRRigReferences instance;
+    public static VRRigReferencesBORIS Instance;
 
     public Camera cam;
     public AudioListener audioListener;
@@ -15,6 +15,6 @@ public class VRRigReferences : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 }

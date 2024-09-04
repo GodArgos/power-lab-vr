@@ -28,15 +28,25 @@ public class VRPlayerNetworked : NetworkBehaviour
 
     [Header("Network Related")]
     [Space(10)]
-    [SerializeField] private NetworkTransformReliable networkHead;
-    [SerializeField] private NetworkTransformReliable networkLeftHand;
-    [SerializeField] private NetworkTransformReliable networkRightHand;
+    [SerializeField] private NetworkTransformReliable[] networkHeads;
+    [SerializeField] private NetworkTransformReliable[] networkLeftHands;
+    [SerializeField] private NetworkTransformReliable[] networkRightHands;
+    [SerializeField] private NetworkAnimator[] networkAnimators;
 
     #region Multiplayer Callback
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
         LocalPlayerSetup();
+    }
+
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        if (!isLocalPlayer)
+        {
+            RemotePlayerSetup(this.avatarSelected);
+        }
     }
     #endregion
 
@@ -45,10 +55,11 @@ public class VRPlayerNetworked : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            UpdatePart(root[avatarSelected], VRRigReferences.instance.root);
-            UpdatePart(head[avatarSelected], VRRigReferences.instance.head);
-            UpdatePart(leftHand[avatarSelected], VRRigReferences.instance.leftHand);
-            UpdatePart(rightHand[avatarSelected], VRRigReferences.instance.rightHand);
+            
+            UpdatePart(root[avatarSelected], avatarSelected == 0 ? VRRigReferencesBORIS.Instance.root : VRRigReferencesMECHA.Instance.root);
+            UpdatePart(head[avatarSelected], avatarSelected == 0 ? VRRigReferencesBORIS.Instance.head : VRRigReferencesMECHA.Instance.head);
+            UpdatePart(leftHand[avatarSelected], avatarSelected == 0 ? VRRigReferencesBORIS.Instance.leftHand : VRRigReferencesMECHA.Instance.leftHand);
+            UpdatePart(rightHand[avatarSelected], avatarSelected == 0 ? VRRigReferencesBORIS.Instance.leftHand : VRRigReferencesMECHA.Instance.rightHand);
         }
     }
 
@@ -64,20 +75,24 @@ public class VRPlayerNetworked : NetworkBehaviour
     private void LocalPlayerSetup()
     {
         int _avatarIndex = (UserDataManager.Instance.avatar == UserDataManager.Avatar.BORIS) ? 0 : 1;
-
-        ArrageNetworkTransforms(_avatarIndex);
-        AvatarSelection(_avatarIndex);
         CmdSelectAvatar(_avatarIndex);
+        ArrageNetworkComponents(_avatarIndex);
+        AvatarSelection(_avatarIndex);
+        
         DisableLocalMeshes();
     }
 
     private void AvatarSelection(int index)
     {
-        for (int i = 0; i < models.Length; i++)
+        for (int i = 0; i < this.models.Length; i++)
         {
             if (index != i)
             {
                 models[i].SetActive(false);
+            }
+            else
+            {
+                models[i].SetActive(true);
             }
         }
     }
@@ -90,11 +105,55 @@ public class VRPlayerNetworked : NetworkBehaviour
         }
     }
 
-    private void ArrageNetworkTransforms(int index)
+    private void ArrageNetworkComponents(int index)
     {
-        networkHead.target = head[index].transform;
-        networkLeftHand.target = leftHand[index].transform;
-        networkRightHand.target = rightHand[index].transform;
+        for (int i = 0; i < this.networkHeads.Length; i++)
+        {
+            if (index != i)
+            {
+                networkHeads[i].enabled = false;
+            }
+            else
+            {
+                networkHeads[i].enabled = true;
+            }
+        }
+
+        for (int i = 0; i < this.networkLeftHands.Length; i++)
+        {
+            if (index != i)
+            {
+                networkLeftHands[i].enabled = false;
+            }
+            else
+            {
+                networkLeftHands[i].enabled= true;
+            }
+        }
+
+        for (int i = 0; i < this.networkRightHands.Length; i++)
+        {
+            if (index != i)
+            {
+                networkRightHands[i].enabled = false;
+            }
+            else
+            {
+                networkRightHands[i].enabled = true;
+            }
+        }
+
+        for (int i = 0; i < this.networkAnimators.Length; i++)
+        {
+            if (index != i)
+            {
+                networkAnimators[i].enabled = false;
+            }
+            else
+            {
+                networkAnimators[i].enabled = true;
+            }
+        }
     }
     #endregion
 
@@ -106,6 +165,10 @@ public class VRPlayerNetworked : NetworkBehaviour
             if (index != i)
             {
                 models[i].SetActive(false);
+            }
+            else
+            {
+                models[i].SetActive(true);
             }
         }
     }
