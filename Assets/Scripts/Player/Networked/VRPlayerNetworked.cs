@@ -54,12 +54,11 @@ public class VRPlayerNetworked : NetworkBehaviour
     private void LateUpdate()
     {
         if (isLocalPlayer)
-        {
-            
+        { 
             UpdatePart(root[avatarSelected], avatarSelected == 0 ? VRRigReferencesBORIS.Instance.root : VRRigReferencesMECHA.Instance.root);
             UpdatePart(head[avatarSelected], avatarSelected == 0 ? VRRigReferencesBORIS.Instance.head : VRRigReferencesMECHA.Instance.head);
             UpdatePart(leftHand[avatarSelected], avatarSelected == 0 ? VRRigReferencesBORIS.Instance.leftHand : VRRigReferencesMECHA.Instance.leftHand);
-            UpdatePart(rightHand[avatarSelected], avatarSelected == 0 ? VRRigReferencesBORIS.Instance.leftHand : VRRigReferencesMECHA.Instance.rightHand);
+            UpdatePart(rightHand[avatarSelected], avatarSelected == 0 ? VRRigReferencesBORIS.Instance.rightHand : VRRigReferencesMECHA.Instance.rightHand);
         }
     }
 

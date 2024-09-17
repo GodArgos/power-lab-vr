@@ -307,7 +307,7 @@ MonoBehaviour:
   - {fileID: 8720101995478306577}
   - {fileID: 998253749130356449}
   networkRightHands:
-  - {fileID: 8720101995478306577}
+  - {fileID: 8646631666611047106}
   - {fileID: 6104519247877546669}
   networkAnimators:
   - {fileID: 6691563048534854338}
