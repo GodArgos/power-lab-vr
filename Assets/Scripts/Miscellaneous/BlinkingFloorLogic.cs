@@ -5,43 +5,32 @@ using UnityEngine;
 public class BlinkingFloorLogic : MonoBehaviour
 {
     private MeshRenderer floorRenderer;
-    private Collider floorCollider;
+    public BoxCollider triggerCollider;
+    public BoxCollider floorCollider;
     private Color originalColor;
     public Color blinkColor = Color.red; // Color when blinking
     public float blinkDuration = 1.0f;   // How long it blinks
     public float resetDelay = 5.0f;      // Time before reactivation
     public float fadeDuration = 1.0f;     // Duración de la transición de opacidad
-
     private bool isActive = true;
+    private Material initialMaterial;
 
-    // Debug variable to trigger blinking manually
-    public bool debugTrigger = false;
+    // Nuevo material para el efecto de parpadeo
+    [SerializeField] private Material blinkMaterial;
 
     private void Start()
     {
         floorRenderer = GetComponent<MeshRenderer>();
-        floorCollider = GetComponent<BoxCollider>();
         originalColor = floorRenderer.material.color;
+        initialMaterial = floorRenderer.material;
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isActive && other.CompareTag("Player")) // Ensure the player has the tag "Player"
+        if (isActive && other.gameObject.CompareTag("Player")) // Ensure the player has the tag "Player"
         {
             StartCoroutine(BlinkAndDeactivate());
-        }
-    }
-
-    private void Update()
-    {
-        // Check if debugTrigger is set to true
-        if (debugTrigger)
-        {
-            debugTrigger = false; // Reset to prevent continuous triggering
-            if (isActive)
-            {
-                StartCoroutine(BlinkAndDeactivate());
-            }
         }
     }
 
@@ -49,7 +38,8 @@ public class BlinkingFloorLogic : MonoBehaviour
     {
         isActive = false;
 
-
+        // Cambiar al material de parpadeo
+        floorRenderer.material = blinkMaterial;
 
         // Blink effect
         for (float t = 0; t < blinkDuration; t += Time.deltaTime)
@@ -65,6 +55,7 @@ public class BlinkingFloorLogic : MonoBehaviour
         // Disable the MeshRenderer and Collider
         floorRenderer.enabled = false;
         floorCollider.enabled = false;
+        triggerCollider.enabled = false;
 
         // Wait for reset delay before reactivating
         yield return new WaitForSeconds(resetDelay);
@@ -72,6 +63,7 @@ public class BlinkingFloorLogic : MonoBehaviour
         // Re-enable the MeshRenderer and Collider
         floorRenderer.enabled = true;
         floorCollider.enabled = true;
+        triggerCollider.enabled = true;
 
         // Transición de transparente a visible
         for (float t = 0; t < fadeDuration; t += Time.deltaTime)
@@ -82,6 +74,7 @@ public class BlinkingFloorLogic : MonoBehaviour
         }
 
         // Reset material color
+        floorRenderer.material = initialMaterial;
         floorRenderer.material.color = originalColor;
 
         isActive = true;

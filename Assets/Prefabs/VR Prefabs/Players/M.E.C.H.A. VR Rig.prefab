@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &429760313431110406
 Transform:
   m_ObjectHideFlags: 0
@@ -41,6 +41,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 429760313431110406}
     m_Modifications:
+    - target: {fileID: 1733948220390572625, guid: 17473bb36b13c254f9e64eebc97fbb5a,
+        type: 3}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2374063207479069602, guid: 17473bb36b13c254f9e64eebc97fbb5a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -95,6 +100,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5689163514408887122, guid: 17473bb36b13c254f9e64eebc97fbb5a,
+        type: 3}
+      propertyPath: speed
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7061050791570036711, guid: 17473bb36b13c254f9e64eebc97fbb5a,
         type: 3}

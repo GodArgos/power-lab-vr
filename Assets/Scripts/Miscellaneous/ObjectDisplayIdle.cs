@@ -30,4 +30,9 @@ public class ObjectDisplayIdle : MonoBehaviour
         // Aplica la nueva posición
         transform.position = new Vector3(transform.position.x, nuevaY, transform.position.z);
     }
+
+    public void OnSelectObject()
+    {
+        GetComponent<ObjectDisplayIdle>().enabled = false;
+    }
 }

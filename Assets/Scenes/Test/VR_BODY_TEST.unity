@@ -176,6 +176,84 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 2
+--- !u!1001 &959016909
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 119908250927435445, guid: 25dee1861fe90474d8c0a3d6175dd924,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 119908250927435445, guid: 25dee1861fe90474d8c0a3d6175dd924,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 119908250927435445, guid: 25dee1861fe90474d8c0a3d6175dd924,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 119908250927435445, guid: 25dee1861fe90474d8c0a3d6175dd924,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 119908250927435445, guid: 25dee1861fe90474d8c0a3d6175dd924,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 119908250927435445, guid: 25dee1861fe90474d8c0a3d6175dd924,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 119908250927435445, guid: 25dee1861fe90474d8c0a3d6175dd924,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 119908250927435445, guid: 25dee1861fe90474d8c0a3d6175dd924,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 119908250927435445, guid: 25dee1861fe90474d8c0a3d6175dd924,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 119908250927435445, guid: 25dee1861fe90474d8c0a3d6175dd924,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5366951684171482986, guid: 25dee1861fe90474d8c0a3d6175dd924,
+        type: 3}
+      propertyPath: m_TeleportInteractor
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6196429914882546398, guid: 25dee1861fe90474d8c0a3d6175dd924,
+        type: 3}
+      propertyPath: m_TeleportInteractor
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9059098141719830551, guid: 25dee1861fe90474d8c0a3d6175dd924,
+        type: 3}
+      propertyPath: m_Name
+      value: VR Full Set-Up
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 25dee1861fe90474d8c0a3d6175dd924, type: 3}
 --- !u!1 &1162389080
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,11 +722,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: M.E.C.H.A. VR Rig
       objectReference: {fileID: 0}
-    - target: {fileID: 3437107753347444719, guid: 749c74abbfaa94b43ae21bda9f4dd504,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -671,6 +744,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: B.O.R.I.S. VR Rig
+      objectReference: {fileID: 0}
+    - target: {fileID: 5119944915634682446, guid: f84b99bd58eba7949b72840a40add8f1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6895224558688987296, guid: f84b99bd58eba7949b72840a40add8f1,
         type: 3}
@@ -752,3 +830,4 @@ SceneRoots:
   - {fileID: 1162389084}
   - {fileID: 5945903533599818171}
   - {fileID: 99117330509308905}
+  - {fileID: 959016909}

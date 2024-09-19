@@ -8,7 +8,6 @@ public class LaserLogic : MonoBehaviour
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private float laserDistance = 8f;
     [SerializeField] private LayerMask ignoreMask;
-    [SerializeField] private UnityEvent OnHitTarget;
 
     private RaycastHit rayHit;
     private Ray ray;
@@ -25,6 +24,12 @@ public class LaserLogic : MonoBehaviour
         {
             lineRenderer.SetPosition(0, transform.position);
             lineRenderer.SetPosition(1, rayHit.point);
+
+            // Verificar si el objeto impactado está en la capa "Player"
+            if (rayHit.collider != null && rayHit.collider.CompareTag("Player"))
+            {
+                SpawnManager.Instance.OnHitPlayer?.Invoke(); // Llamar al evento si se detecta el jugador
+            }
         }
         else
         {
