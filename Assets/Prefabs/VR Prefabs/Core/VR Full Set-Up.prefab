@@ -134,6 +134,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 119908250927435445}
     m_Modifications:
+    - target: {fileID: 1725060355158330112, guid: b0e237f2568db0748bcffad965c1f87f,
+        type: 3}
+      propertyPath: m_EnableFarCasting
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2273423461591005640, guid: b0e237f2568db0748bcffad965c1f87f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2274366945276665483, guid: b0e237f2568db0748bcffad965c1f87f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2683388596790354265, guid: b0e237f2568db0748bcffad965c1f87f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2844165028066366770, guid: b0e237f2568db0748bcffad965c1f87f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2844165028066366770, guid: b0e237f2568db0748bcffad965c1f87f,
+        type: 3}
+      propertyPath: m_RaycastMask.m_Bits
+      value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951179903434980168, guid: b0e237f2568db0748bcffad965c1f87f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3046499949387819643, guid: b0e237f2568db0748bcffad965c1f87f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -182,6 +217,11 @@ PrefabInstance:
     - target: {fileID: 3046499949387819643, guid: b0e237f2568db0748bcffad965c1f87f,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6089854272282974056, guid: b0e237f2568db0748bcffad965c1f87f,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7024091796093396441, guid: b0e237f2568db0748bcffad965c1f87f,

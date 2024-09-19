@@ -6,17 +6,17 @@ public class HandDetectOnCollision : MonoBehaviour
 {
     [SerializeField] private HandScannerLogic scanner;
 
-    private void OnCollisionStay(Collision collision)
+    private void OnTriggerStay(Collider other)
     {
-        if (scanner != null && collision.gameObject.CompareTag("Player"))
+        if (scanner != null && other.gameObject.CompareTag("PlayerHand"))
         {
             scanner.tryActivate = true;
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
-        if (scanner != null && collision.gameObject.CompareTag("Player"))
+        if (scanner != null && other.gameObject.CompareTag("PlayerHand"))
         {
             scanner.tryActivate = false;
         }
