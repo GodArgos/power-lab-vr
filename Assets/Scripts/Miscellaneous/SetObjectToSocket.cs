@@ -33,8 +33,8 @@ public class SetObjectToSocket : MonoBehaviour
         // Instanciar la válvula especial que puede girar
         connectedValve = Instantiate(valvePrefab, socket.attachTransform.transform.position,
             Quaternion.Euler(socket.attachTransform.transform.rotation.x,
-                            socket.attachTransform.transform.rotation.y - 90f,
-                            socket.attachTransform.transform.rotation.z));
+                            socket.attachTransform.transform.rotation.y,
+                            socket.attachTransform.transform.rotation.z -90f));
 
         // Configurar el modo de prueba en la válvula instanciada
         ValveSteering valveSteering = connectedValve.GetComponent<ValveSteering>();
