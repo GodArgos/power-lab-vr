@@ -423,5 +423,22 @@ namespace UnityEngine.XR.Content.Interaction
 
             SetKnobRotation(ValueToRotation());
         }
+
+        public void SetValueWithoutNotify(float value)
+        {
+            if (m_ClampedMotion)
+                value = Mathf.Clamp01(value);
+
+            if (m_AngleIncrement > 0)
+            {
+                var angleRange = m_MaxAngle - m_MinAngle;
+                var angle = Mathf.Lerp(0.0f, angleRange, value);
+                angle = Mathf.Round(angle / m_AngleIncrement) * m_AngleIncrement;
+                value = Mathf.InverseLerp(0.0f, angleRange, angle);
+            }
+
+            m_Value = value;
+            SetKnobRotation(ValueToRotation()); // Ajusta la rotación visual sin disparar eventos
+        }
     }
 }

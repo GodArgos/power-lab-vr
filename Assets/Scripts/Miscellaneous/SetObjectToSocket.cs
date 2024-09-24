@@ -11,11 +11,7 @@ public class SetObjectToSocket : MonoBehaviour
     private IXRSelectInteractable connectedObject;
     [HideInInspector] public GameObject connectedValve;
 
-    // Referencia al DoorController
-    public DoorValve doorController;
-
-    public bool enableTestMode = false;
-    public float testRotationSpeed = 30.0f; // Velocidad de rotación para el modo de prueba
+    public DoorValve door;
 
     void Start()
     {
@@ -34,26 +30,15 @@ public class SetObjectToSocket : MonoBehaviour
         connectedValve = Instantiate(valvePrefab, socket.attachTransform.transform.position,
             Quaternion.Euler(socket.attachTransform.transform.rotation.x,
                             socket.attachTransform.transform.rotation.y,
-                            socket.attachTransform.transform.rotation.z -90f));
+                            socket.attachTransform.transform.rotation.z - 90f));
 
-        // Configurar el modo de prueba en la válvula instanciada
-        ValveSteering valveSteering = connectedValve.GetComponent<ValveSteering>();
-        if (valveSteering != null)
-        {
-            valveSteering.testMode = enableTestMode; // Habilitar o deshabilitar el modo de prueba
-            valveSteering.testRotationSpeed = testRotationSpeed; // Ajustar la velocidad del modo de prueba
-        }
+        // Pasar la referencia de la válvula al DoorController
+        door = FindObjectOfType<DoorValve>();
 
         // Destruir el objeto original que se puso en el socket
         Destroy(obj);
 
         // Desactivar el socket para evitar más interacciones
         socket.socketActive = false;
-
-        // Notificar al DoorController que una válvula ha sido instanciada
-        if (doorController != null)
-        {
-            doorController.RegisterValve(valveSteering);
-        }
     }
 }
