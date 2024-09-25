@@ -15,6 +15,16 @@ namespace UnityEngine.XR.Content.Interaction
         public class ValueChangeEvent : UnityEvent<float> { }
 
         [SerializeField]
+        [Tooltip("In which axis the slider will change")]
+        private Axis m_SlideAxis;
+        private enum Axis
+        {
+            X,
+            Y, 
+            Z
+        }
+
+        [SerializeField]
         [Tooltip("The object that is visually grabbed and manipulated")]
         Transform m_Handle = null;
 
@@ -103,7 +113,22 @@ namespace UnityEngine.XR.Content.Interaction
         {
             // Put anchor position into slider space
             var localPosition = transform.InverseTransformPoint(m_Interactor.GetAttachTransform(this).position);
-            var sliderValue = Mathf.Clamp01((localPosition.z - m_MinPosition) / (m_MaxPosition - m_MinPosition));
+
+            var sliderValue = 0f;
+            
+            if (m_SlideAxis == Axis.X)
+            {
+                sliderValue = Mathf.Clamp01((localPosition.x - m_MinPosition) / (m_MaxPosition - m_MinPosition));
+            }
+            else if (m_SlideAxis == Axis.Y)
+            {
+                sliderValue = Mathf.Clamp01((localPosition.y - m_MinPosition) / (m_MaxPosition - m_MinPosition));
+            }
+            else
+            {
+                sliderValue = Mathf.Clamp01((localPosition.z - m_MinPosition) / (m_MaxPosition - m_MinPosition));
+            }
+            
             SetValue(sliderValue);
             SetSliderPosition(sliderValue);
         }
@@ -114,7 +139,20 @@ namespace UnityEngine.XR.Content.Interaction
                 return;
 
             var handlePos = m_Handle.localPosition;
-            handlePos.z = Mathf.Lerp(m_MinPosition, m_MaxPosition, value);
+
+            if (m_SlideAxis == Axis.X)
+            {
+                handlePos.x = Mathf.Lerp(m_MinPosition, m_MaxPosition, value);
+            }
+            else if (m_SlideAxis == Axis.Y)
+            {
+                handlePos.y = Mathf.Lerp(m_MinPosition, m_MaxPosition, value);
+            }
+            else
+            {
+                handlePos.z = Mathf.Lerp(m_MinPosition, m_MaxPosition, value);
+            }
+
             m_Handle.localPosition = handlePos;
         }
 
@@ -126,8 +164,25 @@ namespace UnityEngine.XR.Content.Interaction
 
         void OnDrawGizmosSelected()
         {
-            var sliderMinPoint = transform.TransformPoint(new Vector3(0.0f, 0.0f, m_MinPosition));
-            var sliderMaxPoint = transform.TransformPoint(new Vector3(0.0f, 0.0f, m_MaxPosition));
+
+            var sliderMinPoint = new Vector3();
+            var sliderMaxPoint = new Vector3();
+
+            if (m_SlideAxis == Axis.X)
+            {
+                sliderMinPoint = transform.TransformPoint(new Vector3(m_MinPosition, 0.0f, 0.0f));
+                sliderMaxPoint = transform.TransformPoint(new Vector3(m_MaxPosition, 0.0f, 0.0f));
+            }
+            else if (m_SlideAxis == Axis.Y)
+            {
+                sliderMinPoint = transform.TransformPoint(new Vector3(0.0f, m_MinPosition, 0.0f));
+                sliderMaxPoint = transform.TransformPoint(new Vector3(0.0f, m_MaxPosition, 0.0f));
+            }
+            else
+            {
+                sliderMinPoint = transform.TransformPoint(new Vector3(0.0f, 0.0f, m_MinPosition));
+                sliderMinPoint = transform.TransformPoint(new Vector3(0.0f, 0.0f, m_MaxPosition));
+            }
 
             Gizmos.color = Color.green;
             Gizmos.DrawLine(sliderMinPoint, sliderMaxPoint);
