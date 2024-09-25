@@ -30,7 +30,7 @@ public class SideLiftController : MonoBehaviour
         Z
     }
 
-    void Update()
+    void FixedUpdate()
     {
         // Revisamos el valor del slider A y B para determinar el destino y la velocidad
         if (sliderA.value <= 0.45f)
@@ -144,5 +144,21 @@ public class SideLiftController : MonoBehaviour
     {
         sliderA.value = 0.5f;
         sliderB.value = 0.5f;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            other.transform.SetParent(transform);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            other.transform.SetParent(null);
+        }
     }
 }
