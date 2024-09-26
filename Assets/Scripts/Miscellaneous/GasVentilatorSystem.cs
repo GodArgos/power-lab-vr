@@ -4,23 +4,39 @@ using UnityEngine;
 
 public class GasVentilatorSystem : MonoBehaviour
 {
-    [SerializeField] private List<ParticleSystem> m_particleSystem; 
-    [SerializeField] private float m_totalTime = 1f;
+    [SerializeField] private List<ParticleSystem> m_particleSystem;
+    [SerializeField] private float m_cycleTime = 1f;
+    [SerializeField] private float m_durationTime = 1f;
+    [SerializeField] private bool m_playOnAwake = true;
     private float m_timer;
     private BoxCollider m_collider;
     private bool m_state = true;
+    private bool m_firstCycleSkipped = false; // Variable para controlar si se ha saltado el primer ciclo
 
     private void Start()
     {
         m_collider = GetComponent<BoxCollider>();
-        m_timer = m_totalTime;
+
+        if (m_playOnAwake)
+        {
+            m_timer = m_cycleTime; // Iniciar el ciclo inmediatamente
+            m_firstCycleSkipped = true; // Ya reproducimos en awake, así que saltamos el primer ciclo
+        }
+        else
+        {
+            m_timer = 0; // Empezar directamente con el estado inactivo
+        }
 
         foreach (ParticleSystem p in m_particleSystem)
         {
             p.Stop();
             var main = p.main;
-            main.duration = m_totalTime;
-            p.Play();
+            main.duration = m_durationTime;
+
+            if (m_playOnAwake)
+            {
+                p.Play();
+            }
         }
     }
 
@@ -30,6 +46,14 @@ public class GasVentilatorSystem : MonoBehaviour
 
         if (m_timer <= 0)
         {
+            // Si el primer ciclo debe ser saltado, lo manejamos aquí
+            if (!m_firstCycleSkipped && !m_playOnAwake)
+            {
+                m_firstCycleSkipped = true; // Marcar que ya hemos saltado el primer ciclo
+                m_timer = m_cycleTime; // Resetear el timer para el próximo ciclo
+                return; // Saltar este ciclo
+            }
+
             m_state = !m_state; // Cambia el estado
 
             if (m_state)
@@ -51,7 +75,7 @@ public class GasVentilatorSystem : MonoBehaviour
             }
 
             // Reiniciar el temporizador
-            m_timer = m_totalTime;
+            m_timer = m_cycleTime;
         }
     }
 
