@@ -290,5 +290,10 @@ namespace UnityEngine.XR.Content.Interaction
         {
             SetButtonHeight(0.0f);
         }
+
+        public void DisableComponent()
+        {
+            GetComponent<XRPushButton>().enabled = false;
+        }
     }
 }
