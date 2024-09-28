@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
-public class OpenDoor : MonoBehaviour
+public class OpenDoor : NetworkBehaviour
 {
     [Header("Dependencies")]
     [Space(10)]
@@ -12,27 +11,60 @@ public class OpenDoor : MonoBehaviour
 
     [Space(15)]
 
-    [Header("Test Variables")]
+    [Header("Door State")]
     [Space(10)]
+    [SyncVar(hook = nameof(OnOpenDoorChanged))]
     public bool openDoor = false;
+
+    [Header("TEST")]
+    [Space(10)]
+    [SerializeField] private bool testVariable = false;
 
     // Non-Serialized Variables
     private Vector3 startPosition;
     private float elapsedTime;
+    private bool isMoving = false;
 
     private void Start()
     {
-        startPosition = door.position;    
+        startPosition = door.position;
     }
 
-    void Update()
+    private void Update()
     {
-        if (openDoor)
+        if (isMoving)
         {
             elapsedTime += Time.deltaTime;
             float percentageComplete = elapsedTime / desiredDuration;
 
             door.position = Vector3.Lerp(startPosition, targetPos, percentageComplete);
+
+            if (percentageComplete >= 1f)
+            {
+                isMoving = false;
+            }
+        }
+
+        if (testVariable && !openDoor)
+        {
+            TriggerOpenDoor();
+        }
+    }
+
+    private void OnOpenDoorChanged(bool oldValue, bool newValue)
+    {
+        if (newValue && !isMoving)
+        {
+            isMoving = true;
+            elapsedTime = 0f;
+        }
+    }
+
+    public void TriggerOpenDoor()
+    {
+        if (!openDoor)
+        {
+            openDoor = true;
         }
     }
 }

@@ -1,27 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
-public class DoorActivationSystem : MonoBehaviour
+public class DoorActivationSystem : NetworkBehaviour
 {
     [Header("Dependencies")]
     [Space(10)]
     [SerializeField] private OpenDoor[] doors = new OpenDoor[2];
-    [SerializeField] private HandScannerLogic[] handScannerLogic = new HandScannerLogic[2];
+    [SerializeField] private HandScannerLogic[] handScannerLogics = new HandScannerLogic[2];
 
     private void Update()
     {
-        if (GetHandScannerCompletition())
+        if (!isServer) return; // Ensure only the server handles the logic
+
+        if (GetHandScannerCompletion())
         {
             foreach (var door in doors)
             {
-                door.openDoor = true;
+                door.TriggerOpenDoor();
             }
         }
     }
 
-    private bool GetHandScannerCompletition()
+    private bool GetHandScannerCompletion()
     {
-        return handScannerLogic[0].completed == true && handScannerLogic[1].completed == true ? true : false;
+        foreach (var scanner in handScannerLogics)
+        {
+            if (!scanner.completed)
+                return false;
+        }
+        return true;
     }
 }

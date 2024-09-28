@@ -1,38 +1,41 @@
-using System.Collections;
-using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
-public class HandScannerLogic : MonoBehaviour
+public class HandScannerLogic : NetworkBehaviour
 {
     [Header("Dependencies")]
     [Space(10)]
     [SerializeField] private GameObject[] fullCheckers = new GameObject[4];
-    [SerializeField] private int checkerIndex = 4;
     [SerializeField] private float duration = 5f;
-    [HideInInspector] public bool completed = false;
+
+    [Space(15)]
+
+    [Header("Sync Variables")]
+    [Space(10)]
+    [SyncVar]
+    public bool completed = false;
+    [SyncVar]
+    public bool tryActivate = false;
+
+    [Space(15)]
+    [Header("TEST")]
+    [Space(10)]
+    [SerializeField] private bool testVariable = false;
 
     private float checkerStep;
     private float timer;
+    private int checkerIndex = 4;
+    
 
-    [Header("Test Variables")]
-    [Space(10)]
-    public bool tryActivate = false;
-
-    // Start is called before the first frame update
     void Start()
     {
         checkerStep = duration / 4;
-        timer = duration;
-        foreach (var checker in fullCheckers)
-        {
-            checker.SetActive(false);
-        }
+        RestartScanner();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (tryActivate)
+        if (tryActivate && !completed)
         {
             if (timer > 0)
             {
@@ -47,17 +50,32 @@ public class HandScannerLogic : MonoBehaviour
             else
             {
                 completed = true;
-                timer = duration;
             }
         }
-        else
+        else if (!completed)
         {
-            foreach (var checker in fullCheckers)
-            {
-                checker.SetActive(false);
-            }
-            timer = duration;
-            checkerIndex = fullCheckers.Length;
+            RestartScanner();
         }
+
+        if (testVariable && !tryActivate) 
+        {
+            SetTryActivate(true);
+        }
+
+    }
+
+    public void RestartScanner()
+    {
+        foreach (var checker in fullCheckers)
+        {
+            checker.SetActive(false);
+        }
+        timer = duration;
+        checkerIndex = fullCheckers.Length;
+    }
+
+    public void SetTryActivate(bool state)
+    {
+        tryActivate = state;
     }
 }

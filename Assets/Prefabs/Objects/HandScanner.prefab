@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6750215334744899636}
   - component: {fileID: 6468188681315758979}
+  - component: {fileID: 4010689822672973792}
   m_Layer: 0
   m_Name: HandScanner
   m_TagString: Untagged
@@ -25,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5009566654039517366}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -5.798}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -46,15 +47,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe18ee9d8d503c408a1adc0b1cd637a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
   fullCheckers:
   - {fileID: 9110063217322508017}
   - {fileID: 9110063216203629601}
   - {fileID: 9110063216200881525}
   - {fileID: 9110063217804774909}
-  checkerIndex: 4
   duration: 5
   completed: 0
   tryActivate: 0
+  testVariable: 0
+--- !u!114 &4010689822672973792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5009566654039517366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 612464038
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
 --- !u!1001 &7970856740458725972
 PrefabInstance:
   m_ObjectHideFlags: 0

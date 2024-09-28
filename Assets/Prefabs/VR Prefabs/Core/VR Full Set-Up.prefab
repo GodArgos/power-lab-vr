@@ -295,6 +295,11 @@ PrefabInstance:
       propertyPath: m_NearFarEnableTeleportDuringNearInteraction
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1421443134230373876, guid: b0e237f2568db0748bcffad965c1f87f,
+        type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 1697556789335798571, guid: b0e237f2568db0748bcffad965c1f87f,
         type: 3}
       propertyPath: m_Layer
@@ -420,6 +425,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4347029407590205608, guid: b0e237f2568db0748bcffad965c1f87f,
+        type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4659657612381002790, guid: b0e237f2568db0748bcffad965c1f87f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0481
+      objectReference: {fileID: 0}
+    - target: {fileID: 4659657612381002790, guid: b0e237f2568db0748bcffad965c1f87f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0331
+      objectReference: {fileID: 0}
+    - target: {fileID: 4659657612381002790, guid: b0e237f2568db0748bcffad965c1f87f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.1001
+      objectReference: {fileID: 0}
     - target: {fileID: 5107191533300002628, guid: b0e237f2568db0748bcffad965c1f87f,
         type: 3}
       propertyPath: m_FarAttachMode
@@ -449,6 +474,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8016503132597350778, guid: b0e237f2568db0748bcffad965c1f87f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0481
+      objectReference: {fileID: 0}
+    - target: {fileID: 8016503132597350778, guid: b0e237f2568db0748bcffad965c1f87f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0331
+      objectReference: {fileID: 0}
+    - target: {fileID: 8016503132597350778, guid: b0e237f2568db0748bcffad965c1f87f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.1001
       objectReference: {fileID: 0}
     - target: {fileID: 8304460150355699835, guid: b0e237f2568db0748bcffad965c1f87f,
         type: 3}
