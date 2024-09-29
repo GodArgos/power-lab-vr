@@ -79,6 +79,8 @@ public class VRPlayerNetworked : NetworkBehaviour
         AvatarSelection(_avatarIndex);
         
         DisableLocalMeshes();
+
+        UserDataManager.Instance.localIdentity = GetComponent<NetworkIdentity>();
     }
 
     private void AvatarSelection(int index)

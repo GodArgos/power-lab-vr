@@ -1,3 +1,4 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,4 +32,6 @@ public class UserDataManager : MonoBehaviour
         BORIS,
         MECHA
     }
+
+    public NetworkIdentity localIdentity;
 }

@@ -11695,18 +11695,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5736137280808974665}
-    - targetCorrespondingSourceObject: {fileID: 1367408760466738840, guid: 1ae91b027cfec3442bd88f7ce9d8ba02,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3534240027832294597}
     - targetCorrespondingSourceObject: {fileID: 377763456978678799, guid: 1ae91b027cfec3442bd88f7ce9d8ba02,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 743330471833687554}
-    - targetCorrespondingSourceObject: {fileID: 2015631160760266770, guid: 1ae91b027cfec3442bd88f7ce9d8ba02,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1270590195210009103}
     - targetCorrespondingSourceObject: {fileID: 5043757780701820696, guid: 1ae91b027cfec3442bd88f7ce9d8ba02,
         type: 3}
       insertIndex: -1
@@ -11833,49 +11825,3 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7352276617245254693}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8426951392663497405 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1367408760466738840, guid: 1ae91b027cfec3442bd88f7ce9d8ba02,
-    type: 3}
-  m_PrefabInstance: {fileID: 7352276617245254693}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3534240027832294597
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8426951392663497405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  _assetId: 239462410
-  serverOnly: 0
-  visibility: 0
-  hasSpawned: 0
---- !u!1 &9074891227559793719 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2015631160760266770, guid: 1ae91b027cfec3442bd88f7ce9d8ba02,
-    type: 3}
-  m_PrefabInstance: {fileID: 7352276617245254693}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1270590195210009103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9074891227559793719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  _assetId: 239462410
-  serverOnly: 0
-  visibility: 0
-  hasSpawned: 0

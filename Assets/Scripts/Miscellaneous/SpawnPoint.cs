@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class SpawnPoint : MonoBehaviour
 {
-    [HideInInspector] public int spawnOrder;
+    [SerializeField] private int level = 0;
+    [SerializeField] public int order = 0;
     private Collider coll;
+    private bool registered = false;
 
-    private void Update()
+    private void Start()
     {
         coll = GetComponent<Collider>();
+        SpawnManager.Instance.AddSpawnPoint(level, order, gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            SpawnManager.Instance.UpdateCurrentSpawnPoint(spawnOrder);
+            SpawnManager.Instance.UpdateCurrentSpawnPoint(order);
             coll.enabled = false;
         }
     }

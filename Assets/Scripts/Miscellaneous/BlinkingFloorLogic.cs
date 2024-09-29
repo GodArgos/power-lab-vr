@@ -1,8 +1,9 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlinkingFloorLogic : MonoBehaviour
+public class BlinkingFloorLogic : NetworkBehaviour
 {
     private MeshRenderer floorRenderer;
     public BoxCollider triggerCollider;
@@ -18,6 +19,9 @@ public class BlinkingFloorLogic : MonoBehaviour
     // Nuevo material para el efecto de parpadeo
     [SerializeField] private Material blinkMaterial;
 
+    [SyncVar]
+    public bool networkIsActive = true;
+
     private void Start()
     {
         floorRenderer = GetComponent<MeshRenderer>();
@@ -28,7 +32,21 @@ public class BlinkingFloorLogic : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isActive && other.gameObject.CompareTag("Player")) // Ensure the player has the tag "Player"
+        if (networkIsActive && other.gameObject.CompareTag("Player"))
+        {
+            CmdPlayerTouchedFloor();
+        }
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdPlayerTouchedFloor()
+    {
+        HandleFloorTouched();
+    }
+
+    private void HandleFloorTouched()
+    {
+        if (networkIsActive)
         {
             StartCoroutine(BlinkAndDeactivate());
         }
@@ -36,12 +54,42 @@ public class BlinkingFloorLogic : MonoBehaviour
 
     private IEnumerator BlinkAndDeactivate()
     {
-        isActive = false;
+        networkIsActive = false;
+
+        // Notificar a todos los clientes para que actualicen el visual
+        RpcStartBlinking();
+
+        // Esperar el tiempo de parpadeo
+        yield return new WaitForSeconds(blinkDuration);
+
+        // Desactivar el piso en todos los clientes
+        RpcDeactivateFloor();
+
+        // Esperar el tiempo antes de reactivar
+        yield return new WaitForSeconds(resetDelay);
+
+        // Reactivar el piso en todos los clientes
+        RpcReactivateFloor();
+
+        networkIsActive = true;
+    }
+
+    [ClientRpc]
+    void RpcStartBlinking()
+    {
+        if (floorRenderer == null)
+            floorRenderer = GetComponent<MeshRenderer>();
 
         // Cambiar al material de parpadeo
         floorRenderer.material = blinkMaterial;
 
-        // Blink effect
+        // Iniciar el efecto de parpadeo
+        //StopAllCoroutines(); // Asegurar que no haya otras corrutinas ejecutándose
+        StartCoroutine(BlinkEffect());
+    }
+
+    private IEnumerator BlinkEffect()
+    {
         for (float t = 0; t < blinkDuration; t += Time.deltaTime)
         {
             // Adjust opacity based on time
@@ -51,20 +99,33 @@ public class BlinkingFloorLogic : MonoBehaviour
 
             yield return null;
         }
+    }
 
-        // Disable the MeshRenderer and Collider
+    [ClientRpc]
+    void RpcDeactivateFloor()
+    {
         floorRenderer.enabled = false;
         floorCollider.enabled = false;
         triggerCollider.enabled = false;
 
-        // Wait for reset delay before reactivating
-        yield return new WaitForSeconds(resetDelay);
+        // Iniciar la corrutina para reactivar el piso
+        //StartCoroutine(ReactivateFloor());
+    }
 
-        // Re-enable the MeshRenderer and Collider
+    [ClientRpc]
+    void RpcReactivateFloor()
+    {
+        // Rehabilitar el renderer y colliders
         floorRenderer.enabled = true;
         floorCollider.enabled = true;
         triggerCollider.enabled = true;
 
+        // Iniciar la transición de opacidad
+        StartCoroutine(FadeIn());
+    }
+
+    private IEnumerator FadeIn()
+    {
         // Transición de transparente a visible
         for (float t = 0; t < fadeDuration; t += Time.deltaTime)
         {
@@ -73,10 +134,8 @@ public class BlinkingFloorLogic : MonoBehaviour
             yield return null;
         }
 
-        // Reset material color
+        // Resetear el material y el color
         floorRenderer.material = initialMaterial;
         floorRenderer.material.color = originalColor;
-
-        isActive = true;
     }
 }

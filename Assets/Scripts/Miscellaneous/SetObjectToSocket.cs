@@ -1,15 +1,16 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
-public class SetObjectToSocket : MonoBehaviour
+public class SetObjectToSocket : NetworkBehaviour
 {
     [SerializeField] GameObject valvePrefab;
     private XRSocketInteractor socket;
-    private IXRSelectInteractable connectedObject;
-    [HideInInspector] public GameObject connectedValve;
+    private GameObject connectedObject;
+    [SyncVar] public GameObject connectedValve;
 
     public DoorValve door;
 
@@ -23,20 +24,45 @@ public class SetObjectToSocket : MonoBehaviour
         if (!socket.socketActive) { return; }
 
         // Obtener el objeto interactivo conectado al socket
-        connectedObject = socket.GetOldestInteractableSelected();
+        connectedObject = socket.GetOldestInteractableSelected().transform.gameObject;
         GameObject obj = connectedObject.transform.gameObject;
 
-        // Instanciar la válvula especial que puede girar
-        connectedValve = Instantiate(valvePrefab, socket.attachTransform.transform.position,
-            Quaternion.Euler(socket.attachTransform.transform.rotation.x,
-                            socket.attachTransform.transform.rotation.y,
-                            socket.attachTransform.transform.rotation.z - 90f));
+        // Si es el servidor, realizamos la acción directamente
+        if (isServer)
+        {
+            SpawnValveAndHandleSocket(obj);
+        }
+        else
+        {
+            // Si es un cliente, enviamos una comanda al servidor
+            CmdSpawnValveAndHandleSocket(obj);
+        }
+    }
 
-        // Pasar la referencia de la válvula al DoorController
+    [Command(requiresAuthority = false)]
+    void CmdSpawnValveAndHandleSocket(GameObject obj)
+    {
+        SpawnValveAndHandleSocket(obj);
+    }
+
+    void SpawnValveAndHandleSocket(GameObject obj)
+    {
+        // Instanciar la válvula especial que puede girar
+        GameObject valve = Instantiate(valvePrefab, socket.attachTransform.position,
+            Quaternion.Euler(socket.attachTransform.rotation.eulerAngles.x,
+                             socket.attachTransform.rotation.eulerAngles.y,
+                             socket.attachTransform.rotation.eulerAngles.z - 90f));
+
+        // Sincronizar la nueva válvula en la red
+        NetworkServer.Spawn(valve);
+
+        // Pasar la referencia de la válvula al DoorController si es necesario
         door = FindObjectOfType<DoorValve>();
 
-        // Destruir el objeto original que se puso en el socket
-        Destroy(obj);
+        // Destruir el objeto original en la red
+        NetworkServer.Destroy(obj);
+
+        connectedValve = valve;
 
         // Desactivar el socket para evitar más interacciones
         socket.socketActive = false;
