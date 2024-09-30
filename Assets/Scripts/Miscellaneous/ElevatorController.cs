@@ -1,12 +1,14 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ElevatorController : MonoBehaviour
+public class ElevatorController : NetworkBehaviour
 {
     [SerializeField] private Transform m_elevatorTransform; // El transform del elevador
     [SerializeField] private float m_targetPoint; // Punto objetivo en el eje Y
     [SerializeField] private float m_speed = 2f; // Velocidad de movimiento
+    [SyncVar]
     [SerializeField] private bool m_activateElevator; // Activador para iniciar el movimiento
 
     private void FixedUpdate()
@@ -28,8 +30,23 @@ public class ElevatorController : MonoBehaviour
             }
         }
     }
-
+    
+    // Public method to activate the elevator
     public void ActivateElevator()
+    {
+        if (isServer)
+        {
+            m_activateElevator = true;
+        }
+        else
+        {
+            CmdActivateElevator();
+        }
+    }
+
+    // Command to activate the elevator on the server
+    [Command(requiresAuthority = false)]
+    public void CmdActivateElevator()
     {
         m_activateElevator = true;
     }

@@ -21,7 +21,7 @@ public class GrabbableAuthority : NetworkBehaviour
     {
         if (!isGrabbed)
         {
-            if (!isOwned)
+            if (!isOwned && isClient && NetworkClient.ready)
             {
                 // If the player doesn't have authority, request it
                 CmdRequestAuthority();
@@ -58,7 +58,7 @@ public class GrabbableAuthority : NetworkBehaviour
     // This method is called when the object is released
     public void OnReleased()
     {
-        if (isOwned)
+        if (isOwned && isClient && NetworkClient.ready)
         {
             // If the player has authority and releases the object, release authority
             CmdReleaseAuthority();

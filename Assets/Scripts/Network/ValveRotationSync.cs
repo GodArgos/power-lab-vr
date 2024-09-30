@@ -31,11 +31,13 @@ public class ValveRotationSync : NetworkBehaviour
         {
             enableTestMode = true;
         }
+        else if (!activator && enableTestMode)
+        {
+            enableTestMode = false;
+        }
         
         if (enableTestMode)
         {
-            
-
             if (isServer)
             {
                 syncedValue = Mathf.PingPong(Time.time * testRotation, 1.0f);

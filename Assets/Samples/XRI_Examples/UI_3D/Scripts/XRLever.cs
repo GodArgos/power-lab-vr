@@ -226,5 +226,21 @@ namespace UnityEngine.XR.Content.Interaction
         {
             SetHandleAngle(m_Value ? m_MaxAngle : m_MinAngle);
         }
+
+        public void SetValueWithoutNotify(bool isOn, bool forceRotation = false)
+        {
+            if (m_Value == isOn)
+            {
+                if (forceRotation)
+                    SetHandleAngle(m_Value ? m_MaxAngle : m_MinAngle);
+
+                return;
+            }
+
+            m_Value = isOn;
+
+            if (!isSelected && (m_LockToValue || forceRotation))
+                SetHandleAngle(m_Value ? m_MaxAngle : m_MinAngle);
+        }
     }
 }

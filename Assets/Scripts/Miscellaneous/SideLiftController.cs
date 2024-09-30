@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+using Mirror;
 using UnityEngine;
 using UnityEngine.XR.Content.Interaction;
 
-public class SideLiftController : MonoBehaviour
+public class SideLiftController : NetworkBehaviour
 {
     [SerializeField]
     private float pointA; // Punto A
@@ -21,7 +19,6 @@ public class SideLiftController : MonoBehaviour
 
     private float currentSpeed = 0f; // Velocidad actual del objeto
     private float targetPosition; // Objetivo de la posición a moverse
-    private bool movingTowardsB = false; // Indica si el objeto se está moviendo hacia B o hacia A
 
     private enum Axis
     {
@@ -32,38 +29,51 @@ public class SideLiftController : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Obtener los valores sincronizados de los sliders
+        float sliderAValue = 0.5f; // Valor por defecto
+        float sliderBValue = 0.5f; // Valor por defecto
+
+        SliderValueSync sliderASync = sliderA.GetComponent<SliderValueSync>();
+        SliderValueSync sliderBSync = sliderB.GetComponent<SliderValueSync>();
+
+        if (sliderASync != null)
+        {
+            sliderAValue = sliderASync.GetSyncedValue();
+        }
+
+        if (sliderBSync != null)
+        {
+            sliderBValue = sliderBSync.GetSyncedValue();
+        }
+
         // Revisamos el valor del slider A y B para determinar el destino y la velocidad
-        if (sliderA.value <= 0.45f)
+        if (sliderAValue <= 0.45f)
         {
-            // Si sliderA está entre 0 y 0.45, el objeto regresa a A con velocidad proporcional
-            movingTowardsB = false;
+            // El objeto regresa a A con velocidad proporcional
             targetPosition = pointA;
-            currentSpeed = maxSpeed * (0.45f - sliderA.value) / 0.45f; // Velocidad creciente al acercarse a 0
+            currentSpeed = maxSpeed * (0.45f - sliderAValue) / 0.45f;
         }
-        else if (sliderA.value >= 0.66f)
+        else if (sliderAValue >= 0.66f)
         {
-            // Si sliderA está entre 0.66 y 1, el objeto va a B con velocidad proporcional
-            movingTowardsB = true;
+            // El objeto va a B con velocidad proporcional
             targetPosition = pointB;
-            currentSpeed = maxSpeed * (sliderA.value - 0.66f) / 0.34f; // Velocidad creciente al acercarse a 1
+            currentSpeed = maxSpeed * (sliderAValue - 0.66f) / 0.34f;
         }
-        else if (sliderB.value <= 0.45f)
+        else if (sliderBValue <= 0.45f)
         {
-            // Si sliderB está entre 0 y 0.45, el objeto regresa a B con velocidad proporcional
-            movingTowardsB = false;
+            // El objeto regresa a B con velocidad proporcional
             targetPosition = pointB;
-            currentSpeed = maxSpeed * (0.45f - sliderB.value) / 0.45f; // Velocidad creciente al acercarse a 0
+            currentSpeed = maxSpeed * (0.45f - sliderBValue) / 0.45f;
         }
-        else if (sliderB.value >= 0.66f)
+        else if (sliderBValue >= 0.66f)
         {
-            // Si sliderB está entre 0.66 y 1, el objeto va a A con velocidad proporcional
-            movingTowardsB = true;
+            // El objeto va a A con velocidad proporcional
             targetPosition = pointA;
-            currentSpeed = maxSpeed * (sliderB.value - 0.66f) / 0.34f; // Velocidad creciente al acercarse a 1
+            currentSpeed = maxSpeed * (sliderBValue - 0.66f) / 0.34f;
         }
         else
         {
-            // Si cualquiera de los sliders está entre 0.46 y 0.65, el objeto se detiene
+            // El objeto se detiene
             currentSpeed = 0f;
         }
 
@@ -73,7 +83,7 @@ public class SideLiftController : MonoBehaviour
             MoveObject();
         }
 
-        // Revisamos si ha llegado al objetivo (A o B), y si es así, reiniciamos los sliders
+        // Revisamos si ha llegado al objetivo, y si es así, reiniciamos los sliders
         if (HasReachedTarget())
         {
             ResetSliders();

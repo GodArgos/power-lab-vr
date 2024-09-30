@@ -192,5 +192,11 @@ namespace UnityEngine.XR.Content.Interaction
         {
             SetSliderPosition(m_Value);
         }
+
+        public void SetValueWithoutNotify(float value)
+        {
+            m_Value = value;
+            SetSliderPosition(value);
+        }
     }
 }

@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
 public class BreakVisorLayer : MonoBehaviour
@@ -9,7 +8,7 @@ public class BreakVisorLayer : MonoBehaviour
     {
         if (other.gameObject.CompareTag("SpawnPoint") && other.gameObject.GetComponent<SpawnPoint>().order == designedSpawnPoint)
         {
-            Destroy(gameObject);
+            NetworkServer.Destroy(gameObject);
         }
     }
 }

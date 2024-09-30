@@ -16,7 +16,6 @@ public class BlinkingMaterial : MonoBehaviour
     {
         m_renderer = GetComponent<MeshRenderer>();
         m_initialMaterial = m_renderer.material;
-        StartBlinking();
     }
 
     public void StartBlinking()
