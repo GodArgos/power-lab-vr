@@ -51,7 +51,7 @@ public class SetObjectToSocket : NetworkBehaviour
         GameObject valve = Instantiate(valvePrefab, socket.attachTransform.position,
             Quaternion.Euler(socket.attachTransform.rotation.eulerAngles.x,
                              socket.attachTransform.rotation.eulerAngles.y,
-                             socket.attachTransform.rotation.eulerAngles.z - 90f));
+                             socket.attachTransform.rotation.eulerAngles.z));
 
         // Sincronizar la nueva válvula en la red
         NetworkServer.Spawn(valve);

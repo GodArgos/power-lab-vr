@@ -149,10 +149,12 @@ public class VRPlayerNetworked : NetworkBehaviour
             if (index != i)
             {
                 networkAnimators[i].enabled = false;
+
             }
             else
             {
                 networkAnimators[i].enabled = true;
+                networkAnimators[i].Reset();
             }
         }
     }

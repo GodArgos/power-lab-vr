@@ -11,6 +11,8 @@ public class ElevatorController : NetworkBehaviour
     [SyncVar]
     [SerializeField] private bool m_activateElevator; // Activador para iniciar el movimiento
 
+    private Transform previousPlayerTransform;
+
     private void FixedUpdate()
     {
         if (m_activateElevator)
@@ -55,6 +57,7 @@ public class ElevatorController : NetworkBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            previousPlayerTransform = other.transform.parent;
             other.transform.SetParent(transform);
         }
     }
@@ -63,7 +66,7 @@ public class ElevatorController : NetworkBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.transform.SetParent(null);
+            other.transform.SetParent(previousPlayerTransform);
         }
     }
 }

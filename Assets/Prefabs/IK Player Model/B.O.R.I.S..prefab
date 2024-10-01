@@ -1700,7 +1700,7 @@ MonoBehaviour:
   isMovingForward: 0
   terrainLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 513
   body: {fileID: 8566967162532149564}
   otherFoot: {fileID: 8897481415628325266}
   speed: 4
@@ -3715,7 +3715,7 @@ MonoBehaviour:
   isMovingForward: 0
   terrainLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 513
   body: {fileID: 8566967162532149564}
   otherFoot: {fileID: 8973563388931883901}
   speed: 4

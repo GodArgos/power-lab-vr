@@ -19,6 +19,7 @@ public class SideLiftController : NetworkBehaviour
 
     private float currentSpeed = 0f; // Velocidad actual del objeto
     private float targetPosition; // Objetivo de la posición a moverse
+    private Transform previousPlayerTransform;
 
     private enum Axis
     {
@@ -160,6 +161,7 @@ public class SideLiftController : NetworkBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            previousPlayerTransform = other.transform.parent;
             other.transform.SetParent(transform);
         }
     }
@@ -168,7 +170,7 @@ public class SideLiftController : NetworkBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.transform.SetParent(null);
+            other.transform.SetParent(previousPlayerTransform);
         }
     }
 }
