@@ -5,35 +5,56 @@ using UnityEngine;
 public class FanLift : MonoBehaviour
 {
     public float liftForce = 10f;  // Force applied upwards
-    private Rigidbody objectRb;
+    private CharacterController characterController;
+    [SerializeField] private List<PlatformCornerMove> m_cornerWindows;
+    private bool alreadyOpened = false;
+    private bool alreadyUsed = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        // Check if the object has a Rigidbody (so we can apply forces)
-        objectRb = other.GetComponent<Rigidbody>();
-        if (objectRb != null)
+        if (other.CompareTag("Player") && !alreadyUsed)
         {
-            // Disable gravity to simulate flight and start lifting the object
-            objectRb.useGravity = false;
+            characterController = other.GetComponent<CharacterController>();
+
+            if (!alreadyOpened)
+            {
+                foreach (var corner in m_cornerWindows)
+                {
+                    corner.MoveToPositionB();
+                }
+            }
+
+            alreadyUsed = true;
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        // Continuously apply an upward force while the object is in the fan trigger
-        if (objectRb != null)
+        // Apply upward movement to CharacterController
+        if (other.CompareTag("Player"))
         {
-            objectRb.AddForce(Vector3.up * liftForce, ForceMode.Acceleration);
+            if (characterController != null)
+            {
+                Vector3 liftDirection = Vector3.up * liftForce * Time.deltaTime;
+                characterController.Move(liftDirection);
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        // Re-enable gravity when the object exits the fan area, if it's still within range
-        if (objectRb != null)
+        if (other.CompareTag("Player"))
         {
-            objectRb.useGravity = true;
-            objectRb = null;
+            // Clear the CharacterController reference when exiting the trigger
+            if (characterController != null)
+            {
+                characterController = null;
+                foreach (var corner in m_cornerWindows)
+                {
+                    corner.MoveToPositionA();
+                    alreadyOpened = true;
+                }
+            }
         }
     }
 }
