@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Turn_Move : MonoBehaviour {
-	public int TurnX;
-	public int TurnY;
-	public int TurnZ;
+	public float TurnX;
+	public float TurnY;
+	public float TurnZ;
 
-	public int MoveX;
-	public int MoveY;
-	public int MoveZ;
+	public float MoveX;
+	public float MoveY;
+	public float MoveZ;
 
 	public bool World;
 
