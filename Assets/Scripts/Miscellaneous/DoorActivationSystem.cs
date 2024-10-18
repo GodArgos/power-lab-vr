@@ -18,7 +18,7 @@ public class DoorActivationSystem : NetworkBehaviour
             foreach (var door in doors)
             {
                 door.TriggerOpenDoor();
-                isActive = true;
+                
             }
         }
     }
