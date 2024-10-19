@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using UnityEngine.PlayerLoop;
 
 public class VRPlayerNetworked : NetworkBehaviour
 {
@@ -11,6 +12,7 @@ public class VRPlayerNetworked : NetworkBehaviour
     public Transform[] head = new Transform[2];
     public Transform[] leftHand = new Transform[2];
     public Transform[] rightHand = new Transform[2];
+    public Transform triggerBody;
 
     [Space(15)]
 
@@ -59,6 +61,7 @@ public class VRPlayerNetworked : NetworkBehaviour
             UpdatePart(head[avatarSelected], avatarSelected == 0 ? VRRigReferencesBORIS.Instance.head : VRRigReferencesMECHA.Instance.head);
             UpdatePart(leftHand[avatarSelected], avatarSelected == 0 ? VRRigReferencesBORIS.Instance.leftHand : VRRigReferencesMECHA.Instance.leftHand);
             UpdatePart(rightHand[avatarSelected], avatarSelected == 0 ? VRRigReferencesBORIS.Instance.rightHand : VRRigReferencesMECHA.Instance.rightHand);
+            UpdatePart(triggerBody, avatarSelected == 0 ? VRRigReferencesBORIS.Instance.root : VRRigReferencesMECHA.Instance.root);
         }
     }
 
