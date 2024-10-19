@@ -10,12 +10,17 @@ public class FinalTrapLogic : NetworkBehaviour
     [SerializeField] private float m_timeForceField = 2f;
     private bool m_activated = false;
 
-    [SyncVar]
+    // SyncVar con un hook para cuando el valor de numberOfPlayers cambie
+    [SyncVar(hook = nameof(OnNumberOfPlayersChanged))]
     public int numberOfPlayers = 0;
     public bool alreadyEntered = false;
 
     [Header("Test Activation")]
     [SyncVar] public bool testActivate = false;
+
+    // HashSet para almacenar jugadores que ya han entrado
+    private HashSet<GameObject> playersInTrigger = new HashSet<GameObject>();
+
 
     private void Start()
     {
@@ -43,19 +48,22 @@ public class FinalTrapLogic : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && !alreadyEntered)
+        // Buscar el NetworkIdentity del jugador en los objetos padres
+        NetworkIdentity networkIdentity = other.GetComponentInParent<NetworkIdentity>();
+
+        if (networkIdentity != null && other.gameObject.CompareTag("PlayerNetwork") && !playersInTrigger.Contains(networkIdentity.gameObject))
         {
-            numberOfPlayers++;
-            alreadyEntered = true;
+            playersInTrigger.Add(networkIdentity.gameObject); // Agregar jugador si no ha sido contado antes
+            numberOfPlayers++;  // Actualizar el número de jugadores, esto activará el hook
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    // Hook que se llama cuando el número de jugadores cambia
+    private void OnNumberOfPlayersChanged(int oldNumber, int newNumber)
     {
-        if (other.gameObject.CompareTag("Player") && alreadyEntered)
+        if (newNumber >= 2)
         {
-            numberOfPlayers--;
-            alreadyEntered = false;
+            CmdHandleActivateTrap();
         }
     }
 

@@ -12,6 +12,7 @@ TagManager:
   - Door
   - SpawnPoint
   - Weapon
+  - PlayerNetwork
   layers:
   - Default
   - TransparentFX

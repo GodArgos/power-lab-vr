@@ -5,22 +5,31 @@ using UnityEngine;
 
 public class CloseDoorWithTrigger : OpenDoor
 {
-    [SyncVar]
+    // SyncVar con un hook para cuando el valor de numberOfPlayers cambie
+    [SyncVar(hook = nameof(OnNumberOfPlayersChanged))]
     public int numberOfPlayers = 0;
-    public bool alreadyEntered = false;
+
+    // HashSet para almacenar jugadores que ya han entrado
+    private HashSet<GameObject> playersInTrigger = new HashSet<GameObject>();
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && !alreadyEntered)
+        // Buscar el NetworkIdentity del jugador en los objetos padres
+        NetworkIdentity networkIdentity = other.GetComponentInParent<NetworkIdentity>();
+
+        if (networkIdentity != null && other.gameObject.CompareTag("PlayerNetwork") && !playersInTrigger.Contains(networkIdentity.gameObject))
         {
-            numberOfPlayers++;
+            playersInTrigger.Add(networkIdentity.gameObject); // Agregar jugador si no ha sido contado antes
+            numberOfPlayers++;  // Actualizar el número de jugadores, esto activará el hook
+        }
+    }
 
-            if (numberOfPlayers >= 2)
-            {
-                CmdHandleNumberAchieved();
-            }
-
-            alreadyEntered = true;
+    // Hook que se llama cuando el número de jugadores cambia
+    private void OnNumberOfPlayersChanged(int oldNumber, int newNumber)
+    {
+        if (newNumber >= 2)
+        {
+            CmdHandleNumberAchieved();
         }
     }
 
