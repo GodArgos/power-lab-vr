@@ -358,6 +358,8 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   syncedValue: 0
+  isBeingHeld: 0
+  activator: 0
   enableTestMode: 0
   testRotation: 30
 --- !u!114 &6461937618339765992
@@ -395,10 +397,34 @@ MonoBehaviour:
       m_Calls: []
   m_HoverEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4293323356713351957}
+        m_TargetAssemblyTypeName: GrabbableAuthority, Assembly-CSharp
+        m_MethodName: OnHoverEnter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
   m_HoverExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4293323356713351957}
+        m_TargetAssemblyTypeName: GrabbableAuthority, Assembly-CSharp
+        m_MethodName: OnHoverExited
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
   m_FirstSelectEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -408,8 +434,8 @@ MonoBehaviour:
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4293323356713351957}
-        m_TargetAssemblyTypeName: GrabbableAuthority, Assembly-CSharp
+      - m_Target: {fileID: 7286640221044103636}
+        m_TargetAssemblyTypeName: ValveRotationSync, Assembly-CSharp
         m_MethodName: OnGrabbed
         m_Mode: 1
         m_Arguments:
@@ -425,6 +451,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4293323356713351957}
         m_TargetAssemblyTypeName: GrabbableAuthority, Assembly-CSharp
+        m_MethodName: OnReleased
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+      - m_Target: {fileID: 7286640221044103636}
+        m_TargetAssemblyTypeName: ValveRotationSync, Assembly-CSharp
         m_MethodName: OnReleased
         m_Mode: 1
         m_Arguments:
@@ -458,7 +496,7 @@ MonoBehaviour:
   m_StartingInteractionStrengthFilters: []
   m_Handle: {fileID: 3623458096721459083}
   m_Value: 0
-  m_ClampedMotion: 0
+  m_ClampedMotion: 1
   m_MaxAngle: 360
   m_MinAngle: -360
   m_AngleIncrement: 0

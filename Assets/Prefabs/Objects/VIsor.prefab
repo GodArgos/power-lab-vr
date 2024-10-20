@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7772290601589448721}
+  - component: {fileID: 2004611645640950461}
   - component: {fileID: 8645434434526723761}
   - component: {fileID: 71892889215212053}
   - component: {fileID: 779461334346929321}
@@ -18,7 +19,6 @@ GameObject:
   - component: {fileID: 2805937843273319313}
   - component: {fileID: 4865854725556126356}
   - component: {fileID: 1059131797404368334}
-  - component: {fileID: 7926781536206820345}
   - component: {fileID: 3875251093616527085}
   - component: {fileID: 1168766022856812324}
   m_Layer: 0
@@ -43,6 +43,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2004611645640950461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5803229298375972360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81d8317e9207fe643a391c1d91b30db1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_visorIndex: 0
 --- !u!114 &8645434434526723761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,7 +117,7 @@ MonoBehaviour:
   - {fileID: 1059131797404368334}
   m_InteractionLayers:
     m_Bits: 1073741826
-  m_DistanceCalculationMode: 1
+  m_DistanceCalculationMode: 0
   m_SelectMode: 0
   m_FocusMode: 1
   m_CustomReticle: {fileID: 0}
@@ -123,10 +136,46 @@ MonoBehaviour:
       m_Calls: []
   m_HoverEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 779461334346929321}
+        m_TargetAssemblyTypeName: GrabbableAuthority, Assembly-CSharp
+        m_MethodName: OnHoverEnter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+      - m_Target: {fileID: 2004611645640950461}
+        m_TargetAssemblyTypeName: CheckVisorGrabbability, Assembly-CSharp
+        m_MethodName: OnEnterHover
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
   m_HoverExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 779461334346929321}
+        m_TargetAssemblyTypeName: GrabbableAuthority, Assembly-CSharp
+        m_MethodName: OnHoverExited
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
   m_FirstSelectEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -139,18 +188,6 @@ MonoBehaviour:
       - m_Target: {fileID: 8645434434526723761}
         m_TargetAssemblyTypeName: ObjectDisplayIdle, Assembly-CSharp
         m_MethodName: OnSelectObject
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
-      - m_Target: {fileID: 779461334346929321}
-        m_TargetAssemblyTypeName: GrabbableAuthority, Assembly-CSharp
-        m_MethodName: OnGrabbed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -203,8 +240,8 @@ MonoBehaviour:
   m_MatchAttachRotation: 1
   m_SnapToColliderVolume: 1
   m_ReinitializeDynamicAttachEverySingleGrab: 1
-  m_AttachEaseInTime: 0.15
-  m_MovementType: 1
+  m_AttachEaseInTime: 0
+  m_MovementType: 2
   m_VelocityDamping: 1
   m_VelocityScale: 1
   m_AngularVelocityDamping: 1
@@ -240,12 +277,12 @@ MonoBehaviour:
     m_RotationOrder: 4
   m_ThrowVelocityScale: 1.5
   m_ThrowAngularVelocityScale: 1
-  m_ForceGravityOnDetach: 1
+  m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
-  m_FarAttachMode: 0
+  m_FarAttachMode: 1
 --- !u!114 &1940320704460745550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,7 +367,7 @@ Rigidbody:
   m_GameObject: {fileID: 5803229298375972360}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 0.05
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -343,11 +380,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 2
+  m_CollisionDetection: 1
 --- !u!65 &1059131797404368334
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -369,40 +406,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.2719746, y: 1.2630553, z: 3.3621957}
   m_Center: {x: -0.06642282, y: 0.16465598, z: -0.75408596}
---- !u!114 &7926781536206820345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5803229298375972360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb803efbe62c34d7baece46c9ffebad9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 1
-  syncMode: 0
-  syncInterval: 0
-  target: {fileID: 7772290601589448721}
-  syncPosition: 1
-  syncRotation: 1
-  syncScale: 0
-  onlySyncOnChange: 1
-  compressRotation: 1
-  interpolatePosition: 1
-  interpolateRotation: 1
-  interpolateScale: 1
-  coordinateSpace: 0
-  sendIntervalMultiplier: 1
-  timelineOffset: 0
-  showGizmos: 0
-  showOverlay: 0
-  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  onlySyncOnChangeCorrectionMultiplier: 2
-  rotationSensitivity: 0.01
-  positionPrecision: 0.01
-  scalePrecision: 0.01
 --- !u!114 &3875251093616527085
 MonoBehaviour:
   m_ObjectHideFlags: 0

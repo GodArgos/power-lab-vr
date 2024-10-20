@@ -34,4 +34,6 @@ public class UserDataManager : MonoBehaviour
     }
 
     public NetworkIdentity localIdentity;
+    public bool pickedVisor = false;
+    public int visorPicked;
 }

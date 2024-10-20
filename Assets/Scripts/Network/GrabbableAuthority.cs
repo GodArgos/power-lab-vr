@@ -2,6 +2,7 @@ using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class GrabbableAuthority : NetworkBehaviour
@@ -10,6 +11,7 @@ public class GrabbableAuthority : NetworkBehaviour
     public bool isGrabbed = false; 
     private NetworkIdentity m_objectIdentity;
     private XRGrabInteractable m_grabInteractable;
+    private bool author = false;
 
     private void Start()
     {
@@ -17,19 +19,15 @@ public class GrabbableAuthority : NetworkBehaviour
         m_grabInteractable = GetComponent<XRGrabInteractable>();
     }
 
-    public void OnGrabbed()
+    public void OnHoverEnter()
     {
-        if (!isGrabbed)
+        if (!isGrabbed && !author)
         {
-            if (!isOwned && isClient && NetworkClient.ready)
+            if (!isOwned && NetworkClient.ready)
             {
-                // If the player doesn't have authority, request it
                 CmdRequestAuthority();
+                author = true;
             }
-        }
-        else
-        {
-            Debug.Log("Object is already grabbed by another player.");
         }
     }
 
@@ -45,7 +43,11 @@ public class GrabbableAuthority : NetworkBehaviour
 
             if (sender != netIdentity.connectionToClient)
             {
-                netIdentity.RemoveClientAuthority();
+                // Remove existing authority and assign it to the new client
+                if (netIdentity.connectionToClient != null)
+                {
+                    netIdentity.RemoveClientAuthority();
+                }
                 netIdentity.AssignClientAuthority(sender);
             }
         }
@@ -55,13 +57,25 @@ public class GrabbableAuthority : NetworkBehaviour
         }
     }
 
+    // Called when the object is no longer hovered (hover exited)
+    public void OnHoverExited()
+    {
+        if (!isGrabbed && isOwned && NetworkClient.ready)
+        {
+            // If the object was hovered but not grabbed, release authority
+            CmdReleaseAuthority();
+            author = false;
+        }
+    }
+
     // This method is called when the object is released
     public void OnReleased()
     {
-        if (isOwned && isClient && NetworkClient.ready)
+        if (isGrabbed && isOwned && NetworkClient.ready)
         {
             // If the player has authority and releases the object, release authority
             CmdReleaseAuthority();
+            author = false;
         }
     }
 
@@ -69,35 +83,6 @@ public class GrabbableAuthority : NetworkBehaviour
     [Command(requiresAuthority = false)]
     private void CmdReleaseAuthority()
     {
-        if (isGrabbed)
-        {
-            // Mark the object as not grabbed
-            isGrabbed = false;
-
-            // Re-enable the grab interactable for others
-            //EnableGrabForOthers();
-
-            // Release the authority from the client
-            m_objectIdentity.RemoveClientAuthority();
-        }
+        isGrabbed = false;
     }
-
-    //// Disable XRGrabInteractable for other players
-    //[ClientRpc(includeOwner = false)]
-    //private void DisableGrabForOthers()
-    //{
-    //    if (!isOwned)
-    //    {
-    //        // Disable the grab interactable to prevent other players from grabbing it
-    //        m_grabInteractable.enabled = false;
-    //    }
-    //}
-
-    //// Enable XRGrabInteractable when the object is released
-    //[ClientRpc]
-    //private void EnableGrabForOthers()
-    //{
-    //    // Enable the grab interactable so that other players can grab it again
-    //    m_grabInteractable.enabled = true;
-    //}
 }

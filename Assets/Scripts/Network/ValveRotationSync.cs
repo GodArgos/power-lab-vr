@@ -7,9 +7,12 @@ using UnityEngine.XR.Content.Interaction;
 public class ValveRotationSync : NetworkBehaviour
 {
     private XRKnob knob;
+    private float initialValue = 0f;
 
     [SyncVar(hook = nameof(OnValueChanged))]
     public float syncedValue;
+    [SyncVar]
+    public bool isBeingHeld; // Nuevo SyncVar para saber si la válvula está siendo manipulada
 
     [Header("TEST")]
     [SerializeField] private bool activator = false;
@@ -20,7 +23,6 @@ public class ValveRotationSync : NetworkBehaviour
     private void Start()
     {
         knob = GetComponent<XRKnob>();
-
         // Suscribirse al evento de cambio de valor del knob
         knob.onValueChange.AddListener(OnKnobValueChanged);
     }
@@ -86,5 +88,52 @@ public class ValveRotationSync : NetworkBehaviour
     public float GetSyncedValue()
     {
         return syncedValue;
+    }
+
+    private void OnGrabbed()
+    {
+        isBeingHeld = true; // La válvula está siendo manipulada
+        CmdSetBeingHeld(true);
+    }
+
+    private void OnReleased()
+    {
+        isBeingHeld = false; // La válvula ha dejado de ser manipulada
+        CmdSetBeingHeld(false);
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdSetBeingHeld(bool value)
+    {
+        isBeingHeld = value;
+    }
+
+    // Método para reiniciar la válvula a su valor y rotación inicial
+    public void ResetValve()
+    {
+        if (isServer)
+        {
+            //syncedValue = initialValue;
+            StartCoroutine(ResetValveValue());
+        }
+        else
+        {
+            CmdResetValve();
+        }
+    }
+
+    private IEnumerator ResetValveValue()
+    {
+        while (syncedValue != initialValue)
+        {
+            syncedValue -= 0.1f;
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdResetValve()
+    {
+        ResetValve();
     }
 }
