@@ -1,8 +1,9 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FanLift : MonoBehaviour
+public class FanLift : NetworkBehaviour
 {
     public float liftForce = 10f;  // Force applied upwards
     private CharacterController characterController;
@@ -18,10 +19,7 @@ public class FanLift : MonoBehaviour
 
             if (!alreadyOpened)
             {
-                foreach (var corner in m_cornerWindows)
-                {
-                    corner.MoveToPositionB();
-                }
+                CmdOpenCorners();
             }
 
             alreadyUsed = true;
@@ -49,12 +47,27 @@ public class FanLift : MonoBehaviour
             if (characterController != null)
             {
                 characterController = null;
-                foreach (var corner in m_cornerWindows)
-                {
-                    corner.MoveToPositionA();
-                    alreadyOpened = true;
-                }
+                CmdCloseCorners();
+                alreadyOpened = true;
             }
+        }
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdOpenCorners()
+    {
+        foreach (var corner in m_cornerWindows)
+        {
+            corner.MoveToPositionB();
+        }
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdCloseCorners()
+    {
+        foreach (var corner in m_cornerWindows)
+        {
+            corner.MoveToPositionA();
         }
     }
 }
