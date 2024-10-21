@@ -15,7 +15,7 @@ public class NetworkManagerHandler : MonoBehaviour
 
     private void Awake()
     {
-        if (Type == NetManagerType.Local)
+        if (Type == NetManagerType.LOCAL)
         {
             m_managers[0].SetActive(true);
             m_managers[1].SetActive(false);

@@ -70,7 +70,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alturaMaxima: 1.5
   alturaMinima: 1.45
-  velocidad: 0.025
+  velocidad: 0.00025
 --- !u!114 &71892889215212053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,6 +211,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 1
+      - m_Target: {fileID: 4865854725556126356}
+        m_TargetAssemblyTypeName: UnityEngine.Rigidbody, UnityEngine
+        m_MethodName: set_useGravity
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 1
   m_FirstFocusEntered:
     m_PersistentCalls:

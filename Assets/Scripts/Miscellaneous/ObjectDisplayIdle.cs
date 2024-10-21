@@ -10,10 +10,19 @@ public class ObjectDisplayIdle : MonoBehaviour
 
     private float direccion = 1.0f; // Dirección del movimiento
 
+    private Rigidbody rb; // Referencia al Rigidbody
+
+    void Start()
+    {
+        // Obtiene el Rigidbody del objeto
+        rb = GetComponent<Rigidbody>();
+        rb.useGravity = false;
+    }
+
     void Update()
     {
-        // Calcula la nueva posición en el eje Y
-        float nuevaY = transform.position.y + direccion * velocidad * Time.deltaTime;
+        // Calcula la nueva velocidad en el eje Y
+        float nuevaY = rb.position.y + direccion * velocidad;
 
         // Verifica si el objeto ha alcanzado la altura máxima o mínima
         if (nuevaY >= alturaMaxima)
@@ -27,8 +36,8 @@ public class ObjectDisplayIdle : MonoBehaviour
             direccion = 1.0f; // Cambia la dirección hacia arriba
         }
 
-        // Aplica la nueva posición
-        transform.position = new Vector3(transform.position.x, nuevaY, transform.position.z);
+        // Aplica la nueva posición usando Rigidbody
+        rb.MovePosition(new Vector3(rb.position.x, nuevaY, rb.position.z));
     }
 
     public void OnSelectObject()

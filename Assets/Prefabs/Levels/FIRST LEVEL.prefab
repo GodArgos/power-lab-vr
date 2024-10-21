@@ -2096,7 +2096,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 5149680647397961398}
   floorCollider: {fileID: 789716167901554107}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -2658,8 +2658,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720ca11411f1ad45b3f2da3bbb47619, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 0
-  order: 0
+  level: 1
+  order: 1
 --- !u!65 &7004542990809593861
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3155,7 +3155,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 5828407389450555051}
   floorCollider: {fileID: 7825171499402410492}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -4873,7 +4873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720ca11411f1ad45b3f2da3bbb47619, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 0
+  level: 1
   order: 0
 --- !u!65 &3585328012636639342
 BoxCollider:
@@ -5896,7 +5896,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 2176380403207137296}
   floorCollider: {fileID: 2315838596909355696}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -7377,7 +7377,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 5073165881697001557}
   floorCollider: {fileID: 6409299015319009125}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -8472,7 +8472,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 4302057245071284904}
   floorCollider: {fileID: 3147163528743080369}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -9811,7 +9811,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 8255106444842779716}
   floorCollider: {fileID: 8367778100319318658}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -12536,7 +12536,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 3170115634667753362}
   floorCollider: {fileID: 7879631268132826385}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -14577,7 +14577,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 8864243136127624136}
   floorCollider: {fileID: 1813222714536454269}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -15673,7 +15673,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 7967381413158404432}
   floorCollider: {fileID: 5905579126966482353}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -17537,7 +17537,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 536948910774066601}
   floorCollider: {fileID: 7308352029321191236}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -19578,7 +19578,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 8069371636527679259}
   floorCollider: {fileID: 4655983319282310754}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -21199,7 +21199,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 7116277919029208721}
   floorCollider: {fileID: 3156048981593479162}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -21560,7 +21560,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 749536199165556028}
   floorCollider: {fileID: 6459152178415459170}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -22001,7 +22001,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 3556119580274595007}
   floorCollider: {fileID: 2476557606348036271}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -23517,7 +23517,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 270047974185460876}
   floorCollider: {fileID: 5012790063617537420}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -23878,7 +23878,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 7332541886057355527}
   floorCollider: {fileID: 1934801841242813479}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -27541,8 +27541,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e720ca11411f1ad45b3f2da3bbb47619, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 0
-  order: 0
+  level: 1
+  order: 2
 --- !u!65 &7280437827602267798
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -33656,7 +33656,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 2292321220970960613}
   floorCollider: {fileID: 8323642379814593624}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -36109,7 +36109,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 797562690179909492}
   floorCollider: {fileID: 7000880981131911877}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -39867,7 +39867,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 2233762326916696824}
   floorCollider: {fileID: 785274358816935250}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -41173,7 +41173,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 8812252733422292350}
   floorCollider: {fileID: 1918166181076756363}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -42748,7 +42748,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 8701147479885175785}
   floorCollider: {fileID: 7167558253132871201}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -43319,7 +43319,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 7248044082619797909}
   floorCollider: {fileID: 4445767401820752560}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -43470,7 +43470,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 8944177514762226525}
   floorCollider: {fileID: 491183222698516985}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -47529,7 +47529,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 2950129417481682185}
   floorCollider: {fileID: 5686333802498805757}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -47680,7 +47680,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 3626877958640906596}
   floorCollider: {fileID: 2466328489460564408}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -47831,7 +47831,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 8878069065841851003}
   floorCollider: {fileID: 3255848241233976506}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -49098,7 +49098,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 5770119376387340013}
   floorCollider: {fileID: 8193768068791239878}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -49354,7 +49354,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 2664380849693603762}
   floorCollider: {fileID: 597876511178797530}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -49505,7 +49505,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 5776344703702670033}
   floorCollider: {fileID: 6758406109390167499}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -49656,7 +49656,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 6419743188880054452}
   floorCollider: {fileID: 9006305671919669786}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -50259,7 +50259,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 4867053248303257203}
   floorCollider: {fileID: 9128050977632362686}
   blinkColor: {r: 1, g: 1, b: 1, a: 1}
-  blinkDuration: 2
+  blinkDuration: 3
   resetDelay: 5
   fadeDuration: 1
   blinkMaterial: {fileID: 2100000, guid: 86d2a0c65f90eff4eb532e39809d3c36, type: 2}
@@ -61931,6 +61931,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5671486543804391533}
     m_Modifications:
+    - target: {fileID: 71892889215212053, guid: e71ce25de06e14f4db21a50f32a0cac1,
+        type: 3}
+      propertyPath: designedSpawnPoint
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1168766022856812324, guid: e71ce25de06e14f4db21a50f32a0cac1,
         type: 3}
       propertyPath: sceneId
@@ -61940,6 +61945,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _assetId
       value: 3246282186
+      objectReference: {fileID: 0}
+    - target: {fileID: 2004611645640950461, guid: e71ce25de06e14f4db21a50f32a0cac1,
+        type: 3}
+      propertyPath: m_visorIndex
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5803229298375972360, guid: e71ce25de06e14f4db21a50f32a0cac1,
         type: 3}
@@ -63074,6 +63084,46 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6247563418931345701, guid: e71ce25de06e14f4db21a50f32a0cac1,
+        type: 3}
+      propertyPath: m_SelectExited.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247563418931345701, guid: e71ce25de06e14f4db21a50f32a0cac1,
+        type: 3}
+      propertyPath: m_SelectExited.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247563418931345701, guid: e71ce25de06e14f4db21a50f32a0cac1,
+        type: 3}
+      propertyPath: m_SelectExited.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 3055212138119644540}
+    - target: {fileID: 6247563418931345701, guid: e71ce25de06e14f4db21a50f32a0cac1,
+        type: 3}
+      propertyPath: m_SelectExited.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247563418931345701, guid: e71ce25de06e14f4db21a50f32a0cac1,
+        type: 3}
+      propertyPath: m_SelectExited.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: set_useGravity
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247563418931345701, guid: e71ce25de06e14f4db21a50f32a0cac1,
+        type: 3}
+      propertyPath: m_SelectExited.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.Rigidbody, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247563418931345701, guid: e71ce25de06e14f4db21a50f32a0cac1,
+        type: 3}
+      propertyPath: m_SelectExited.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247563418931345701, guid: e71ce25de06e14f4db21a50f32a0cac1,
+        type: 3}
+      propertyPath: m_SelectExited.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7772290601589448721, guid: e71ce25de06e14f4db21a50f32a0cac1,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -63139,6 +63189,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8645434434526723761, guid: e71ce25de06e14f4db21a50f32a0cac1,
+        type: 3}
+      propertyPath: velocidad
+      value: 0.00025
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -63147,6 +63202,12 @@ PrefabInstance:
 --- !u!4 &161020490161334265 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7772290601589448721, guid: e71ce25de06e14f4db21a50f32a0cac1,
+    type: 3}
+  m_PrefabInstance: {fileID: 7629298254407567336}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &3055212138119644540 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 4865854725556126356, guid: e71ce25de06e14f4db21a50f32a0cac1,
     type: 3}
   m_PrefabInstance: {fileID: 7629298254407567336}
   m_PrefabAsset: {fileID: 0}
