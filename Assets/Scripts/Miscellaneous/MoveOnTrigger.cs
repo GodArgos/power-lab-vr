@@ -10,6 +10,7 @@ public class MoveOnTrigger : NetworkBehaviour
     private float startTime = 0f;
     private float journeyLength;
     [SyncVar] public bool allowMove = false;
+    private float tolerance = 0.01f;
 
     private void Update()
     {
@@ -26,7 +27,7 @@ public class MoveOnTrigger : NetworkBehaviour
 
             transform.position = Vector3.Lerp(transform.position, m_targetPosition, fractionOfJourney);
 
-            if (Vector3.Distance(transform.position, m_targetPosition) <= 0f)
+            if (Vector3.Distance(transform.position, m_targetPosition) <= tolerance)
             {
                 allowMove = false;
             }
