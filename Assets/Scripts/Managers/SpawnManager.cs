@@ -67,6 +67,7 @@ public class SpawnManager : MonoBehaviour
 
     public void UpdateCurrentSpawnPoint(int newValue)
     {
+        Debug.Log(("Spawpoint " +  newValue + " of " + currentLevel + " has been reached."));
         currentSpawnPoint = newValue;
     }
 
@@ -74,6 +75,7 @@ public class SpawnManager : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            Debug.Log("SpawnPoints of Level " + currentLevel + " has started.");
             colliders[currentLevel].enabled = false;
             currentLevel++;
             currentSpawnPoint = 0;

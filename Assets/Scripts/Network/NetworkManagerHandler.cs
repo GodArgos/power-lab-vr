@@ -10,7 +10,7 @@ public class NetworkManagerHandler : MonoBehaviour
         STEAM
     }
 
-    [SerializeField] private NetManagerType Type;
+    [SerializeField] private NetManagerType Type = NetManagerType.LOCAL;
     [SerializeField] private List<GameObject> m_managers;
 
     private void Awake()
