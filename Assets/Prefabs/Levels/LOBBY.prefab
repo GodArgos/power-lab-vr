@@ -176,12 +176,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7508689123192907462}
-  - component: {fileID: 8987778374142146853}
-  - component: {fileID: 1699020315422311259}
   - component: {fileID: 2287911224290921272}
   - component: {fileID: 4301045281814070425}
   - component: {fileID: 4662884365575879118}
   - component: {fileID: 2799141898129692151}
+  - component: {fileID: 5118910325434270914}
   m_Layer: 0
   m_Name: Doors (1)
   m_TagString: Untagged
@@ -206,46 +205,6 @@ Transform:
   - {fileID: 9150846652868063858}
   m_Father: {fileID: 2270589241434919866}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8987778374142146853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 157156140650095100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fb1e48b7d35ef84fb83242f104bff14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
-  door: {fileID: 2528635868816796238}
-  targetPos: {x: -22, y: 0, z: 5.733}
-  desiredDuration: 3
-  openDoor: 0
-  testVariable: 0
---- !u!114 &1699020315422311259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 157156140650095100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fb1e48b7d35ef84fb83242f104bff14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
-  door: {fileID: 9150846652868063858}
-  targetPos: {x: -23, y: 0, z: -5.733}
-  desiredDuration: 3
-  openDoor: 0
-  testVariable: 0
 --- !u!114 &2287911224290921272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,8 +241,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.99999815, y: 2.9354568, z: 5.490763}
-  m_Center: {x: -17.57, y: 1.4737309, z: 0.0063239825}
+  m_Size: {x: 4.448438, y: 2.9354568, z: 5.490763}
+  m_Center: {x: -19.294195, y: 1.4737309, z: 0.0063239825}
 --- !u!114 &4662884365575879118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,6 +263,9 @@ MonoBehaviour:
   desiredDuration: 3
   openDoor: 0
   testVariable: 0
+  m_SoundPlayer: {fileID: 0}
+  soundID: 
+  numberOfPlayers: 0
 --- !u!114 &2799141898129692151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,6 +286,36 @@ MonoBehaviour:
   desiredDuration: 3
   openDoor: 0
   testVariable: 0
+  m_SoundPlayer: {fileID: 0}
+  soundID: 
+  numberOfPlayers: 0
+--- !u!54 &5118910325434270914
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157156140650095100}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 2
 --- !u!1 &206075128293810659
 GameObject:
   m_ObjectHideFlags: 0

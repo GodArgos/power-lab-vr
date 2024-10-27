@@ -7,6 +7,7 @@ public class HandScannerLogic : NetworkBehaviour
     [Space(10)]
     [SerializeField] private GameObject[] fullCheckers = new GameObject[4];
     [SerializeField] private float duration = 5f;
+    [SerializeField] private SoundPlayer m_SoundPlayer;
 
     [Space(15)]
 
@@ -43,6 +44,8 @@ public class HandScannerLogic : NetworkBehaviour
                 {
                     fullCheckers[fullCheckers.Length - checkerIndex].SetActive(true);
                     checkerIndex--;
+
+                    m_SoundPlayer.PlaySoundForClient("scanner_beep");
                 }
 
                 timer -= Time.deltaTime;

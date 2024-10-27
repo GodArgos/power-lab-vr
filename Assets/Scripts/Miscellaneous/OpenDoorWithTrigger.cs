@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class OpenDoorWithTrigger : OpenDoor
 {
+    [SerializeField] private SoundPlayer m_SoundPlayer;
+    [SerializeField] private string soundID;
+    private bool soundPlayed = false;
+
     // SyncVar con un hook para cuando el valor de numberOfPlayers cambie
     [SyncVar(hook = nameof(OnNumberOfPlayersChanged))]
     public int numberOfPlayers = 0;
@@ -28,6 +32,12 @@ public class OpenDoorWithTrigger : OpenDoor
     {
         if (newNumber >= 2)
         {
+            if (!soundPlayed)
+            {
+                m_SoundPlayer.CmdPlaySoundForAll(soundID);
+                soundPlayed = true;
+            }
+
             CmdHandleNumberAchieved();
         }
     }
