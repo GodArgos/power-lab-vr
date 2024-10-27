@@ -10,6 +10,9 @@ public class DoorValve : NetworkBehaviour
     public bool doubleWork = true;
     public SetObjectToSocket valve1; // Referencia a la primera válvula
     public SetObjectToSocket valve2; // Referencia a la segunda válvula
+    [SerializeField] private SoundPlayer soundPlayer;
+    private bool goingDown = true;
+    private bool goingUp = false;
 
     [SyncVar]
     public bool isDoorAtTarget = false;
@@ -32,6 +35,14 @@ public class DoorValve : NetworkBehaviour
 
                 if (bothAtMaxRot && !valve1Stopped && !valve2Stopped && !isDoorAtTarget)
                 {
+                    if (goingDown && !goingUp)
+                    {
+                        soundPlayer.CmdStopSoundForAll();
+                        soundPlayer.CmdPlaySoundForAll("metaldoor_open");
+                        goingUp = true;
+                        goingDown = false;
+                    }
+                    
                     // Subir la puerta
                     door.Translate(Vector3.up * doorSpeed * Time.deltaTime);
 
@@ -40,10 +51,23 @@ public class DoorValve : NetworkBehaviour
                     {
                         door.localPosition = new Vector3(door.localPosition.x, maxHeight, door.localPosition.z);
                         LockValves();
+
+                        if (soundPlayer.audioSource.isPlaying)
+                        {
+                            soundPlayer.CmdStopSoundForAll();
+                        }
                     }
                 }
                 else
                 {
+                    if (goingUp && !goingDown)
+                    {
+                        soundPlayer.CmdStopSoundForAll();
+                        soundPlayer.CmdPlaySoundForAll("metaldoor_close");
+                        goingDown = true;
+                        goingUp = false;
+                    }
+
                     // Bajar la puerta lentamente para permitir correcciones si es necesario
                     door.Translate(Vector3.down * (doorSpeed / 2) * Time.deltaTime);
 
@@ -51,6 +75,11 @@ public class DoorValve : NetworkBehaviour
                     if (door.localPosition.y <= 0)
                     {
                         door.localPosition = new Vector3(door.localPosition.x, 0, door.localPosition.z);
+
+                        if (soundPlayer.audioSource.isPlaying)
+                        {
+                            soundPlayer.CmdStopSoundForAll();
+                        }
                     }
 
                     // Reiniciar las válvulas si alguna ha dejado de ser manipulada
@@ -77,22 +106,48 @@ public class DoorValve : NetworkBehaviour
 
                 if (atMaxRot && !valve1Stopped)
                 {
+                    if (goingDown && !goingUp)
+                    {
+                        soundPlayer.CmdStopSoundForAll();
+                        soundPlayer.CmdPlaySoundForAll("metaldoor_open");
+                        goingUp = true;
+                        goingDown = false;
+                    }
+
                     // Subir la puerta
                     door.Translate(Vector3.up * doorSpeed * Time.deltaTime);
 
                     if (door.localPosition.y >= maxHeight)
                     {
                         door.localPosition = new Vector3(door.localPosition.x, maxHeight, door.localPosition.z);
+
+                        if (soundPlayer.audioSource.isPlaying)
+                        {
+                            soundPlayer.CmdStopSoundForAll();
+                        }
                     }
                 }
                 else
                 {
+                    if (goingUp && !goingDown)
+                    {
+                        soundPlayer.CmdStopSoundForAll();
+                        soundPlayer.CmdPlaySoundForAll("metaldoor_close");
+                        goingDown = true;
+                        goingUp = false;
+                    }
+
                     // Bajar la puerta
                     door.Translate(Vector3.down * (doorSpeed / 2) * Time.deltaTime);
 
                     if (door.localPosition.y <= 0)
                     {
                         door.localPosition = new Vector3(door.localPosition.x, 0, door.localPosition.z);
+
+                        if (soundPlayer.audioSource.isPlaying)
+                        {
+                            soundPlayer.CmdStopSoundForAll();
+                        }
                     }
 
                     // Reiniciar la válvula si se ha dejado de manipular

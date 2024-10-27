@@ -56,6 +56,20 @@ public class SoundPlayer : NetworkBehaviour
         }
     }
 
+    public void PlayPausableSoundLocal(string soundID)
+    {
+        var clip = GetAudioClipByID(soundID);
+        if (clip != null)
+        {
+            audioSource.clip = clip;
+            audioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning($"Sound ID '{soundID}' not found in SoundDatabase.");
+        }
+    }
+
     public void StopSoundForClient()
     {
         StopLocalSound();
@@ -64,6 +78,16 @@ public class SoundPlayer : NetworkBehaviour
     private void StopLocalSound()
     {
         audioSource.Stop();
+    }
+
+    public void PauseSoundForClient()
+    {
+        PauseLocalSound();
+    }
+
+    private void PauseLocalSound()
+    {
+        audioSource.Pause();
     }
 
     #endregion
@@ -92,6 +116,31 @@ public class SoundPlayer : NetworkBehaviour
     private void RpcStopSoundForAll()
     {
         StopLocalSound();
+    }
+
+    // Métodos para detener el sonido
+    [Command(requiresAuthority = false)]
+    public void CmdPauseSoundForAll()
+    {
+        RpcPauseSoundForAll();
+    }
+
+    [ClientRpc]
+    private void RpcPauseSoundForAll()
+    {
+        PauseLocalSound();
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdPlayPausableSoundForAll(string soundID)
+    {
+        RpcPlayPausablSoundForAll(soundID);
+    }
+
+    [ClientRpc]
+    private void RpcPlayPausablSoundForAll(string soundID)
+    {
+        PlayPausableSoundLocal(soundID);
     }
     #endregion
 }

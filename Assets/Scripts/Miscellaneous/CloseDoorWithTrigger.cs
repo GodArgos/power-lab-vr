@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class CloseDoorWithTrigger : OpenDoor
 {
+    [SerializeField] private SoundPlayer soundPlayer;
+    
     // SyncVar con un hook para cuando el valor de numberOfPlayers cambie
     [SyncVar(hook = nameof(OnNumberOfPlayersChanged))]
     public int numberOfPlayers = 0;
@@ -29,6 +31,11 @@ public class CloseDoorWithTrigger : OpenDoor
     {
         if (newNumber >= 2)
         {
+            if (!soundPlayer.audioSource.isPlaying)
+            {
+                soundPlayer.CmdPlaySoundForAll("metaldoor_close");
+            }
+
             CmdHandleNumberAchieved();
         }
     }

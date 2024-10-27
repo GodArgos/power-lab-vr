@@ -114,9 +114,6 @@ MonoBehaviour:
   ignoreMask:
     serializedVersion: 2
     m_Bits: 0
-  OnHitTarget:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!120 &6367200406315843238
 LineRenderer:
   serializedVersion: 2

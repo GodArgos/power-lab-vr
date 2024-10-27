@@ -19,12 +19,17 @@ public class ValveRotationSync : NetworkBehaviour
     [SyncVar]
     [SerializeField] private bool enableTestMode = false;
     [SerializeField] private float testRotation = 10f;
+    private SoundPlayer soundPlayer;
+    private bool soundPlayed = false;
+
+    private float lastValue = 0;
 
     private void Start()
     {
         knob = GetComponent<XRKnob>();
         // Suscribirse al evento de cambio de valor del knob
         knob.onValueChange.AddListener(OnKnobValueChanged);
+        soundPlayer = GetComponent<SoundPlayer>();
     }
 
     private void Update()
@@ -50,6 +55,13 @@ public class ValveRotationSync : NetworkBehaviour
                 CmdSetValue(val);
             }
         }
+
+        // Verificar si el valor llegó al máximo para detener el sonido
+        if (syncedValue >= 1.0f && !soundPlayed)
+        {
+            soundPlayer.CmdStopSoundForAll();
+            soundPlayed = true;
+        }
     }
 
     public override void OnStartClient()
@@ -73,8 +85,19 @@ public class ValveRotationSync : NetworkBehaviour
     [Command(requiresAuthority = false)]
     private void CmdSetValue(float value)
     {
+        var oldValue = syncedValue;
         // Actualizamos el valor sincronizado
         syncedValue = value;
+
+        // Reproducir sonido cuando la válvula comienza a girar
+        if (syncedValue != oldValue && isBeingHeld && !soundPlayed && !soundPlayer.audioSource.isPlaying)
+        {
+            soundPlayer.CmdPlayPausableSoundForAll("valve_turn");
+        }
+        else if (syncedValue == oldValue && soundPlayer.audioSource.isPlaying)
+        {
+            soundPlayer.CmdPauseSoundForAll();
+        }
     }
 
     // Método que se llama en los clientes cuando el valor sincronizado cambia
@@ -100,6 +123,9 @@ public class ValveRotationSync : NetworkBehaviour
     {
         isBeingHeld = false; // La válvula ha dejado de ser manipulada
         CmdSetBeingHeld(false);
+
+        // Pausar sonido cuando deja de girar
+        soundPlayer.CmdPauseSoundForAll();
     }
 
     [Command(requiresAuthority = false)]
@@ -129,6 +155,7 @@ public class ValveRotationSync : NetworkBehaviour
             syncedValue -= 0.1f;
             yield return new WaitForSeconds(0.1f);
         }
+        soundPlayer.CmdStopSoundForAll();
     }
 
     [Command(requiresAuthority = false)]

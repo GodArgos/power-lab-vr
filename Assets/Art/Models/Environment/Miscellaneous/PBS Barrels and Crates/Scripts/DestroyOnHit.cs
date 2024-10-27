@@ -14,45 +14,6 @@ public class DestroyOnHit : NetworkBehaviour
 	public bool autoDestroy = true;
 	public float lifeTime = 5.0f;
 
-    // Update is called once per frame
-    //void OnCollisionEnter(Collision col)
-    //{
-    //       if (col.gameObject.CompareTag("Weapon") && CheckVelocity(col.gameObject.GetComponent<EnableWeaponDestruction>().velocity, 3.5f))
-    //	{
-    //            instantiate the exploding barrel
-    //           GameObject go = (GameObject)Instantiate(
-    //               explodedPrefab,
-    //               gameObject.transform.position,
-    //               gameObject.transform.rotation
-    //           );
-
-    //            get the explosion component on the new object
-    //           ExplodeBarrel explodeComp = go.GetComponent<ExplodeBarrel>();
-
-    //            set desired properties
-    //           explodeComp.explosionForce = explosionForce;
-    //           explodeComp.explosionRadius = explosionRadius;
-    //           explodeComp.upForceMin = upForceMin;
-    //           explodeComp.upForceMax = upForceMax;
-    //           explodeComp.autoDestroy = autoDestroy;
-    //           explodeComp.lifeTime = lifeTime;
-
-    //            make the barrel explode
-    //           explodeComp.Explode();
-
-    //            Sincroniza el objeto en la red
-    //           NetworkServer.Spawn(go);
-
-    //            destroy the nice barrel
-    //           NetworkServer.Destroy(gameObject);
-    //       }
-    //}
-
-    //   private bool CheckVelocity(Vector3 velocity, float minVelocity)
-    //   {
-    //       return velocity.x >= minVelocity ? true : (velocity.y >= minVelocity ? true : (velocity.z >= minVelocity ? true : false));
-    //   }
-
     void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.CompareTag("Weapon") && CheckVelocity(col.gameObject.GetComponent<EnableWeaponDestruction>().velocity, 3.5f))
@@ -102,6 +63,8 @@ public class DestroyOnHit : NetworkBehaviour
 
         // Sincroniza el objeto en la red
         NetworkServer.Spawn(go);
+
+        go.GetComponent<SoundPlayer>().CmdPlaySoundForAll("crate_break_" + (int)Random.Range(1, 5));
 
         // Destruye el objeto actual en la red
         NetworkServer.Destroy(gameObject);

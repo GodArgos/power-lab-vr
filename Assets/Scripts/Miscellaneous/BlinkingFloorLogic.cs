@@ -22,11 +22,14 @@ public class BlinkingFloorLogic : NetworkBehaviour
     [SyncVar]
     public bool networkIsActive = true;
 
+    private SoundPlayer soundPlayer;
+
     private void Start()
     {
         floorRenderer = GetComponent<MeshRenderer>();
         originalColor = floorRenderer.material.color;
         initialMaterial = floorRenderer.material;
+        soundPlayer = transform.GetChild(0).GetComponent<SoundPlayer>();
     }
 
 
@@ -61,6 +64,8 @@ public class BlinkingFloorLogic : NetworkBehaviour
 
         // Esperar el tiempo de parpadeo
         yield return new WaitForSeconds(blinkDuration);
+
+        soundPlayer.CmdPlaySoundForAll("fall_apart");
 
         // Desactivar el piso en todos los clientes
         RpcDeactivateFloor();
