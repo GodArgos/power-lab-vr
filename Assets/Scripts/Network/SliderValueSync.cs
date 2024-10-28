@@ -8,6 +8,9 @@ public class SliderValueSync : NetworkBehaviour
 
     [SyncVar(hook = nameof(OnValueChanged))]
     public float syncedValue = 0.5f; // Valor inicial en 0.5
+    [SyncVar(hook = nameof(OnIsBeingHeldChanged))]
+    public bool isBeingHeld = false; // Nuevo SyncVar para saber si la válvula está siendo manipulada
+    [SerializeField] private bool movingSlide = false;
 
     [Header("TEST")]
     [SerializeField] private bool activator = false;
@@ -16,12 +19,20 @@ public class SliderValueSync : NetworkBehaviour
     [Range(0f, 1f)]
     [SerializeField] private float testValue = 0.5f;
 
+    [SerializeField] private SoundPlayer soundPlayer;
+    [SerializeField] private string audioID;
+
+    private float lastSyncedValue;
+    private float changeThreshold = 0.0005f;
+
+    private bool slideAtSide = false;
+
     private void Start()
     {
         slider = GetComponent<XRSlider>();
-
         // Suscribirse al evento de cambio de valor del knob
         slider.onValueChange.AddListener(OnSliderValueChanged);
+        lastSyncedValue = syncedValue; // Inicializar el valor anterior al valor inicial
     }
 
     private void Update()
@@ -42,6 +53,57 @@ public class SliderValueSync : NetworkBehaviour
                 CmdSetValue(testValue);
             }
         }
+
+        if (movingSlide)
+        {
+            if (isBeingHeld)
+            {
+                if (Mathf.Abs(syncedValue - lastSyncedValue) >= changeThreshold)
+                {
+                    if (!soundPlayer.audioSource.isPlaying)
+                    {
+                        Debug.Log("Playing sound");
+                        soundPlayer.CmdPlayPausableSoundForAll(audioID);
+                    }
+                    lastSyncedValue = syncedValue; // Actualizar el último valor registrado
+                }
+                else
+                {
+                    if (soundPlayer.audioSource.isPlaying)
+                    {
+                        Debug.Log("Pausing sound on held");
+                        soundPlayer.CmdPauseSoundForAll();
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Pausing sound not held");
+                soundPlayer.CmdPauseSoundForAll();
+            }
+
+            // Pausar sonido cuando el slider está en los valores extremos
+            if (syncedValue <= 0 || syncedValue >= 1.0f)
+            {
+                soundPlayer.CmdPauseSoundForAll();
+            }
+        }
+        else
+        {
+            // Reproducir el sonido solo una vez al llegar a los extremos (0 o 1)
+            if ((syncedValue <= 0 || syncedValue >= 1.0f) && !slideAtSide)
+            {
+                if (!soundPlayer.audioSource.isPlaying)
+                {
+                    soundPlayer.CmdPlaySoundForAll(audioID);
+                }
+                slideAtSide = true; // Marcar que ya se reprodujo el sonido en el extremo
+            }
+            else if (syncedValue > 0 && syncedValue < 1.0f)
+            {
+                slideAtSide = false; // Resetear cuando el slider se aleja de los extremos
+            }
+        }
     }
 
     // Método llamado cuando el valor del slider cambia localmente
@@ -52,6 +114,11 @@ public class SliderValueSync : NetworkBehaviour
         {
             CmdSetValue(value);
         }
+    }
+
+    private void OnIsBeingHeldChanged(bool oldHeld, bool newHeld)
+    {
+        isBeingHeld = newHeld;
     }
 
     // Comando que se ejecuta en el servidor cuando es llamado por un cliente
@@ -79,5 +146,24 @@ public class SliderValueSync : NetworkBehaviour
     public void ResetValue(float value)
     {
         syncedValue = value;
+        if (movingSlide) { soundPlayer.CmdStopSoundForAll(); }
+    }
+
+    public void OnGrabbed()
+    {
+        isBeingHeld = true; // La válvula está siendo manipulada
+        CmdSetBeingHeld(true);
+    }
+
+    public void OnReleased()
+    {
+        isBeingHeld = false; // La válvula ha dejado de ser manipulada
+        CmdSetBeingHeld(false);
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdSetBeingHeld(bool value)
+    {
+        isBeingHeld = value;
     }
 }

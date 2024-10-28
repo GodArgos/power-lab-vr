@@ -10,6 +10,7 @@ public class SetObjectToSocket : NetworkBehaviour
     [SerializeField] GameObject valvePrefab;
     private XRSocketInteractor socket;
     private GameObject connectedObject;
+    [SerializeField] private bool needToBreak = false;
     [SyncVar] public GameObject connectedValve;
 
     public DoorValve door;
@@ -63,6 +64,7 @@ public class SetObjectToSocket : NetworkBehaviour
         NetworkServer.Destroy(obj);
 
         connectedValve = valve;
+        valve.GetComponent<ValveRotationSync>().brokenValve = needToBreak;
 
         // Desactivar el socket para evitar más interacciones
         socket.socketActive = false;

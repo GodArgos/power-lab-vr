@@ -8,7 +8,7 @@ public class ValveRotationSync : NetworkBehaviour
 {
     private XRKnob knob;
     private float initialValue = 0f;
-
+    [HideInInspector] public bool brokenValve = false;
     [SyncVar(hook = nameof(OnValueChanged))]
     public float syncedValue;
     [SyncVar]
@@ -22,7 +22,6 @@ public class ValveRotationSync : NetworkBehaviour
     private SoundPlayer soundPlayer;
     private bool soundPlayed = false;
 
-    private float lastValue = 0;
 
     private void Start()
     {
@@ -56,11 +55,14 @@ public class ValveRotationSync : NetworkBehaviour
             }
         }
 
-        // Verificar si el valor llegó al máximo para detener el sonido
-        if (syncedValue >= 1.0f && !soundPlayed)
+        if (!brokenValve)
         {
-            soundPlayer.CmdStopSoundForAll();
-            soundPlayed = true;
+            // Verificar si el valor llegó al máximo para detener el sonido
+            if (syncedValue >= 1.0f && !soundPlayed)
+            {
+                soundPlayer.CmdStopSoundForAll();
+                soundPlayed = true;
+            }
         }
     }
 
@@ -155,7 +157,11 @@ public class ValveRotationSync : NetworkBehaviour
             syncedValue -= 0.1f;
             yield return new WaitForSeconds(0.1f);
         }
-        soundPlayer.CmdStopSoundForAll();
+        
+        if (!brokenValve)
+        {
+            soundPlayer.CmdStopSoundForAll();
+        }  
     }
 
     [Command(requiresAuthority = false)]
