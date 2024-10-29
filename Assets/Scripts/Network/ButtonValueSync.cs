@@ -22,6 +22,8 @@ public class ButtonValueSync : NetworkBehaviour
     [SerializeField] private bool enableTestMode = false;
     [SerializeField] private bool testValue = false;
 
+    [SerializeField] private SoundPlayer soundPlayer;
+
     private void Start()
     {
         button = GetComponent<XRPushButton>();
@@ -52,6 +54,11 @@ public class ButtonValueSync : NetworkBehaviour
             {
                 CmdSetPressed(testValue);
             }
+        }
+
+        if (isPressed && soundPlayer.audioSource.isPlaying)
+        {
+            soundPlayer.CmdStopSoundForAll();
         }
     }
 

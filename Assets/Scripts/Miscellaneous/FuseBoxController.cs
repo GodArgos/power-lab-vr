@@ -62,6 +62,7 @@ public class FuseBoxController : MonoBehaviour
         {
             m_pushButton.GetComponent<XRPushButton>().enabled = true;
             m_pushButton.transform.GetChild(0).GetComponent<BlinkingMaterial>().StartBlinking();
+            m_pushButton.GetComponent<SoundPlayer>().CmdPlayPausableSoundForAll("button_buzzer");
             m_activationLever.enabled = false;
             buttonReady = true;
             m_greenLight.StopBlinking();

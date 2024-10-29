@@ -16,6 +16,8 @@ public class SideLiftController : NetworkBehaviour
     private XRSlider sliderB; // Referencia al slider B
     [SerializeField]
     private Axis movementAxis = Axis.X; // Eje en el cual se moverá el objeto
+    [SerializeField] private SoundPlayer soundPlayer_main;
+    [SerializeField] private SoundPlayer soundPlayer_second;
 
     private float currentSpeed = 0f; // Velocidad actual del objeto
     private float targetPosition; // Objetivo de la posición a moverse
@@ -76,17 +78,33 @@ public class SideLiftController : NetworkBehaviour
         {
             // El objeto se detiene
             currentSpeed = 0f;
+
+            if (soundPlayer_main.audioSource.isPlaying)
+            {
+                soundPlayer_main.CmdPauseSoundForAll();
+            }
         }
 
         // Mover el objeto si la velocidad es mayor que cero y no ha alcanzado el destino
         if (currentSpeed > 0 && !HasReachedTarget())
         {
+            if (!soundPlayer_main.audioSource.isPlaying)
+            {
+                soundPlayer_main.CmdPlayPausableSoundForAll("sidelift");
+            }
+
             MoveObject();
         }
 
         // Revisamos si ha llegado al objetivo, y si es así, reiniciamos los sliders
         if (HasReachedTarget())
         {
+            if (soundPlayer_main.audioSource.isPlaying)
+            {
+                soundPlayer_main.CmdStopSoundForAll();
+                soundPlayer_second.CmdPlaySoundForAll("sidelift_arrive");
+            }
+            
             ResetSliders();
         }
     }

@@ -12,11 +12,16 @@ public class ElevatorController : NetworkBehaviour
     [SerializeField] private bool m_activateElevator; // Activador para iniciar el movimiento
 
     private Transform previousPlayerTransform;
-
+    [SerializeField] private SoundPlayer m_soundPlayer;
     private void FixedUpdate()
     {
         if (m_activateElevator)
         {
+            if (!m_soundPlayer.audioSource.isPlaying)
+            {
+                m_soundPlayer.CmdPlayPausableSoundForAll("elevator_song");
+            }
+            
             // Obtener la posición local actual del elevador
             Vector3 currentLocalPosition = m_elevatorTransform.localPosition;
             // Definir la posición objetivo con el valor de m_targetPoint en el eje Y
@@ -28,6 +33,7 @@ public class ElevatorController : NetworkBehaviour
             // Detener el movimiento si ya hemos alcanzado la posición objetivo
             if (Mathf.Abs(m_elevatorTransform.localPosition.y - m_targetPoint) < 0.01f)
             {
+                m_soundPlayer.CmdStopSoundForAll();
                 m_activateElevator = false; // Desactivar el movimiento cuando llegue al objetivo
             }
         }

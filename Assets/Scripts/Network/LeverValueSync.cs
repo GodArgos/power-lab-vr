@@ -16,6 +16,8 @@ public class LeverValueSync : NetworkBehaviour
     [SerializeField] private bool enableTestMode = false;
     [SerializeField] private bool testValue = false;
 
+    [SerializeField] private SoundPlayer soundPlayer;
+
     private void Start()
     {
         lever = GetComponent<XRLever>();
@@ -50,6 +52,7 @@ public class LeverValueSync : NetworkBehaviour
     {
         if (isOwned && !enableTestMode)
         {
+            soundPlayer.CmdPlaySoundForAll("lever_lock");
             CmdSetValue(true);
         }
     }
