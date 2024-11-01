@@ -7,15 +7,28 @@ public class MoveOnTrigger : NetworkBehaviour
 {
     [SerializeField] private Vector3 m_targetPosition;
     [SerializeField] private float m_speed;
+    [SerializeField] private SoundPlayer soundPlayer;
     private float startTime = 0f;
     private float journeyLength;
     [SyncVar] public bool allowMove = false;
     private float tolerance = 0.01f;
 
+    // SyncVar con un hook para cuando el valor de numberOfPlayers cambie
+    [SyncVar(hook = nameof(OnNumberOfPlayersChanged))]
+    public int numberOfPlayers = 0;
+
+    // HashSet para almacenar jugadores que ya han entrado
+    private HashSet<GameObject> playersInTrigger = new HashSet<GameObject>();
+
     private void Update()
     {
         if (allowMove)
         {
+            if (!soundPlayer.audioSource.isPlaying)
+            {
+                soundPlayer.CmdPlayPausableSoundForAll("celebration");
+            }
+            
             if (startTime == 0)
             {
                 startTime = Time.time;
@@ -34,11 +47,35 @@ public class MoveOnTrigger : NetworkBehaviour
         }
     }
 
+    // Hook que se llama cuando el número de jugadores cambia
+    private void OnNumberOfPlayersChanged(int oldNumber, int newNumber)
+    {
+        if (newNumber >= 2)
+        {
+            if (!soundPlayer.audioSource.isPlaying)
+            {
+                soundPlayer.CmdPlaySoundForAll("metaldoor_close");
+            }
+
+            CmdUpdateActivation(true);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        // Buscar el NetworkIdentity del jugador en los objetos padres
+        NetworkIdentity networkIdentity = other.GetComponentInParent<NetworkIdentity>();
+
+        if (networkIdentity != null && other.gameObject.CompareTag("PlayerNetwork") && !playersInTrigger.Contains(networkIdentity.gameObject))
         {
-            allowMove = true;
+            playersInTrigger.Add(networkIdentity.gameObject); // Agregar jugador si no ha sido contado antes
+            numberOfPlayers++;  // Actualizar el número de jugadores, esto activará el hook
         }
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdUpdateActivation(bool state)
+    {
+        allowMove = state;
     }
 }

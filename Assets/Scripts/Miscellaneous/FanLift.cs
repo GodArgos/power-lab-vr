@@ -8,6 +8,7 @@ public class FanLift : NetworkBehaviour
     public float liftForce = 10f;  // Force applied upwards
     private CharacterController characterController;
     [SerializeField] private List<PlatformCornerMove> m_cornerWindows;
+    [SerializeField] private SoundPlayer soundPlayer;
     private bool alreadyOpened = false;
     private bool alreadyUsed = false;
 
@@ -19,6 +20,7 @@ public class FanLift : NetworkBehaviour
 
             if (!alreadyOpened)
             {
+                soundPlayer.CmdPlaySoundForAll("hydraulic_open");
                 CmdOpenCorners();
             }
 
@@ -47,6 +49,7 @@ public class FanLift : NetworkBehaviour
             if (characterController != null)
             {
                 characterController = null;
+                soundPlayer.CmdPlaySoundForAll("hydraulic_close");
                 CmdCloseCorners();
                 alreadyOpened = true;
             }

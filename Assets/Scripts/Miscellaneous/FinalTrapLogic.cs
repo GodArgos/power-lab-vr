@@ -8,6 +8,7 @@ public class FinalTrapLogic : NetworkBehaviour
     [SerializeField] private List<GameObject> m_affectedObjects;
     [SerializeField] private List<GameObject> m_forceField;
     [SerializeField] private float m_timeForceField = 2f;
+    [SerializeField] private SoundPlayer forceSoundPlayer;
     private bool m_activated = false;
 
     // SyncVar con un hook para cuando el valor de numberOfPlayers cambie
@@ -75,6 +76,7 @@ public class FinalTrapLogic : NetworkBehaviour
 
     private IEnumerator ActivateTrap()
     {
+        forceSoundPlayer.CmdPlayPausableSoundForAll("forcefield");
         ActivateForceFields();
 
         yield return new WaitForSeconds(m_timeForceField);

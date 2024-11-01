@@ -61,6 +61,7 @@ public class SpecialTransitionLogic : NetworkBehaviour
 
         // Activar explosión
         GameObject exp = Instantiate(m_explosionPrefab, XROrigin.transform.position, Quaternion.identity);
+        exp.GetComponent<SoundPlayer>().CmdPlaySoundForAll("explosion");
 
         Debug.Log("Explosion Activated");
 
@@ -85,6 +86,7 @@ public class SpecialTransitionLogic : NetworkBehaviour
         // Esperar un par de segundos
         yield return new WaitForSeconds(4);
 
+        exp.GetComponent<SoundPlayer>().CmdStopSoundForAll();
         Destroy(exp);
 
         // Volver a los valores originales del vignette

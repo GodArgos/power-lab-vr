@@ -62,7 +62,6 @@ public class SliderValueSync : NetworkBehaviour
                 {
                     if (!soundPlayer.audioSource.isPlaying)
                     {
-                        Debug.Log("Playing sound");
                         soundPlayer.CmdPlayPausableSoundForAll(audioID);
                     }
                     lastSyncedValue = syncedValue; // Actualizar el último valor registrado
@@ -71,15 +70,16 @@ public class SliderValueSync : NetworkBehaviour
                 {
                     if (soundPlayer.audioSource.isPlaying)
                     {
-                        Debug.Log("Pausing sound on held");
                         soundPlayer.CmdPauseSoundForAll();
                     }
                 }
             }
             else
             {
-                Debug.Log("Pausing sound not held");
-                soundPlayer.CmdPauseSoundForAll();
+                if (soundPlayer.audioSource.isPlaying)
+                {
+                    soundPlayer.CmdPauseSoundForAll();
+                }
             }
 
             // Pausar sonido cuando el slider está en los valores extremos
