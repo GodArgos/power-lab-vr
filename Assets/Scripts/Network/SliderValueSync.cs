@@ -9,14 +9,14 @@ public class SliderValueSync : NetworkBehaviour
     [SyncVar(hook = nameof(OnValueChanged))]
     public float syncedValue = 0.5f; // Valor inicial en 0.5
     [SyncVar(hook = nameof(OnIsBeingHeldChanged))]
-    public bool isBeingHeld = false; // Nuevo SyncVar para saber si la válvula está siendo manipulada
+    public bool isBeingHeld = false; // Nuevo SyncVar para saber si la vï¿½lvula estï¿½ siendo manipulada
     [SerializeField] private bool movingSlide = false;
 
     [Header("TEST")]
     [SerializeField] private bool activator = false;
     [SyncVar]
     [SerializeField] private bool enableTestMode = false;
-    [Range(0f, 1f)]
+    // [Range(0f, 1f)]
     [SerializeField] private float testValue = 0.5f;
 
     [SerializeField] private SoundPlayer soundPlayer;
@@ -64,7 +64,7 @@ public class SliderValueSync : NetworkBehaviour
                     {
                         soundPlayer.CmdPlayPausableSoundForAll(audioID);
                     }
-                    lastSyncedValue = syncedValue; // Actualizar el último valor registrado
+                    lastSyncedValue = syncedValue; // Actualizar el ï¿½ltimo valor registrado
                 }
                 else
                 {
@@ -82,7 +82,7 @@ public class SliderValueSync : NetworkBehaviour
                 }
             }
 
-            // Pausar sonido cuando el slider está en los valores extremos
+            // Pausar sonido cuando el slider estï¿½ en los valores extremos
             if (syncedValue <= 0 || syncedValue >= 1.0f)
             {
                 soundPlayer.CmdPauseSoundForAll();
@@ -106,7 +106,7 @@ public class SliderValueSync : NetworkBehaviour
         }
     }
 
-    // Método llamado cuando el valor del slider cambia localmente
+    // Mï¿½todo llamado cuando el valor del slider cambia localmente
     private void OnSliderValueChanged(float value)
     {
         // Si el cliente tiene autoridad sobre este objeto, enviamos el valor al servidor
@@ -128,20 +128,20 @@ public class SliderValueSync : NetworkBehaviour
         syncedValue = value;
     }
 
-    // Método para obtener el valor sincronizado desde otros scripts
+    // Mï¿½todo para obtener el valor sincronizado desde otros scripts
     public float GetSyncedValue()
     {
         return syncedValue;
     }
 
-    // Método que se llama en los clientes cuando el valor sincronizado cambia
+    // Mï¿½todo que se llama en los clientes cuando el valor sincronizado cambia
     private void OnValueChanged(float oldValue, float newValue)
     {
         // Actualizar el valor del slider sin notificar para evitar bucles
         slider.SetValueWithoutNotify(newValue);
     }
 
-    // Método para reiniciar el valor desde el servidor
+    // Mï¿½todo para reiniciar el valor desde el servidor
     [Server]
     public void ResetValue(float value)
     {
@@ -151,13 +151,13 @@ public class SliderValueSync : NetworkBehaviour
 
     public void OnGrabbed()
     {
-        isBeingHeld = true; // La válvula está siendo manipulada
+        isBeingHeld = true; // La vï¿½lvula estï¿½ siendo manipulada
         CmdSetBeingHeld(true);
     }
 
     public void OnReleased()
     {
-        isBeingHeld = false; // La válvula ha dejado de ser manipulada
+        isBeingHeld = false; // La vï¿½lvula ha dejado de ser manipulada
         CmdSetBeingHeld(false);
     }
 

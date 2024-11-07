@@ -5,9 +5,9 @@ using UnityEngine;
 public class VignetteController : MonoBehaviour
 {
     [SerializeField] private MeshRenderer vignette;
-    [Range(0f, 1f)]
+    // [Range(0f, 1f)]
     [SerializeField] public float apertureSize;
-    [Range(0f, 1f)]
+    // [Range(0f, 1f)]
     [SerializeField] public float featheringEffect;
     [SerializeField] private Color vignetteColor = Color.red;
     [SerializeField] private Color vignetteColorBlend = Color.black;
