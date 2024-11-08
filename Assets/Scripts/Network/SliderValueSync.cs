@@ -151,14 +151,26 @@ public class SliderValueSync : NetworkBehaviour
 
     public void OnGrabbed()
     {
-        isBeingHeld = true; // La v�lvula est� siendo manipulada
-        CmdSetBeingHeld(true);
+        if (isServer)
+        {
+            isBeingHeld = true;
+        }
+        else
+        {
+            CmdSetBeingHeld(true);
+        }
     }
 
     public void OnReleased()
     {
-        isBeingHeld = false; // La v�lvula ha dejado de ser manipulada
-        CmdSetBeingHeld(false);
+        if (isServer)
+        {
+            isBeingHeld = false;
+        }
+        else
+        {
+            CmdSetBeingHeld(false);
+        }
     }
 
     [Command(requiresAuthority = false)]

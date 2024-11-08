@@ -25,7 +25,19 @@ public class GrabbableAuthority : NetworkBehaviour
         {
             if (!isOwned && NetworkClient.ready)
             {
-                CmdRequestAuthority();
+                CmdRequestAuthority(netIdentity.connectionToClient);
+                author = true;
+            }
+        }
+    }
+
+    public void OnGrabbed()
+    {
+        if (!isGrabbed && !author)
+        {
+            if (!isOwned && NetworkClient.ready)
+            {
+                CmdRequestAuthority(netIdentity.connectionToClient);
                 author = true;
             }
         }
@@ -33,7 +45,7 @@ public class GrabbableAuthority : NetworkBehaviour
 
     // Command to request authority on the server
     [Command(requiresAuthority = false)]
-    private void CmdRequestAuthority(NetworkConnectionToClient sender = null)
+    private void CmdRequestAuthority(NetworkConnectionToClient sender)
     {
         if (!isGrabbed)
         {

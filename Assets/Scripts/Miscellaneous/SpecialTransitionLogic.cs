@@ -11,6 +11,7 @@ public class SpecialTransitionLogic : NetworkBehaviour
     [SerializeField] private GameObject m_explosionPrefab;
     [SerializeField] private Transform positionA;  // Posición A
     [SerializeField] private Transform positionB;  // Posición B
+    [SerializeField] private FanLift fan;
 
     private bool startedTrans = false;
     private XROrigin XROrigin;
@@ -135,6 +136,7 @@ public class SpecialTransitionLogic : NetworkBehaviour
         else
         {
             XROrigin.transform.position = positionB.position;
+            fan.playerCollider = XROrigin.gameObject.GetComponent<CharacterController>();
             CameraDisconnection();
         }
     }

@@ -9,30 +9,53 @@ public class FanLift : NetworkBehaviour
     private CharacterController characterController;
     [SerializeField] private List<PlatformCornerMove> m_cornerWindows;
     [SerializeField] private SoundPlayer soundPlayer;
+    [SerializeField] private SoundPlayer force_soundPlayer;
     private bool alreadyOpened = false;
-    private bool alreadyUsed = false;
+    private bool firstUsed = false;
+    [HideInInspector] public Collider playerCollider;
+    [SerializeField] private List<GameObject> forceField;
+
+    private void Start()
+    {
+        if (isServer)
+        {
+            HandleForceFields(false);
+        }
+        else
+        {
+            CmdHandleForceFields(false);
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !alreadyUsed)
+        if (other.CompareTag("Player") && other == playerCollider)
         {
             characterController = other.GetComponent<CharacterController>();
 
-            if (!alreadyOpened)
+            if (isServer)
             {
-                soundPlayer.CmdPlaySoundForAll("hydraulic_open");
-                CmdOpenCorners();
+                HandleForceFields(true);
             }
-
-            alreadyUsed = true;
+            else
+            {
+                CmdHandleForceFields(true);
+            }
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
         // Apply upward movement to CharacterController
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && other == playerCollider)
         {
+            if (!firstUsed)
+            {
+                soundPlayer.CmdPlaySoundForAll("hydraulic_open");
+                CmdOpenCorners();
+                firstUsed = true;
+            }
+            
             if (characterController != null)
             {
                 Vector3 liftDirection = Vector3.up * liftForce * Time.deltaTime;
@@ -41,19 +64,48 @@ public class FanLift : NetworkBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    public void CloseEverything()
     {
-        if (other.CompareTag("Player"))
+        if (characterController != null)
         {
-            // Clear the CharacterController reference when exiting the trigger
-            if (characterController != null)
+            characterController = null;
+            soundPlayer.CmdPlaySoundForAll("hydraulic_close");
+            CmdCloseCorners();
+
+            if (isServer)
             {
-                characterController = null;
-                soundPlayer.CmdPlaySoundForAll("hydraulic_close");
-                CmdCloseCorners();
-                alreadyOpened = true;
+                HandleForceFields(false);
             }
+            else
+            {
+                CmdHandleForceFields(false);
+            }
+
+            alreadyOpened = true;
         }
+    }
+
+    private void HandleForceFields(bool state)
+    {
+        foreach (GameObject go in forceField)
+        {
+            go.SetActive(state);
+        }
+
+        if (state)
+        {
+            force_soundPlayer.CmdPlayPausableSoundForAll("forcefield");
+        }
+        else
+        {
+            force_soundPlayer.CmdStopSoundForAll();
+        }
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdHandleForceFields(bool state)
+    {
+        HandleForceFields(state);
     }
 
     [Command(requiresAuthority = false)]
