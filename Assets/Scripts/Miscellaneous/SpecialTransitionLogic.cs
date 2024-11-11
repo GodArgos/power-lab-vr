@@ -12,6 +12,7 @@ public class SpecialTransitionLogic : NetworkBehaviour
     [SerializeField] private Transform positionA;  // Posición A
     [SerializeField] private Transform positionB;  // Posición B
     [SerializeField] private FanLift fan;
+    [SerializeField] private SoundPlayer soundPlayer;
 
     private bool startedTrans = false;
     private XROrigin XROrigin;
@@ -62,7 +63,7 @@ public class SpecialTransitionLogic : NetworkBehaviour
 
         // Activar explosión
         GameObject exp = Instantiate(m_explosionPrefab, XROrigin.transform.position, Quaternion.identity);
-        exp.GetComponent<SoundPlayer>().CmdPlaySoundForAll("explosion");
+        soundPlayer.CmdPlaySoundForAll("explosion");
 
         Debug.Log("Explosion Activated");
 
@@ -87,7 +88,7 @@ public class SpecialTransitionLogic : NetworkBehaviour
         // Esperar un par de segundos
         yield return new WaitForSeconds(4);
 
-        exp.GetComponent<SoundPlayer>().CmdStopSoundForAll();
+        
         Destroy(exp);
 
         // Volver a los valores originales del vignette
