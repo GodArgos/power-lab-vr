@@ -31,16 +31,19 @@ public class FanLift : NetworkBehaviour
     {
         if (other.CompareTag("Player") && other == playerCollider)
         {
-            characterController = other.GetComponent<CharacterController>();
+            if (!alreadyOpened)
+            {
+                characterController = other.GetComponent<CharacterController>();
 
-            if (isServer)
-            {
-                HandleForceFields(true);
-            }
-            else
-            {
-                CmdHandleForceFields(true);
-            }
+                if (isServer)
+                {
+                    HandleForceFields(true);
+                }
+                else
+                {
+                    CmdHandleForceFields(true);
+                }
+            } 
         }
     }
 
