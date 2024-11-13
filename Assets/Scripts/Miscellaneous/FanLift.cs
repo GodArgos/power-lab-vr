@@ -35,14 +35,16 @@ public class FanLift : NetworkBehaviour
             {
                 characterController = other.GetComponent<CharacterController>();
 
-                if (isServer)
-                {
-                    HandleForceFields(true);
-                }
-                else
-                {
-                    CmdHandleForceFields(true);
-                }
+                //if (isServer)
+                //{
+                //    HandleForceFields(true);
+                //}
+                //else
+                //{
+                //    CmdHandleForceFields(true);
+                //}
+
+                RpcHandleForceFields(true);
             } 
         }
     }
@@ -75,14 +77,16 @@ public class FanLift : NetworkBehaviour
             soundPlayer.CmdPlaySoundForAll("hydraulic_close");
             CmdCloseCorners();
 
-            if (isServer)
-            {
-                HandleForceFields(false);
-            }
-            else
-            {
-                CmdHandleForceFields(false);
-            }
+            //if (isServer)
+            //{
+            //    HandleForceFields(false);
+            //}
+            //else
+            //{
+            //    CmdHandleForceFields(false);
+            //}
+
+            RpcHandleForceFields(false);
 
             alreadyOpened = true;
         }
@@ -103,6 +107,12 @@ public class FanLift : NetworkBehaviour
         {
             force_soundPlayer.CmdStopSoundForAll();
         }
+    }
+
+    [ClientRpc]
+    private void RpcHandleForceFields(bool state)
+    {
+        HandleForceFields(state);
     }
 
     [Command(requiresAuthority = false)]
