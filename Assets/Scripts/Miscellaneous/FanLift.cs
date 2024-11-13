@@ -41,10 +41,10 @@ public class FanLift : NetworkBehaviour
                 //}
                 //else
                 //{
-                //    CmdHandleForceFields(true);
+                CmdHandleForceFields(true);
                 //}
 
-                RpcHandleForceFields(true);
+                //RpcHandleForceFields(true);
             } 
         }
     }
@@ -83,10 +83,10 @@ public class FanLift : NetworkBehaviour
             //}
             //else
             //{
-            //    CmdHandleForceFields(false);
+            CmdHandleForceFields(false);
             //}
 
-            RpcHandleForceFields(false);
+            //RpcHandleForceFields(false);
 
             alreadyOpened = true;
         }
