@@ -17,14 +17,7 @@ public class FanLift : NetworkBehaviour
 
     private void Start()
     {
-        if (isServer)
-        {
-            HandleForceFields(false);
-        }
-        else
-        {
-            CmdHandleForceFields(false);
-        }
+        CmdCloseEverything();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,15 +27,7 @@ public class FanLift : NetworkBehaviour
             if (!alreadyOpened)
             {
                 characterController = other.GetComponent<CharacterController>();
-
-                if (isServer)
-                {
-                    RpcHandleForceFields(true);
-                }
-                else
-                {
-                    CmdHandleForceFields(true);
-                }
+                CmdOpenEverything();
             } 
         }
     }
@@ -74,15 +59,7 @@ public class FanLift : NetworkBehaviour
             characterController = null;
             soundPlayer.CmdPlaySoundForAll("hydraulic_close");
             CmdCloseCorners();
-
-            if (isServer)
-            {
-                RpcHandleForceFields(false);
-            }
-            else
-            {
-                CmdHandleForceFields(false);
-            }
+            CmdCloseEverything();
 
             alreadyOpened = true;
         }
@@ -114,7 +91,19 @@ public class FanLift : NetworkBehaviour
     [Command(requiresAuthority = false)]
     private void CmdHandleForceFields(bool state)
     {
-        HandleForceFields(state);
+        foreach (GameObject go in forceField)
+        {
+            go.SetActive(state);
+        }
+
+        if (state)
+        {
+            force_soundPlayer.CmdPlayPausableSoundForAll("forcefield");
+        }
+        else
+        {
+            force_soundPlayer.CmdStopSoundForAll();
+        }
     }
 
     [Command(requiresAuthority = false)]
@@ -133,5 +122,17 @@ public class FanLift : NetworkBehaviour
         {
             corner.MoveToPositionA();
         }
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdOpenEverything()
+    {
+        RpcHandleForceFields(true); // Server calls the RPC to sync force field state on all clients
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdCloseEverything()
+    {
+        RpcHandleForceFields(false); // Server calls the RPC to sync force field state on all clients
     }
 }
