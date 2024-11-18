@@ -102,6 +102,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   isGrabbed: 0
+  author: 0
 --- !u!114 &6247563418931345701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,7 +151,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 0
       - m_Target: {fileID: 2004611645640950461}
         m_TargetAssemblyTypeName: CheckVisorGrabbability, Assembly-CSharp
         m_MethodName: OnEnterHover
@@ -162,7 +163,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 0
   m_HoverExited:
     m_PersistentCalls:
       m_Calls:
@@ -177,7 +178,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 0
   m_FirstSelectEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -252,7 +253,19 @@ MonoBehaviour:
         m_CallState: 1
   m_FirstFocusEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2004611645640950461}
+        m_TargetAssemblyTypeName: CheckVisorGrabbability, Assembly-CSharp
+        m_MethodName: OnEnterHover
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
   m_LastFocusExited:
     m_PersistentCalls:
       m_Calls: []

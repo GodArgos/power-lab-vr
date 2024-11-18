@@ -10,166 +10,96 @@ public class GasVentilatorSystem : NetworkBehaviour
     [SerializeField] private float m_durationTime = 1f;
     [SerializeField] private bool m_playOnAwake = true;
     [SerializeField] private SoundPlayer m_soundPlayer;
+
     private float m_timer;
     private BoxCollider m_collider;
 
-    // Sincronizará el estado del gas entre el servidor y los clientes
     [SyncVar(hook = nameof(OnStateChanged))]
     private bool m_state = true;
 
-    private bool m_firstCycleSkipped = false; // Controla si se ha saltado el primer ciclo
+    private bool m_isWaitingForParticles = false; // Control para pausar el ciclo
 
     private void Start()
     {
         m_collider = GetComponent<BoxCollider>();
+        m_timer = m_playOnAwake ? m_cycleTime : 0;
 
-        if (m_playOnAwake)
+        foreach (ParticleSystem ps in m_particleSystem)
         {
-            m_timer = m_cycleTime; // Iniciar el ciclo inmediatamente
-            m_firstCycleSkipped = true; // Ya reproducimos en awake, saltamos el primer ciclo
-        }
-        else
-        {
-            m_timer = 0; // Empezar directamente con el estado inactivo
-        }
-
-        foreach (ParticleSystem p in m_particleSystem)
-        {
-            p.Stop();
-            var main = p.main;
+            ps.Stop();
+            var main = ps.main;
             main.duration = m_durationTime;
 
-            if (m_playOnAwake)
-            {
-                p.Play();
-            }
+            if (m_playOnAwake) ps.Play();
         }
     }
 
     private void Update()
     {
-        if (!isServer) return; // Solo el servidor debe controlar la lógica de activación/desactivación
+        if (!isServer || m_isWaitingForParticles) return;
 
         m_timer -= Time.deltaTime;
 
         if (m_timer <= 0)
         {
-            if (!m_firstCycleSkipped && !m_playOnAwake)
-            {
-                m_firstCycleSkipped = true; // Saltar el primer ciclo
-                m_timer = m_cycleTime;
-                return;
-            }
-
-            m_state = !m_state; // Cambia el estado
-
-            if (m_state)
-            {
-                // Activar el collider y reproducir las partículas
-                m_soundPlayer.CmdPlaySoundForAll("gas_leaking");
-                m_collider.enabled = true;
-                RpcPlayParticles();
-            }
-            else
-            {
-                
-                StartCoroutine(StopParticlesAndDisableCollider());
-            }
-
-            m_timer = m_cycleTime; // Reiniciar el temporizador
+            m_state = !m_state; // Cambia el estado (esto activa OnStateChanged)
+            m_timer = m_cycleTime; // Reinicia el temporizador
         }
     }
 
-    // Se llamará cuando el valor de SyncVar m_state cambie
     private void OnStateChanged(bool oldState, bool newState)
     {
         if (newState)
         {
-            // Si el nuevo estado es true, reproducir partículas en los clientes
             PlayParticles();
+            m_collider.enabled = true;
+            m_soundPlayer.CmdPlayPausableSoundForAll("gas_leaking");
         }
         else
         {
-            // Si el nuevo estado es false, detener partículas en los clientes
-            StartCoroutine(StopParticles());
+            StartCoroutine(StopParticlesAndDisableCollider());
         }
-    }
-
-    [ClientRpc]
-    private void RpcPlayParticles()
-    {
-        PlayParticles();
     }
 
     private void PlayParticles()
     {
         foreach (ParticleSystem ps in m_particleSystem)
         {
-            if (!ps.isPlaying)
-            {
-                ps.Play();
-            }
+            if (!ps.isPlaying) ps.Play();
         }
     }
 
     private IEnumerator StopParticlesAndDisableCollider()
     {
-        RpcStopParticles();
+        // Pausa el ciclo mientras las partículas se detienen
+        m_isWaitingForParticles = true;
 
-        // Detener la emisión de partículas
         foreach (ParticleSystem ps in m_particleSystem)
         {
             ps.Stop(false, ParticleSystemStopBehavior.StopEmitting);
         }
 
-        bool allParticlesStopped = false;
-        while (!allParticlesStopped)
+        // Espera hasta que todas las partículas estén completamente detenidas
+        while (true)
         {
-            allParticlesStopped = true;
+            bool allStopped = true;
             foreach (ParticleSystem ps in m_particleSystem)
             {
                 if (ps.IsAlive(true))
                 {
-                    allParticlesStopped = false;
+                    allStopped = false;
                     break;
                 }
             }
-            yield return null; // Espera un frame antes de verificar
-        }
 
-        m_collider.enabled = false; // Desactivar el collider después
-
-        m_soundPlayer.CmdStopSoundForAll();
-    }
-
-    [ClientRpc]
-    private void RpcStopParticles()
-    {
-        StartCoroutine(StopParticles());
-    }
-
-    private IEnumerator StopParticles()
-    {
-        
-        foreach (ParticleSystem ps in m_particleSystem)
-        {
-            ps.Stop(false, ParticleSystemStopBehavior.StopEmitting);
-        }
-
-        bool allParticlesStopped = false;
-        while (!allParticlesStopped)
-        {
-            allParticlesStopped = true;
-            foreach (ParticleSystem ps in m_particleSystem)
-            {
-                if (ps.IsAlive(true))
-                {
-                    allParticlesStopped = false;
-                    break;
-                }
-            }
+            if (allStopped) break;
             yield return null;
         }
+
+        m_collider.enabled = false; // Desactiva el collider
+        m_soundPlayer.CmdStopSoundForAll();
+
+        // Reanuda el ciclo una vez que todo está detenido
+        m_isWaitingForParticles = false;
     }
 }
-

@@ -7,23 +7,30 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class GrabbableAuthority : NetworkBehaviour
 {
-    [SyncVar]
+    [SyncVar(hook = nameof(OnGrabbedChanged))]
     public bool isGrabbed = false; 
     private NetworkIdentity m_objectIdentity;
     private XRGrabInteractable m_grabInteractable;
-    private bool author = false;
+    public bool author = false;
 
     private void Start()
     {
         m_objectIdentity = GetComponent<NetworkIdentity>();
         m_grabInteractable = GetComponent<XRGrabInteractable>();
+
+        isGrabbed = false;
+
+        if (isServer)
+        {
+            netIdentity.RemoveClientAuthority();
+        }
     }
 
     public void OnHoverEnter()
     {
         if (!isGrabbed && !author)
         {
-            if (!isOwned && NetworkClient.ready)
+            if (/*!isOwned && */NetworkClient.ready)
             {
                 CmdRequestAuthority(netIdentity.connectionToClient);
                 author = true;
@@ -35,7 +42,7 @@ public class GrabbableAuthority : NetworkBehaviour
     {
         if (!isGrabbed && !author)
         {
-            if (!isOwned && NetworkClient.ready)
+            if (/*!isOwned && */NetworkClient.ready)
             {
                 CmdRequestAuthority(netIdentity.connectionToClient);
                 author = true;
@@ -96,5 +103,11 @@ public class GrabbableAuthority : NetworkBehaviour
     private void CmdReleaseAuthority()
     {
         isGrabbed = false;
+        //netIdentity.RemoveClientAuthority();
+    }
+
+    private void OnGrabbedChanged(bool oldValue, bool newValue)
+    {
+        isGrabbed = newValue;
     }
 }
