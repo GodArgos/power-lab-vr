@@ -7,107 +7,82 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class GrabbableAuthority : NetworkBehaviour
 {
-    [SyncVar(hook = nameof(OnGrabbedChanged))]
-    public bool isGrabbed = false; 
+    [SyncVar(hook = nameof(OnIsGrabbedChanged))] public bool isGrabbed = false; 
     private NetworkIdentity m_objectIdentity;
-    private XRGrabInteractable m_grabInteractable;
-    public bool author = false;
+    private XRBaseInteractable m_grabInteractable;
+    private DelegateAuthority m_delegateAuthority;
 
     private void Start()
     {
         m_objectIdentity = GetComponent<NetworkIdentity>();
-        m_grabInteractable = GetComponent<XRGrabInteractable>();
-
-        isGrabbed = false;
-
-        if (isServer)
-        {
-            netIdentity.RemoveClientAuthority();
-        }
     }
 
-    public void OnHoverEnter()
+    private void OnEnable()
     {
-        if (!isGrabbed && !author)
-        {
-            if (/*!isOwned && */NetworkClient.ready)
-            {
-                CmdRequestAuthority(netIdentity.connectionToClient);
-                author = true;
-            }
-        }
+        m_grabInteractable = GetComponent<XRBaseInteractable>();
+        m_delegateAuthority = GetComponent<DelegateAuthority>();
+
+        m_grabInteractable.selectEntered.AddListener(OnGrabbed);
+        m_grabInteractable.selectExited.AddListener(OnReleased);
     }
 
-    public void OnGrabbed()
+    private void OnDisable()
     {
-        if (!isGrabbed && !author)
+        m_grabInteractable.selectEntered.RemoveListener(OnGrabbed);
+        m_grabInteractable.selectExited.RemoveListener(OnReleased);
+    }
+
+    private void OnGrabbed(SelectEnterEventArgs args)
+    {
+        if (!isGrabbed && m_grabInteractable.isActiveAndEnabled)
         {
-            if (/*!isOwned && */NetworkClient.ready)
+            if (!isOwned)
             {
-                CmdRequestAuthority(netIdentity.connectionToClient);
-                author = true;
+                m_delegateAuthority.CmdRequestAuthority(m_objectIdentity);
             }
+
+            CmdUpdateGrabState(true);
         }
     }
 
-    // Command to request authority on the server
+    private void OnReleased(SelectExitEventArgs args)
+    {
+        m_delegateAuthority.CmdRequestAuthority(m_objectIdentity);
+        CmdUpdateGrabState(false);
+    }
+
+    #region Commands
     [Command(requiresAuthority = false)]
-    private void CmdRequestAuthority(NetworkConnectionToClient sender)
+    private void CmdUpdateGrabState(bool state)
     {
-        if (!isGrabbed)
-        {
-            // Assign authority and mark the object as grabbed
-            isGrabbed = true;
-            //DisableGrabForOthers();
-
-            if (sender != netIdentity.connectionToClient)
-            {
-                // Remove existing authority and assign it to the new client
-                if (netIdentity.connectionToClient != null)
-                {
-                    netIdentity.RemoveClientAuthority();
-                }
-                netIdentity.AssignClientAuthority(sender);
-            }
-        }
-        else
-        {
-            Debug.Log("Grab request denied: object is already grabbed.");
-        }
+        this.isGrabbed = state;
     }
 
-    // Called when the object is no longer hovered (hover exited)
-    public void OnHoverExited()
-    {
-        if (!isGrabbed && isOwned && NetworkClient.ready)
-        {
-            // If the object was hovered but not grabbed, release authority
-            CmdReleaseAuthority();
-            author = false;
-        }
-    }
-
-    // This method is called when the object is released
-    public void OnReleased()
-    {
-        if (isGrabbed && isOwned && NetworkClient.ready)
-        {
-            // If the player has authority and releases the object, release authority
-            CmdReleaseAuthority();
-            author = false;
-        }
-    }
-
-    // Command to release authority on the server
     [Command(requiresAuthority = false)]
-    private void CmdReleaseAuthority()
+    private void CmdUpdateXRGrabbableState(bool state)
     {
-        isGrabbed = false;
-        //netIdentity.RemoveClientAuthority();
+        RpcUpdateXRGrabbableState(state);
     }
+    #endregion
 
-    private void OnGrabbedChanged(bool oldValue, bool newValue)
+    #region Hooks
+    public void OnIsGrabbedChanged(bool oldValue, bool newValue)
     {
-        isGrabbed = newValue;
+        CmdUpdateXRGrabbableState(!newValue);
     }
+    #endregion
+
+    #region Remote Client Calls
+    [ClientRpc(includeOwner = false)]
+    private void RpcUpdateXRGrabbableState(bool state)
+    {
+        m_grabInteractable.enabled = state;
+
+        //foreach (Collider col in m_grabInteractable.colliders)
+        //{
+        //    col.enabled = state;
+        //}
+    }
+    #endregion
+
 }

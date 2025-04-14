@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using UnityEngine.InputSystem.LowLevel;
 
 public class GasVentilatorSystem : NetworkBehaviour
 {
@@ -15,7 +16,7 @@ public class GasVentilatorSystem : NetworkBehaviour
     private BoxCollider m_collider;
 
     [SyncVar(hook = nameof(OnStateChanged))]
-    private bool m_state = true;
+    public bool m_state = true;
 
     private bool m_isWaitingForParticles = false; // Control para pausar el ciclo
 
@@ -29,9 +30,17 @@ public class GasVentilatorSystem : NetworkBehaviour
             ps.Stop();
             var main = ps.main;
             main.duration = m_durationTime;
-
-            if (m_playOnAwake) ps.Play();
         }
+    }
+
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+
+        //if (isServer)
+        //    CmdUpdateSystemStatus(true);
+
+        ApplyState(m_state);
     }
 
     private void Update()
@@ -49,16 +58,7 @@ public class GasVentilatorSystem : NetworkBehaviour
 
     private void OnStateChanged(bool oldState, bool newState)
     {
-        if (newState)
-        {
-            PlayParticles();
-            m_collider.enabled = true;
-            m_soundPlayer.CmdPlayPausableSoundForAll("gas_leaking");
-        }
-        else
-        {
-            StartCoroutine(StopParticlesAndDisableCollider());
-        }
+        CmdHandleSystem(newState);
     }
 
     private void PlayParticles()
@@ -79,27 +79,52 @@ public class GasVentilatorSystem : NetworkBehaviour
             ps.Stop(false, ParticleSystemStopBehavior.StopEmitting);
         }
 
-        // Espera hasta que todas las partículas estén completamente detenidas
-        while (true)
+        yield return new WaitUntil(() =>
         {
-            bool allStopped = true;
             foreach (ParticleSystem ps in m_particleSystem)
             {
                 if (ps.IsAlive(true))
-                {
-                    allStopped = false;
-                    break;
-                }
+                    return false;
             }
-
-            if (allStopped) break;
-            yield return null;
-        }
+            return true;
+        });
 
         m_collider.enabled = false; // Desactiva el collider
         m_soundPlayer.CmdStopSoundForAll();
 
         // Reanuda el ciclo una vez que todo está detenido
         m_isWaitingForParticles = false;
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdUpdateSystemStatus(bool status)
+    {
+        this.m_state = status;
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdHandleSystem(bool status)
+    {
+        RpcStartSystem(status);
+    }
+
+    [ClientRpc]
+    private void RpcStartSystem(bool status)
+    {
+        ApplyState(status);
+    }
+
+    private void ApplyState(bool status)
+    {
+        if (status)
+        {
+            PlayParticles();
+            m_collider.enabled = true;
+            m_soundPlayer.CmdPlayPausableSoundForAll("gas_leaking");
+        }
+        else
+        {
+            StartCoroutine(StopParticlesAndDisableCollider());
+        }
     }
 }
