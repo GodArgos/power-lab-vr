@@ -15,9 +15,14 @@ public class FanLift : NetworkBehaviour
     [HideInInspector] public Collider playerCollider;
     [SerializeField] private List<GameObject> forceField;
 
-    private void Start()
+    public override void OnStartClient()
     {
-        CmdCloseEverything();
+        base.OnStartClient();
+
+        if (isServer)
+        {
+            CmdCloseEverything();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
