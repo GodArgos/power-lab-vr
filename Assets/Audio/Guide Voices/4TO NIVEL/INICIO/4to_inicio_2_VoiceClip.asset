@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26893fed1bc5aa4419e0f64c85422291, type: 3}
+  m_Name: 4to_inicio_2_VoiceClip
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 615177441ae1d2b4680827d74464796f, type: 3}
+  canBeInterrupted: 0
+  canBeSkipped: 0
+  subtitle: "Y, por cierto, parece que uno de ustedes ha perdido la vista por el
+    golpe. Pero no se preocupen, estoy segura de que podr\xE1n encontrar la salida...
+    de alguna manera. As\xED que, jugador del piso de arriba, es tu momento de brillar.
+    Tienes la responsabilidad de guiar a tu amigo por este laberinto."

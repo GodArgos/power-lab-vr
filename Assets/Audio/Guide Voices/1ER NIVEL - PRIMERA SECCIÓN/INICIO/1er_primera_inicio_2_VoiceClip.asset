@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26893fed1bc5aa4419e0f64c85422291, type: 3}
+  m_Name: 1er_primera_inicio_2_VoiceClip
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 6233734ac6c90f54da727dbe3787202a, type: 3}
+  canBeInterrupted: 0
+  canBeSkipped: 0
+  subtitle: "Ahora que uno de ustedes ve la realidad, o al menos mi versi\xF3n preferida
+    de ella, les explic\xF3: lo que tu compa\xF1ero sin visor ve es una habitaci\xF3n
+    vac\xEDa. Si no siguen el camino que solo t\xFA puedes ver... bueno, una ca\xEDda
+    r\xE1pida y dolorosa les espera. Claro, si los robots sintieran dolor. Adem\xE1s,
+    \xBFven esos l\xE1seres en las paredes? Se activan y desactivan de forma aleatoria.
+    Si los tocan consid\xE9rense fritos. As\xED que, \xBFlistos para confiar el uno
+    en el otro?\r"

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26893fed1bc5aa4419e0f64c85422291, type: 3}
+  m_Name: 4to_final_3_VoiceClip
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 084936c8ba439734f9bee223f1ed0155, type: 3}
+  canBeInterrupted: 0
+  canBeSkipped: 0
+  subtitle: "Muy bien, manos en el esc\xE1ner otra vez. Pueden hacerlo, lo s\xE9.
+    \xBFSienten la emoci\xF3n? Esta s\xED es la \xFAltima puerta\u2026 probablemente."

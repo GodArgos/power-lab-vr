@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26893fed1bc5aa4419e0f64c85422291, type: 3}
+  m_Name: 2do_primera_inicio_1_VoiceClip
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 865dc04527e79f644a09339264d05383, type: 3}
+  canBeInterrupted: 0
+  canBeSkipped: 0
+  subtitle: "Bienvenidos al siguiente nivel, tienen una puerta delante de ustedes,
+    pero no se abrir\xE1 hasta que encuentren dos v\xE1lvulas escondidas en alguna
+    de esas cajas. No ser\xE1 sencillo, por supuesto. La informaci\xF3n que tengo
+    es tan \xFAtil como siempre: las v\xE1lvulas est\xE1n en... alguna parte."

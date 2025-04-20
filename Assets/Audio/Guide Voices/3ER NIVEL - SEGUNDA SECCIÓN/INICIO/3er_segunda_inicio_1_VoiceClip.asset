@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26893fed1bc5aa4419e0f64c85422291, type: 3}
+  m_Name: 3er_segunda_inicio_1_VoiceClip
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 84ef8e08545d5fb428c9ce8695d8626a, type: 3}
+  canBeInterrupted: 0
+  canBeSkipped: 0
+  subtitle: "Bienvenidos a la sala de residuos. La decoraci\xF3n es un poco\u2026
+    intensa, pero en el fondo tiene su encanto. Fuego y gas corrosivo, una combinaci\xF3n
+    que nunca falla en crear un ambiente acogedor. Aunque, debo mencionar que el
+    gas no deber\xEDa haber llegado hasta aqu\xED. Pero, ya saben, RoboCorp y sus
+    sorpresas."

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26893fed1bc5aa4419e0f64c85422291, type: 3}
+  m_Name: 1er_segunda_inicio_1_VoiceClip
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 81b8237de9b6947499cdc75f717fc9ef, type: 3}
+  canBeInterrupted: 0
+  canBeSkipped: 0
+  subtitle: "\xA1Oh, miren! Ya lograron sobrevivir al primer reto. Sorprendente,
+    \xBFverdad? Pero no se relajen todav\xEDa, lo mejor est\xE1 por venir. Para empezar,
+    ese visor que ven... esta vez lo tiene que usar quien no lo utiliz\xF3 antes.
+    Lo s\xE9, lo s\xE9, qu\xE9 l\xE1stima que no puedan competir por \xE9l esta vez."

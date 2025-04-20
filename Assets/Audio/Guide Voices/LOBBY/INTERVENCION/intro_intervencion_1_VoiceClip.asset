@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26893fed1bc5aa4419e0f64c85422291, type: 3}
+  m_Name: intro_intervencion_1_VoiceClip
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 0a6213a95dc28c648bc3e4d408d9bb46, type: 3}
+  canBeInterrupted: 0
+  canBeSkipped: 0
+  subtitle: "Cuando est\xE9n listos para realmente empezar... si es que alguna vez
+    lo est\xE1n, pueden proceder a la puerta. Ver\xE1n dos esc\xE1neres de manos
+    a ambos lados. Simplemente coloquen sus manos rob\xF3ticas en ellos, lo que para
+    ustedes deber\xEDa ser un gran logro de coordinaci\xF3n b\xE1sica.\r\nOh! Y si
+    algo explota al abrir la puerta... bueno, al menos ya sabremos que esa puerta
+    no funciona.\r"

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26893fed1bc5aa4419e0f64c85422291, type: 3}
+  m_Name: 4to_final_1_VoiceClip
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: e5b4123e73dac07498a5cb6110487b86, type: 3}
+  canBeInterrupted: 0
+  canBeSkipped: 0
+  subtitle: "Bueno, bueno, miren nada m\xE1s. Han llegado hasta aqu\xED, superando
+    pruebas, accidentes y mi excepcional sentido del humor. Todo por una peque\xF1a
+    recompensa. Y ahora, solo les queda una \xFAltima puerta para cruzar. As\xED
+    que, \xBFpor qu\xE9 detenerse aqu\xED? Despu\xE9s de todo, el pastel que les
+    promet\xED est\xE1 esperando... en alg\xFAn lugar al otro lado."

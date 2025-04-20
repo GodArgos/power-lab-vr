@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26893fed1bc5aa4419e0f64c85422291, type: 3}
+  m_Name: 1er_segunda_inicio_2_VoiceClip
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: b5d6ae53864deda42b7ce6d13ccd3734, type: 3}
+  canBeInterrupted: 0
+  canBeSkipped: 0
+  subtitle: "Perfecto. Ahora que el otro robot est\xE1 a cargo de ver la verdad...
+    aqu\xED va lo divertido. El camino que ves no es solo inestable; se caer\xE1
+    despu\xE9s de un tiempo. As\xED que no pueden quedarse quietos por mucho tiempo
+    en un solo lugar. \xBFQu\xE9 tan r\xE1pido caer\xE1 el piso? Bueno, supongo que
+    lo averiguar\xE1n de la manera dif\xEDcil."

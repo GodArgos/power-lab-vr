@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26893fed1bc5aa4419e0f64c85422291, type: 3}
+  m_Name: 3er_primera_intervencion_2_VoiceClip
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: bf39c0ae6554e7a4e88b16e04bb6b193, type: 3}
+  canBeInterrupted: 1
+  canBeSkipped: 0
+  subtitle: "Excelente. Palanca lista, act\xEDvala para devolverle vida al ascensor.
+    Adelante, no teman\u2026 despu\xE9s de todo, si se sobrecarga, probablemente
+    tendr\xE1n unos segundos para correr."
