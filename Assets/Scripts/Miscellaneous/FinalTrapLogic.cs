@@ -9,6 +9,9 @@ public class FinalTrapLogic : NetworkBehaviour
     [SerializeField] private List<GameObject> m_forceField;
     [SerializeField] private float m_timeForceField = 2f;
     [SerializeField] private SoundPlayer forceSoundPlayer;
+    [SerializeField] private VoiceTriggerNetworked VoiceTriggerNetworked;
+    [SerializeField] private float neededPlayers = 2;
+
     private bool m_activated = false;
 
     // SyncVar con un hook para cuando el valor de numberOfPlayers cambie
@@ -35,6 +38,9 @@ public class FinalTrapLogic : NetworkBehaviour
     {
         if ((!m_activated && alreadyEntered && numberOfPlayers >= 2) || (testActivate && !m_activated))
         {
+            if (VoiceTriggerNetworked != null)
+                VoiceTriggerNetworked.CmdHandleVoiceTrigger();
+
             if (isServer)
             {
                 StartCoroutine(ActivateTrap());
@@ -62,7 +68,7 @@ public class FinalTrapLogic : NetworkBehaviour
     // Hook que se llama cuando el número de jugadores cambia
     private void OnNumberOfPlayersChanged(int oldNumber, int newNumber)
     {
-        if (newNumber >= 2)
+        if (newNumber == neededPlayers)
         {
             CmdHandleActivateTrap();
         }

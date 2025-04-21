@@ -13,6 +13,9 @@ public class ElevatorController : NetworkBehaviour
 
     private Transform previousPlayerTransform;
     [SerializeField] private SoundPlayer m_soundPlayer;
+
+    [SerializeField] private VoiceTriggerNetworked VoiceTriggerNetworked;
+
     private void FixedUpdate()
     {
         if (m_activateElevator)
@@ -50,6 +53,9 @@ public class ElevatorController : NetworkBehaviour
         {
             CmdActivateElevator();
         }
+
+        if (VoiceTriggerNetworked != null)
+            VoiceTriggerNetworked.CmdHandleVoiceTrigger();
     }
 
     // Command to activate the elevator on the server

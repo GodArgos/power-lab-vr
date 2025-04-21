@@ -13,6 +13,9 @@ public class SpecialTransitionLogic : NetworkBehaviour
     [SerializeField] private Transform positionB;  // Posición B
     [SerializeField] private FanLift fan;
     [SerializeField] private SoundPlayer soundPlayer;
+    [SerializeField] private float transitionTime = 4f;
+    [SerializeField] private VoiceTriggerNetworked VoiceTriggerNetworked_Pre;
+    [SerializeField] private VoiceTriggerNetworked VoiceTriggerNetworked_Post;
 
     private bool startedTrans = false;
     private XROrigin XROrigin;
@@ -44,7 +47,13 @@ public class SpecialTransitionLogic : NetworkBehaviour
         {
             if (isServer)
             {
+                if (VoiceTriggerNetworked_Pre != null)
+                    VoiceTriggerNetworked_Pre.CmdHandleVoiceTrigger();
+
                 RpcStartTransition();
+
+                if (VoiceTriggerNetworked_Post != null)
+                    VoiceTriggerNetworked_Post.CmdHandleVoiceTrigger();
             }
             
             startedTrans = true;
@@ -86,7 +95,7 @@ public class SpecialTransitionLogic : NetworkBehaviour
         }
 
         // Esperar un par de segundos
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(transitionTime);
 
         
         Destroy(exp);

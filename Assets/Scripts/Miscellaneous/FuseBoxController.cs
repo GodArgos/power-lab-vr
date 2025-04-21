@@ -12,6 +12,7 @@ public class FuseBoxController : MonoBehaviour
     [SerializeField] private float[] slidersOrder;
     [SerializeField] private BlinkingMaterial m_greenLight;
     [SerializeField] private BlinkingMaterial m_redLight;
+    [SerializeField] private VoiceTriggerNetworked VoiceTriggerNetworked;
 
     // Non-Serialized Variables
     private bool slidersReady = false;
@@ -53,6 +54,9 @@ public class FuseBoxController : MonoBehaviour
             m_redLight.StopBlinking();
             m_greenLight.StartBlinking();
             Debug.Log("LEVER ACTIVATED");
+
+            if (VoiceTriggerNetworked != null)
+                VoiceTriggerNetworked.CmdHandleVoiceTrigger();
         }
     }
 
