@@ -1,17 +1,17 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 public enum VoiceType { Start, Intervention, Final }
 
-public class VoiceTrigger : MonoBehaviour
+public abstract class VoiceTrigger : MonoBehaviour
 {
+    [Header("Parameters")]
     public string levelName;
-    public VoiceType type;
-    public int clipIndex;
+    public VoiceType voiceType = VoiceType.Intervention;
 
-    public void PlayVoice()
-    {
-        if (levelName == null || clipIndex < 0) return;
+    [Header("Events")]
+    public UnityEvent OnVoiceClipEnds;
 
-        VoiceManager.Instance?.PlayClip(levelName, type, clipIndex);
-    }
+    public abstract void PlayVoice();
 }

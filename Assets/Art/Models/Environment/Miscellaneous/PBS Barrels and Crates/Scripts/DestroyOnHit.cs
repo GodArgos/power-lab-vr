@@ -14,6 +14,8 @@ public class DestroyOnHit : NetworkBehaviour
 	public bool autoDestroy = true;
 	public float lifeTime = 5.0f;
 
+    [SerializeField] private VoiceTriggerNetworked VoiceTriggerNetworked;
+
     void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.CompareTag("Weapon") && CheckVelocity(col.gameObject.GetComponent<EnableWeaponDestruction>().velocity, 3.5f))
@@ -28,6 +30,9 @@ public class DestroyOnHit : NetworkBehaviour
                 // Si es un cliente, envía una comanda al servidor
                 CmdDestroyAndSpawn();
             }
+
+            if (VoiceTriggerNetworked != null)
+                VoiceTriggerNetworked.CmdHandleVoiceTrigger();
         }
     }
 

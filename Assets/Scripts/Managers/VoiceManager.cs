@@ -1,7 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
 
 public class VoiceManager : MonoBehaviour
 {
@@ -16,12 +17,14 @@ public class VoiceManager : MonoBehaviour
     [Range(0.1f, 5f)]
     [SerializeField] private float maxDelayTime = 1.0f;
 
-    // Variables
     private Queue<VoiceClipSO> audioQueue = new();
     private VoiceClipSO currentClip;
     private bool isPlaying = false;
     private bool isInterrupting = false;
-    private Queue<VoiceClipSO> tempQueue = new(); // Cola temporal durante la interrupción
+    private Queue<VoiceClipSO> tempQueue = new();
+
+    private Action onSequenceComplete;
+    private bool executingSingleClip = false;
 
     public static VoiceManager Instance { get; private set; }
 
@@ -39,9 +42,14 @@ public class VoiceManager : MonoBehaviour
         {
             PlayNextInQueue();
         }
+        else if (!isPlaying && audioQueue.Count == 0 && onSequenceComplete != null && !executingSingleClip)
+        {
+            onSequenceComplete.Invoke();
+            onSequenceComplete = null;
+        }
     }
 
-    public void PlayClip(string levelName, VoiceType type, int index)
+    public void PlayClip(string levelName, VoiceType type, int index, Action onComplete = null)
     {
         var level = levels.FirstOrDefault(l => l.name == levelName);
         if (level == null)
@@ -54,6 +62,8 @@ public class VoiceManager : MonoBehaviour
 
         if (clip != null)
         {
+            onSequenceComplete = onComplete;
+            executingSingleClip = true;
             EnqueueClip(clip);
         }
         else
@@ -62,7 +72,7 @@ public class VoiceManager : MonoBehaviour
         }
     }
 
-    public void PlayClipSequence(string levelName, VoiceType voiceType, int startIndex, int endIndex = -1)
+    public void PlayClipSequence(string levelName, VoiceType voiceType, int startIndex, int endIndex = -1, Action onComplete = null)
     {
         var level = levels.FirstOrDefault(l => l.name == levelName);
         if (level == null)
@@ -78,10 +88,14 @@ public class VoiceManager : MonoBehaviour
             return;
         }
 
-        int finalIndex = (endIndex > startIndex) ? Mathf.Min(endIndex, clips.Length - 1) : clips.Length - 1;
+        int finalIndex = (endIndex == -1) ? clips.Length - 1 : Mathf.Clamp(endIndex, startIndex, clips.Length - 1);
+        //int finalIndex = (endIndex >= startIndex && endIndex < clips.Length) ? endIndex : startIndex;
+
+        onSequenceComplete = onComplete;
+        executingSingleClip = false;
 
         for (int i = startIndex; i <= finalIndex; i++)
-        {
+        {   
             if (i >= 0 && i < clips.Length && clips[i] != null)
             {
                 EnqueueClip(clips[i]);
@@ -115,18 +129,13 @@ public class VoiceManager : MonoBehaviour
     {
         isInterrupting = true;
 
-        // Almacenar la cola actual
         tempQueue = new Queue<VoiceClipSO>(audioQueue);
         audioQueue.Clear();
 
-        // Reproducir frase conectora
-        VoiceClipSO reconnect = GetRandomReconnectClip();
-        yield return StartCoroutine(PlayClipRoutine(reconnect, 0f)); // sin delay
+        // Omitimos reconectar frase por simplicidad
 
-        // Reproducir el nuevo clip
-        yield return StartCoroutine(PlayClipRoutine(newClip, 0f)); // sin delay
+        yield return StartCoroutine(PlayClipRoutine(newClip, 0f));
 
-        // Restaurar cola original
         foreach (var clip in tempQueue)
             audioQueue.Enqueue(clip);
 
@@ -139,7 +148,7 @@ public class VoiceManager : MonoBehaviour
         if (audioQueue.Count == 0) return;
 
         var nextClip = audioQueue.Dequeue();
-        float delay = isInterrupting ? 0f : Random.Range(minDelayTime, maxDelayTime);
+        float delay = isInterrupting ? 0f : UnityEngine.Random.Range(minDelayTime, maxDelayTime);
         StartCoroutine(PlayClipRoutine(nextClip, delay));
     }
 
@@ -155,8 +164,15 @@ public class VoiceManager : MonoBehaviour
         // Aquí podrías emitir subtítulos: clip.subtitle
 
         yield return new WaitForSeconds(clip.audioClip.length);
+
         currentClip = null;
         isPlaying = false;
+
+        if (executingSingleClip && audioQueue.Count == 0 && onSequenceComplete != null)
+        {
+            onSequenceComplete.Invoke();
+            onSequenceComplete = null;
+        }
     }
 
     private VoiceClipSO GetRandomReconnectClip()
@@ -164,7 +180,7 @@ public class VoiceManager : MonoBehaviour
         if (reconnectPhrases == null || reconnectPhrases.Count == 0)
             return null;
 
-        var audio = reconnectPhrases[Random.Range(0, reconnectPhrases.Count)];
+        var audio = reconnectPhrases[UnityEngine.Random.Range(0, reconnectPhrases.Count)];
 
         var reconnectClip = ScriptableObject.CreateInstance<VoiceClipSO>();
         reconnectClip.audioClip = audio;

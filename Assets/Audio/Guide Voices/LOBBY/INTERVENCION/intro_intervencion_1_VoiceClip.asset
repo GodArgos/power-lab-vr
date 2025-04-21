@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: intro_intervencion_1_VoiceClip
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 0a6213a95dc28c648bc3e4d408d9bb46, type: 3}
-  canBeInterrupted: 0
+  canBeInterrupted: 1
   canBeSkipped: 0
   subtitle: "Cuando est\xE9n listos para realmente empezar... si es que alguna vez
     lo est\xE1n, pueden proceder a la puerta. Ver\xE1n dos esc\xE1neres de manos

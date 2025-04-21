@@ -13,6 +13,7 @@ public class DoorValve : NetworkBehaviour
     [SerializeField] private SoundPlayer soundPlayer;
     private bool goingDown = true;
     private bool goingUp = false;
+    [SerializeField] private VoiceTriggerNetworked VoiceTriggerNetworked;
 
     [SyncVar]
     public bool isDoorAtTarget = false;
@@ -56,6 +57,9 @@ public class DoorValve : NetworkBehaviour
                         {
                             soundPlayer.CmdStopSoundForAll();
                         }
+
+                        if (VoiceTriggerNetworked != null)
+                            VoiceTriggerNetworked.CmdHandleVoiceTrigger();
                     }
                 }
                 else
@@ -125,6 +129,9 @@ public class DoorValve : NetworkBehaviour
                         {
                             soundPlayer.CmdStopSoundForAll();
                         }
+
+                        if (VoiceTriggerNetworked != null)
+                            VoiceTriggerNetworked.CmdHandleVoiceTrigger();
                     }
                 }
                 else
