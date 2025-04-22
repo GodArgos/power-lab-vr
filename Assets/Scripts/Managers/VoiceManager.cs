@@ -10,6 +10,7 @@ public class VoiceManager : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private List<LevelVoiceSO> levels;
     [SerializeField] private List<AudioClip> reconnectPhrases;
+    public SubtitleRunner subRunner;
 
     [Header("Parameters")]
     [Range(0.1f, 5f)]
@@ -161,9 +162,13 @@ public class VoiceManager : MonoBehaviour
         audioSource.clip = clip.audioClip;
         audioSource.Play();
 
-        // Aquí podrías emitir subtítulos: clip.subtitle
+        subRunner.UpdateStatus(true);
+
+        subRunner.RunText("L.I.S.A\n" + clip.subtitle, clip.audioClip.length - (delay * 1.5f));
 
         yield return new WaitForSeconds(clip.audioClip.length);
+
+        subRunner.UpdateStatus(false);
 
         currentClip = null;
         isPlaying = false;

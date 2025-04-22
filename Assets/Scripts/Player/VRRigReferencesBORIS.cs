@@ -12,9 +12,15 @@ public class VRRigReferencesBORIS : MonoBehaviour
     public Transform head;
     public Transform leftHand;
     public Transform rightHand;
+    public SubtitleRunner subtitleRunner;
 
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Start()
+    {
+        VoiceManager.Instance.subRunner = subtitleRunner;
     }
 }
