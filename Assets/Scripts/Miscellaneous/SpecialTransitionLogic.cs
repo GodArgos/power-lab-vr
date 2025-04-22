@@ -28,7 +28,7 @@ public class SpecialTransitionLogic : NetworkBehaviour
     private void Start()
     {
         XROrigin = FindObjectOfType<XROrigin>();
-        vignette = XROrigin.transform.GetChild(0).GetChild(0).GetChild(2).GetComponent<VignetteController>();
+        vignette = XROrigin.transform.GetChild(0).GetChild(0).GetChild(3).GetComponent<VignetteController>();
         vignette.enabled = false;
 
         foreach (GameObject go in m_postParticles)
