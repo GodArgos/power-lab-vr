@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class MainMenuController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject mainMenuCanvas;
+    
+    public void OnPlayClicked()
     {
-        
+        if (mainMenuCanvas != null)
+        {
+            mainMenuCanvas.SetActive(false);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnExitClicked()
     {
-        
+        #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+        #else
+                Application.Quit();
+        #endif
     }
 }
