@@ -33,7 +33,7 @@ public class UserDataManager : MonoBehaviour
         MECHA
     }
 
-    public NetworkIdentity localIdentity;
+    public string sessionCode;
     public bool pickedVisor = false;
     public int visorPicked;
 }
