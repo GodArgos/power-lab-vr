@@ -6,11 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Plugins/Mirror/Examples/AdditiveScenes/Scenes/MirrorAdditiveScenesSubScene.unity
-    guid: 7f4fd683fc6d866418c95f99977533a6
+    path: Assets/Scenes/New Scenes/MenuScene.unity
+    guid: c0668ac876e53314e88dbf148b6afe48
   - enabled: 1
-    path: Assets/Plugins/Mirror/Examples/AdditiveScenes/Scenes/MirrorAdditiveScenesMain.unity
-    guid: 7a0eee2f518e9dc4fb628d96dc452faf
+    path: Assets/Scenes/New Scenes/LobbyScene.unity
+    guid: e0726233fd3db3044b861f84e28abdd9
+  - enabled: 1
+    path: Assets/Scenes/Main/MainScene.unity
+    guid: 9019d0eaedfe9f447a2ef764c4c840ec
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: e3aee76b9372917449aef639e2f74814,
       type: 2}

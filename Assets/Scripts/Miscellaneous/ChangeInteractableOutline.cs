@@ -26,7 +26,6 @@ public class ChangeInteractableOutline : MonoBehaviour
         interactable.hoverEntered.RemoveListener(OnHoverEntered);
         interactable.hoverExited.RemoveListener(OnHoverExited);
         interactable.activated.RemoveListener(OnActivatedTried);
-
     }
 
     private void OnHoverEntered(HoverEnterEventArgs args)

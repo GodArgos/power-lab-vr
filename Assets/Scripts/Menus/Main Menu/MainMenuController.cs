@@ -4,13 +4,23 @@ using UnityEngine;
 
 public class MainMenuController : MonoBehaviour
 {
-    [SerializeField] private GameObject mainMenuCanvas;
+    [SerializeField] private GameObject connectionMenu;
+    [SerializeField] private GameObject joinMenu;
     
     public void OnPlayClicked()
     {
-        if (mainMenuCanvas != null)
+        if (connectionMenu != null)
         {
-            mainMenuCanvas.SetActive(false);
+            connectionMenu.SetActive(true);
+        }
+    }
+
+    public void OnJoinClicked()
+    {
+        if (joinMenu != null)
+        {
+            connectionMenu.SetActive(false);
+            joinMenu.SetActive(true);
         }
     }
 
