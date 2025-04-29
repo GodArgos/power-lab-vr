@@ -55,6 +55,8 @@ public class SessionManager : MonoBehaviour
                 errorStatusText.text = ErrorHandler(hostIP);
                 return;
             }
+
+            UserDataManager.Instance.sessionCode = enteredCode;
         }
 
         if (NetworkManager.singleton != null)

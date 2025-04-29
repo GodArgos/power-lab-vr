@@ -61,7 +61,8 @@ public class RoomPlayerController : NetworkRoomPlayer
         if (!isLocalPlayer)
         {
             playerStatus = Instantiate(playerStatusPrefab, RoomManagmentUIReferences.Instance.playerContainer);
-            RemoteStatusSetup(-1, this.readyToBegin);
+            RemoteStatusSetup(this.characterAvatar, this.readyToBegin);
+
             Debug.Log("ENTRO OTRO JUGADOR");
         }
     }
@@ -94,6 +95,7 @@ public class RoomPlayerController : NetworkRoomPlayer
         PlayerNumberSetup(this.index);
         ReadySetup(this.readyToBegin);
         ButtonSetup(this.readyToBegin);
+        HandleFirstConnection();
     }
     #endregion
 
@@ -148,12 +150,32 @@ public class RoomPlayerController : NetworkRoomPlayer
         CmdChangeReadyState(!this.readyToBegin);
     }
 
+    private void ForceReadyStatus(bool status)
+    {
+        CmdChangeReadyState(status);
+    }
+
     private void StartGame()
     {
         if (CustomNetworkRoomManager.singleton != null)
         {
             CmdPrepareForGame();
             CustomNetworkRoomManager.singleton.CheckForReadiness();
+        }
+    }
+
+    private void HandleFirstConnection()
+    {
+        foreach (var interactable in interactables)
+        {
+            if (interactable.GetComponent<ChangeInteractableOutline>().isSelected)
+            {
+                interactable.enabled = false;
+            }
+            else
+            {
+                interactable.enabled = true;
+            }
         }
     }
     #endregion
@@ -245,7 +267,7 @@ public class RoomPlayerController : NetworkRoomPlayer
             
             if (value == -1)
             {
-                UpdateReadyStatus();
+                ForceReadyStatus(false);
             }
         }
     }
@@ -263,7 +285,7 @@ public class RoomPlayerController : NetworkRoomPlayer
 
             if (value == -1)
             {
-                UpdateReadyStatus();
+                ForceReadyStatus(false);
             }
         }
     }

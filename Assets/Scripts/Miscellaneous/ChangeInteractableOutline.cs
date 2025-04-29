@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
+using Mirror;
 
-public class ChangeInteractableOutline : MonoBehaviour
+public class ChangeInteractableOutline : NetworkBehaviour
 {
-    public bool isSelected = false;
+    [SyncVar] public bool isSelected = false;
     [SerializeField] private Outline objectOutline;
     [SerializeField] private float hoverSize;
     [SerializeField] private float selectedSize;
@@ -48,8 +49,14 @@ public class ChangeInteractableOutline : MonoBehaviour
     {
         if (objectOutline != null)
         {
-            isSelected = !isSelected;
+            CmdUpdateSelectableStatus();
             objectOutline.OutlineWidth = isSelected ? selectedSize : hoverSize;
         }
+    }
+
+    [Command(requiresAuthority = false)]
+    private void CmdUpdateSelectableStatus()
+    {
+        this.isSelected = !this.isSelected;
     }
 }

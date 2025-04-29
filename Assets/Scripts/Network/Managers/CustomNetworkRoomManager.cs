@@ -71,5 +71,4 @@ public class CustomNetworkRoomManager : NetworkRoomManager
             NetworkServer.ReplacePlayerForConnection(conn, newPlayer, true);
         }
     }
-
 }

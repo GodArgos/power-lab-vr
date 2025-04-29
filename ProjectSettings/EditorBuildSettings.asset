@@ -9,11 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/New Scenes/MenuScene.unity
     guid: c0668ac876e53314e88dbf148b6afe48
   - enabled: 1
-    path: Assets/Scenes/New Scenes/LobbyScene.unity
+    path: Assets/Scenes/New Scenes/RoomScene.unity
     guid: e0726233fd3db3044b861f84e28abdd9
   - enabled: 1
     path: Assets/Scenes/Main/MainScene.unity
     guid: 9019d0eaedfe9f447a2ef764c4c840ec
+  - enabled: 1
+    path: Assets/Scenes/New Scenes/LobbyScene.unity
+    guid: 264e084c664147447a1c14ce5cfe1cde
+  - enabled: 1
+    path: Assets/Scenes/New Scenes/FirstLevel.unity
+    guid: 2f03704201b356d41a7f0928d47ad5c9
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: e3aee76b9372917449aef639e2f74814,
       type: 2}
