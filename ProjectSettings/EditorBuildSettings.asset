@@ -17,6 +17,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/New Scenes/FirstLevel.unity
     guid: 2f03704201b356d41a7f0928d47ad5c9
+  - enabled: 1
+    path: Assets/Scenes/New Scenes/SecondLevel.unity
+    guid: c027e2c62a7053d41bf91279b98f84d8
+  - enabled: 1
+    path: Assets/Scenes/New Scenes/ThirdLevel.unity
+    guid: 2a0efc129d9b78c4cb8abf2f71d20c0c
+  - enabled: 1
+    path: Assets/Scenes/New Scenes/FourthLevel.unity
+    guid: f45fe7a6e542f4642b9af72fe52ba37b
+  - enabled: 1
+    path: Assets/Scenes/New Scenes/FinalLevel.unity
+    guid: d00fb84d446362b49a6723f4d1edf6ee
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: e3aee76b9372917449aef639e2f74814,
       type: 2}

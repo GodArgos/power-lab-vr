@@ -42,8 +42,6 @@ public class CustomNetworkRoomManager : NetworkRoomManager
         }
     }
 
-
-
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
     {
         // increment the index before adding the player, so first player starts at 1

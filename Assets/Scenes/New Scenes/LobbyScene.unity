@@ -1457,6 +1457,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  unloadLastScene: 0
+  sceneFactor: 1
 --- !u!65 &1563986072
 BoxCollider:
   m_ObjectHideFlags: 0
