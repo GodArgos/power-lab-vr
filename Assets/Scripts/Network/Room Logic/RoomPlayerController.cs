@@ -1,6 +1,7 @@
 using Mirror;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
@@ -9,7 +10,7 @@ public class RoomPlayerController : NetworkRoomPlayer
 {
     [Header("DEPENDENCIES")]
     [SerializeField] private GameObject playerStatusPrefab;
-
+    private bool onGame = false;
     private GameObject playerStatus;
 
     [SyncVar(hook = nameof(SetSelectedAvatar))] public int characterAvatar = -1;
@@ -49,6 +50,12 @@ public class RoomPlayerController : NetworkRoomPlayer
     #region Multiplayer CallBacks
     public override void OnStartLocalPlayer()
     {
+        if (SceneManager.GetActiveScene().buildIndex >= 2)
+        {
+            this.enabled = false;
+            return;
+        }
+        
         base.OnStartLocalPlayer();
         playerStatus = Instantiate(playerStatusPrefab, RoomManagmentUIReferences.Instance.playerContainer);
         LocalStatusSetup();
@@ -57,6 +64,12 @@ public class RoomPlayerController : NetworkRoomPlayer
 
     public override void OnStartClient()
     {
+        if (SceneManager.GetActiveScene().buildIndex >= 2)
+        {
+            this.enabled = false;
+            return;
+        }
+
         base.OnStartClient();
         if (!isLocalPlayer)
         {
@@ -69,6 +82,12 @@ public class RoomPlayerController : NetworkRoomPlayer
 
     public override void OnStopClient()
     {
+        if (SceneManager.GetActiveScene().buildIndex >= 2)
+        {
+            this.enabled = false;
+            return;
+        }
+
         base.OnStopClient();
         if (!isLocalPlayer)
         {
@@ -78,6 +97,12 @@ public class RoomPlayerController : NetworkRoomPlayer
 
     public override void OnClientExitRoom()
     {
+        if (SceneManager.GetActiveScene().buildIndex >= 2)
+        {
+            this.enabled = false;
+            return;
+        }
+
         base.OnClientExitRoom();
         if (!isLocalPlayer)
         {
@@ -249,6 +274,7 @@ public class RoomPlayerController : NetworkRoomPlayer
         if (characterAvatar != -1)
         {
             UserDataManager.Instance.avatar = characterAvatar == 0 ? UserDataManager.Avatar.BORIS : UserDataManager.Avatar.MECHA;
+            onGame = true;
         }
     }
     #endregion

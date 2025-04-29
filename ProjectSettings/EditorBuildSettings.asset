@@ -12,9 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/New Scenes/RoomScene.unity
     guid: e0726233fd3db3044b861f84e28abdd9
   - enabled: 1
-    path: Assets/Scenes/Main/MainScene.unity
-    guid: 9019d0eaedfe9f447a2ef764c4c840ec
-  - enabled: 1
     path: Assets/Scenes/New Scenes/LobbyScene.unity
     guid: 264e084c664147447a1c14ce5cfe1cde
   - enabled: 1

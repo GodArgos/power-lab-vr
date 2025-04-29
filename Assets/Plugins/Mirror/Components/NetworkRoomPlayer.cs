@@ -191,5 +191,10 @@ namespace Mirror
         }
 
         #endregion
+
+        public void SetReadyToBegin(bool value)
+        {
+            readyToBegin = value;
+        }
     }
 }

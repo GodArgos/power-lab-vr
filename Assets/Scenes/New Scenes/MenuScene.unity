@@ -4462,11 +4462,11 @@ MonoBehaviour:
   evaluationInterval: 3
   timeInterpolationGui: 0
   showRoomGUI: 0
-  minPlayers: 2
+  minPlayers: 1
   roomPlayerPrefab: {fileID: 6716749530598395092, guid: e3002c57955c08140bce25074bb706fa,
     type: 3}
   RoomScene: Assets/Scenes/New Scenes/RoomScene.unity
-  GameplayScene: Assets/Scenes/Main/MainScene.unity
+  GameplayScene: Assets/Scenes/New Scenes/LobbyScene.unity
   _allPlayersReady: 0
   clientIndex: 0
 --- !u!4 &110319615
