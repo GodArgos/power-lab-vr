@@ -114,6 +114,7 @@ MonoBehaviour:
   ignoreMask:
     serializedVersion: 2
     m_Bits: 0
+  VoiceTriggerNetworked: {fileID: 0}
 --- !u!120 &6367200406315843238
 LineRenderer:
   serializedVersion: 2
@@ -336,7 +337,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3931817572583439841, guid: 85f4e06fd9acb244694b09cc710e5978, type: 3}
+  - {fileID: 2100000, guid: cbe15723d7ef6f14e87afe52a3edac24, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
