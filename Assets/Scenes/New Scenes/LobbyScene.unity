@@ -2320,6 +2320,7 @@ GameObject:
   - component: {fileID: 1563986072}
   - component: {fileID: 1563986070}
   - component: {fileID: 1563986074}
+  - component: {fileID: 1563986075}
   m_Layer: 0
   m_Name: ChangeSceneCube
   m_TagString: Untagged
@@ -2363,8 +2364,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5450943, y: 1.5896916, z: 1}
-  m_Center: {x: 0.22745277, y: 0.294846, z: 0}
+  m_Size: {x: 0.5450943, y: 1.5896916, z: 2.6840155}
+  m_Center: {x: 0.22745277, y: 0.294846, z: -0.2188047}
 --- !u!4 &1563986073
 Transform:
   m_ObjectHideFlags: 0
@@ -2399,6 +2400,33 @@ MonoBehaviour:
   neededPlayers: 2
   active: 1
   numberOfPlayers: 0
+--- !u!54 &1563986075
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563986069}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1571067143
 GameObject:
   m_ObjectHideFlags: 0
@@ -3001,7 +3029,7 @@ Transform:
   m_GameObject: {fileID: 1769661618}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -21.064, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3550,6 +3578,16 @@ PrefabInstance:
         type: 3}
       propertyPath: desiredDuration
       value: 1.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301045281814070425, guid: 419f6a0cde4bbf346a7767c8272b8938,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 3.2505987
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301045281814070425, guid: 419f6a0cde4bbf346a7767c8272b8938,
+        type: 3}
+      propertyPath: m_Center.x
+      value: -19.893072
       objectReference: {fileID: 0}
     - target: {fileID: 4587991484131804208, guid: 419f6a0cde4bbf346a7767c8272b8938,
         type: 3}

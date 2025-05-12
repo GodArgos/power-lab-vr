@@ -156,6 +156,11 @@ public class RoomPlayerController : NetworkRoomPlayer
     private void ReadySetup(bool status)
     {
         playerStatus.GetComponent<RoomPlayerStatusReferences>().SetReadyStatus(status);
+        if (characterAvatar != -1)
+        {
+            UserDataManager.Instance.avatar = characterAvatar == 0 ? UserDataManager.Avatar.BORIS : UserDataManager.Avatar.MECHA;
+            Debug.Log(UserDataManager.Instance.avatar);
+        }
     }
 
     private void ButtonSetup(bool status)
@@ -184,7 +189,7 @@ public class RoomPlayerController : NetworkRoomPlayer
     {
         if (CustomNetworkRoomManager.singleton != null)
         {
-            CmdPrepareForGame();
+            //CmdPrepareForGame();
             CustomNetworkRoomManager.singleton.CheckForReadiness();
         }
     }
@@ -274,6 +279,7 @@ public class RoomPlayerController : NetworkRoomPlayer
         if (characterAvatar != -1)
         {
             UserDataManager.Instance.avatar = characterAvatar == 0 ? UserDataManager.Avatar.BORIS : UserDataManager.Avatar.MECHA;
+            Debug.Log(UserDataManager.Instance.avatar);
             onGame = true;
         }
     }
