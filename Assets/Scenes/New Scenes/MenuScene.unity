@@ -70130,8 +70130,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Target: {fileID: 1395674292}
-  m_Height: 1.4
-  m_Distance: 0.7
+  m_Height: 1.55
+  m_Distance: 1.2
 --- !u!1 &1651392074
 GameObject:
   m_ObjectHideFlags: 0
@@ -75641,8 +75641,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Target: {fileID: 1395674292}
-  m_Height: 1.4
-  m_Distance: 0.7
+  m_Height: 1.55
+  m_Distance: 1.2
 --- !u!114 &1786425416
 MonoBehaviour:
   m_ObjectHideFlags: 0
