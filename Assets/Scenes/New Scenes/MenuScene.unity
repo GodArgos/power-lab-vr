@@ -4380,6 +4380,8 @@ GameObject:
   - component: {fileID: 110319615}
   - component: {fileID: 110319614}
   - component: {fileID: 110319613}
+  - component: {fileID: 110319617}
+  - component: {fileID: 110319616}
   m_Layer: 0
   m_Name: CustomRoomNetworkManager
   m_TagString: Untagged
@@ -4437,7 +4439,7 @@ MonoBehaviour:
   autoConnectClientBuild: 0
   offlineScene: Assets/Scenes/New Scenes/MenuScene.unity
   onlineScene: Assets/Scenes/New Scenes/RoomScene.unity
-  transport: {fileID: 110319613}
+  transport: {fileID: 110319617}
   networkAddress: localhost
   maxConnections: 100
   disconnectInactiveConnections: 0
@@ -4486,6 +4488,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &110319616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110319612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef4bffeda13d7a748973ff9204401c07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &110319617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110319612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6e55fca1f4e4844593a3dd65a3ecb39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Channels: 0200000001000000
+  Timeout: 25
+  AllowSteamRelay: 1
+  UseNextGenSteamNetworking: 1
 --- !u!1 &111291378
 GameObject:
   m_ObjectHideFlags: 0
