@@ -35,7 +35,7 @@ public class SteamLobby : MonoBehaviour
     public void HostLobby()
     {
 
-        hostButton.SetActive(false);
+        //hostButton.SetActive(false);
 
         SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, networkManager.maxConnections);
 
@@ -47,7 +47,7 @@ public class SteamLobby : MonoBehaviour
     {
         if (callback.m_eResult != EResult.k_EResultOK)
         {
-            hostButton.SetActive(true);
+            //hostButton.SetActive(true);
             return;
         }
 
@@ -77,9 +77,7 @@ public class SteamLobby : MonoBehaviour
         networkManager.networkAddress = hostAddress;
         networkManager.StartClient();
 
-        hostButton.SetActive(false);
+        //hostButton.SetActive(false);
 
     }
-
-
 }

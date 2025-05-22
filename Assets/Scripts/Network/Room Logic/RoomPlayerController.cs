@@ -156,6 +156,9 @@ public class RoomPlayerController : NetworkRoomPlayer
     private void ReadySetup(bool status)
     {
         playerStatus.GetComponent<RoomPlayerStatusReferences>().SetReadyStatus(status);
+
+        if (!isLocalPlayer) return;
+
         if (characterAvatar != -1)
         {
             UserDataManager.Instance.avatar = characterAvatar == 0 ? UserDataManager.Avatar.BORIS : UserDataManager.Avatar.MECHA;
