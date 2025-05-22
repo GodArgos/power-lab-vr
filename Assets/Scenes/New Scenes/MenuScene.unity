@@ -4382,6 +4382,7 @@ GameObject:
   - component: {fileID: 110319613}
   - component: {fileID: 110319617}
   - component: {fileID: 110319616}
+  - component: {fileID: 110319618}
   m_Layer: 0
   m_Name: CustomRoomNetworkManager
   m_TagString: Untagged
@@ -4516,6 +4517,19 @@ MonoBehaviour:
   Timeout: 25
   AllowSteamRelay: 1
   UseNextGenSteamNetworking: 1
+--- !u!114 &110319618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110319612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f7c43467600e24cb074c43514bcb69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hostButton: {fileID: 195602267}
 --- !u!1 &111291378
 GameObject:
   m_ObjectHideFlags: 0
@@ -8572,7 +8586,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 727208512}
+      objectReference: {fileID: 110319618}
     - target: {fileID: 2261960413961230445, guid: 26f2e64900c53ae4e859b89a85e5ea0b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -8581,12 +8595,12 @@ PrefabInstance:
     - target: {fileID: 2261960413961230445, guid: 26f2e64900c53ae4e859b89a85e5ea0b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: HostGame
+      value: HostLobby
       objectReference: {fileID: 0}
     - target: {fileID: 2261960413961230445, guid: 26f2e64900c53ae4e859b89a85e5ea0b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SessionManager, Assembly-CSharp
+      value: SteamLobby, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2261960413961230445, guid: 26f2e64900c53ae4e859b89a85e5ea0b,
         type: 3}
@@ -8721,6 +8735,12 @@ PrefabInstance:
 --- !u!224 &195602266 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 905653798956434481, guid: 26f2e64900c53ae4e859b89a85e5ea0b,
+    type: 3}
+  m_PrefabInstance: {fileID: 195602265}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &195602267 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 905653798956434480, guid: 26f2e64900c53ae4e859b89a85e5ea0b,
     type: 3}
   m_PrefabInstance: {fileID: 195602265}
   m_PrefabAsset: {fileID: 0}
