@@ -106,6 +106,8 @@ public class ButtonValueSync : NetworkBehaviour
             {
                 blinkingMaterial.StopBlinking();
             }
+
+            GetComponent<XRPushButton>().enabled = false;
         }
     }
 

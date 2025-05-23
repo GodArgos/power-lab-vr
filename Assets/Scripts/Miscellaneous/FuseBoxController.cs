@@ -19,6 +19,10 @@ public class FuseBoxController : MonoBehaviour
     private bool leverReady = false;
     private bool buttonReady = false;
 
+    [Header("Test Variables")]
+    [SerializeField] private bool activateButton = false;
+
+
     private void Start()
     {
         m_pushButton.GetComponent<XRPushButton>().enabled = false;
@@ -27,6 +31,17 @@ public class FuseBoxController : MonoBehaviour
 
     void Update()
     {
+        if (activateButton)
+        {
+            m_pushButton.GetComponent<XRPushButton>().enabled = true;
+            m_pushButton.transform.GetChild(0).GetComponent<BlinkingMaterial>().StartBlinking();
+            m_pushButton.GetComponent<SoundPlayer>().CmdPlayPausableSoundForAll("button_buzzer");
+            m_activationLever.enabled = false;
+            buttonReady = true;
+            m_greenLight.StopBlinking();
+            Debug.Log("BUTTON ACTIVATED");
+            activateButton = false;
+        }
         if (!slidersReady) { CheckAllSwitches(); }
         if (leverReady && !buttonReady) { CheckLever(); }
     }

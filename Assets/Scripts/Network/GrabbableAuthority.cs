@@ -7,6 +7,7 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class GrabbableAuthority : NetworkBehaviour
 {
+    public bool canBeGrabbed = true;
     [SyncVar(hook = nameof(OnIsGrabbedChanged))] public bool isGrabbed = false; 
     private NetworkIdentity m_objectIdentity;
     private XRBaseInteractable m_grabInteractable;
@@ -19,6 +20,8 @@ public class GrabbableAuthority : NetworkBehaviour
 
     private void OnEnable()
     {
+        if (!canBeGrabbed) return;
+
         m_grabInteractable = GetComponent<XRBaseInteractable>();
         m_delegateAuthority = GetComponent<DelegateAuthority>();
 

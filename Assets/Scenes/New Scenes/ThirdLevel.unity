@@ -32158,19 +32158,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
-      - m_Target: {fileID: 1154342053}
-        m_TargetAssemblyTypeName: UnityEngine.XR.Content.Interaction.XRPushButton,
-          Unity.XR.Content.Interaction
-        m_MethodName: DisableComponent
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
   m_OnRelease:
     m_PersistentCalls:
       m_Calls: []
@@ -32192,6 +32179,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  canBeGrabbed: 0
   isGrabbed: 0
 --- !u!114 &1154342056
 MonoBehaviour:
@@ -66977,6 +66965,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  canBeGrabbed: 1
   isGrabbed: 0
 --- !u!114 &5567899619525773293
 MonoBehaviour:
@@ -68184,6 +68173,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  canBeGrabbed: 1
   isGrabbed: 0
 --- !u!114 &6420775372628592966
 MonoBehaviour:
@@ -68639,6 +68629,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  canBeGrabbed: 1
   isGrabbed: 0
 --- !u!114 &6665145143507788587
 MonoBehaviour:
@@ -68896,6 +68887,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  canBeGrabbed: 1
   isGrabbed: 0
 --- !u!114 &6705781505399379206
 MonoBehaviour:
@@ -69349,6 +69341,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  canBeGrabbed: 1
   isGrabbed: 0
 --- !u!114 &6920998603722734776
 MonoBehaviour:
@@ -69715,6 +69708,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  canBeGrabbed: 1
   isGrabbed: 0
 --- !u!114 &7060665423274933419
 MonoBehaviour:
@@ -70319,6 +70313,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  canBeGrabbed: 1
   isGrabbed: 0
 --- !u!114 &7350277415635986988
 MonoBehaviour:
@@ -70624,6 +70619,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  canBeGrabbed: 1
   isGrabbed: 0
 --- !u!114 &7469531271883006057
 MonoBehaviour:
@@ -70889,6 +70885,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  canBeGrabbed: 1
   isGrabbed: 0
 --- !u!114 &7518201176588500595
 MonoBehaviour:
@@ -71591,6 +71588,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  canBeGrabbed: 1
   isGrabbed: 0
 --- !u!114 &7923535450603637982
 MonoBehaviour:
@@ -71923,6 +71921,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  canBeGrabbed: 1
   isGrabbed: 0
 --- !u!114 &8094025807803861372
 MonoBehaviour:
@@ -73195,6 +73194,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  canBeGrabbed: 1
   isGrabbed: 0
 --- !u!114 &8620882515344897981
 MonoBehaviour:
@@ -73603,6 +73603,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  canBeGrabbed: 1
   isGrabbed: 0
 --- !u!114 &8703436768671683078
 MonoBehaviour:
@@ -74207,6 +74208,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  canBeGrabbed: 1
   isGrabbed: 0
 --- !u!114 &9040167434635792225
 MonoBehaviour:
@@ -74521,6 +74523,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  canBeGrabbed: 1
   isGrabbed: 0
 --- !u!114 &9091641914877251510
 MonoBehaviour:
@@ -74855,6 +74858,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  canBeGrabbed: 1
   isGrabbed: 0
 --- !u!114 &9211156386723275945
 MonoBehaviour:
