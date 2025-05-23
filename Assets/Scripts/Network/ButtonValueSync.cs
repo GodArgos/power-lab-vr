@@ -65,7 +65,7 @@ public class ButtonValueSync : NetworkBehaviour
     // Called when the button is pressed locally
     private void OnButtonPressed()
     {
-        if (isOwned && !enableTestMode)
+        if (!enableTestMode)
         {
             CmdSetPressed(true);
         }
@@ -74,7 +74,7 @@ public class ButtonValueSync : NetworkBehaviour
     // Called when the button is released locally
     private void OnButtonReleased()
     {
-        if (isOwned && !enableTestMode)
+        if (!enableTestMode)
         {
             CmdSetPressed(false);
         }
