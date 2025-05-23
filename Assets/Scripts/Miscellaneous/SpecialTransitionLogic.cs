@@ -146,6 +146,7 @@ public class SpecialTransitionLogic : NetworkBehaviour
         else
         {
             XROrigin.transform.position = positionB.position;
+            fan = FindFan().GetComponent<FanLift>();
             fan.playerCollider = XROrigin.gameObject.GetComponent<CharacterController>();
             CameraDisconnection();
         }
@@ -170,5 +171,10 @@ public class SpecialTransitionLogic : NetworkBehaviour
     {
         XROrigin.Camera.cullingMask = 0;
         XROrigin.Camera.clearFlags = CameraClearFlags.SolidColor;
+    }
+
+    private GameObject FindFan()
+    {
+        return GameObject.FindGameObjectWithTag("FanCollider");
     }
 }

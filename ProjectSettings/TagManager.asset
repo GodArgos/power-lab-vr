@@ -13,6 +13,7 @@ TagManager:
   - SpawnPoint
   - Weapon
   - PlayerNetwork
+  - FanCollider
   layers:
   - Default
   - TransparentFX

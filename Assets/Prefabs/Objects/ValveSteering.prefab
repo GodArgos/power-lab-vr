@@ -304,6 +304,7 @@ GameObject:
   - component: {fileID: 8851851589961100113}
   - component: {fileID: 2112057228582124559}
   - component: {fileID: 2055110517221218095}
+  - component: {fileID: 1563358046716755710}
   m_Layer: 0
   m_Name: ValveSteering
   m_TagString: Untagged
@@ -344,7 +345,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   isGrabbed: 0
-  author: 0
 --- !u!114 &7286640221044103636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,34 +401,10 @@ MonoBehaviour:
       m_Calls: []
   m_HoverEntered:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4293323356713351957}
-        m_TargetAssemblyTypeName: GrabbableAuthority, Assembly-CSharp
-        m_MethodName: OnHoverEnter
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 0
+      m_Calls: []
   m_HoverExited:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4293323356713351957}
-        m_TargetAssemblyTypeName: GrabbableAuthority, Assembly-CSharp
-        m_MethodName: OnHoverExited
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 0
+      m_Calls: []
   m_FirstSelectEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -438,18 +414,6 @@ MonoBehaviour:
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4293323356713351957}
-        m_TargetAssemblyTypeName: GrabbableAuthority, Assembly-CSharp
-        m_MethodName: OnGrabbed
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
       - m_Target: {fileID: 7286640221044103636}
         m_TargetAssemblyTypeName: ValveRotationSync, Assembly-CSharp
         m_MethodName: OnGrabbed
@@ -465,18 +429,6 @@ MonoBehaviour:
   m_SelectExited:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4293323356713351957}
-        m_TargetAssemblyTypeName: GrabbableAuthority, Assembly-CSharp
-        m_MethodName: OnReleased
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
       - m_Target: {fileID: 7286640221044103636}
         m_TargetAssemblyTypeName: ValveRotationSync, Assembly-CSharp
         m_MethodName: OnReleased
@@ -686,6 +638,21 @@ MonoBehaviour:
   audioSource: {fileID: 2112057228582124559}
   soundAssets:
   - {fileID: 11400000, guid: b92c1b77ea92e22489eaacec8ef34782, type: 2}
+--- !u!114 &1563358046716755710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5279549066308452045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 203abd81c7ed1ea42a7aed0b06a66ad1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
 --- !u!1 &9069820097221029579
 GameObject:
   m_ObjectHideFlags: 0
