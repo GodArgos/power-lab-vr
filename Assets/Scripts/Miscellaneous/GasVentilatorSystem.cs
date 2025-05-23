@@ -22,7 +22,6 @@ public class GasVentilatorSystem : NetworkBehaviour
 
     private void Start()
     {
-        m_collider = GetComponent<BoxCollider>();
         m_timer = m_playOnAwake ? m_cycleTime : 0;
 
         foreach (ParticleSystem ps in m_particleSystem)
@@ -39,6 +38,7 @@ public class GasVentilatorSystem : NetworkBehaviour
 
         //if (isServer)
         //    CmdUpdateSystemStatus(true);
+        m_collider = GetComponent<BoxCollider>();
 
         ApplyState(m_state);
     }

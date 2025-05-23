@@ -35830,7 +35830,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   sceneFactor: 5
-  neededPlayers: 2
+  neededPlayers: 1
   active: 1
   numberOfPlayers: 0
 --- !u!114 &1131382612
@@ -35845,7 +35845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneId: 1035251980
+  sceneId: 3742044864
   _assetId: 0
   serverOnly: 0
   visibility: 0
