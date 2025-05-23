@@ -30,7 +30,7 @@ public class OnTriggerLoadSceneAdditive : NetworkBehaviour
 
     private void OnNumberOfPlayersChanged(int oldNumber, int newNumber)
     {
-        if (newNumber == neededPlayers)
+        if (newNumber == neededPlayers && active)
         {
             CmdChangeScene();
         }

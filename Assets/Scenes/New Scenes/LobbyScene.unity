@@ -2397,7 +2397,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   sceneFactor: 1
-  neededPlayers: 2
+  neededPlayers: 1
   active: 1
   numberOfPlayers: 0
 --- !u!54 &1563986075
