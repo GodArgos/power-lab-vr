@@ -34835,7 +34835,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1096715918}
-  - component: {fileID: 1096715917}
   m_Layer: 0
   m_Name: FourthLevelVoiceClips
   m_TagString: Untagged
@@ -34843,26 +34842,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1096715917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1096715916}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41fe91ddc0f12a743a22c6e9867b8672, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelName: 4thLevel_LevelVoice
-  voiceType: 0
-  OnVoiceClipEnds:
-    m_PersistentCalls:
-      m_Calls: []
-  startIndex: 0
-  endIndex: -1
-  playOnStart: 0
 --- !u!4 &1096715918
 Transform:
   m_ObjectHideFlags: 0

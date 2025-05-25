@@ -16241,6 +16241,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  canBeGrabbed: 1
   isGrabbed: 0
 --- !u!114 &488364797
 MonoBehaviour:
@@ -44661,6 +44662,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  canBeGrabbed: 1
   isGrabbed: 0
 --- !u!114 &832513611
 MonoBehaviour:
@@ -80613,7 +80615,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   VoiceTriggerNetworked: {fileID: 1686646754}
-  neededPlayers: 1
+  neededPlayers: 2
   numberOfPlayers: 0
 --- !u!65 &1686646756
 BoxCollider:

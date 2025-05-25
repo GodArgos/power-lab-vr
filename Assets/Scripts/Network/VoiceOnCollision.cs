@@ -26,7 +26,7 @@ public class VoiceOnCollision : NetworkBehaviour
 
     private void OnNumberOfPlayersChanged(int oldNumber, int newNumber)
     {
-        if (newNumber == neededPlayers)
+        if (newNumber == numberOfPlayers)
         {
             VoiceTriggerNetworked.CmdHandleVoiceTrigger();
         }

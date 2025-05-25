@@ -15620,7 +15620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 923f0c98bc7bd1a4eb65d48069f39211, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPosition: {x: -1, y: 0.95, z: 3.15}
+  targetPosition: {x: -1, y: 1.25, z: 3.15}
   targetRotation: {x: 0, y: -25, z: 0}
   moveSpeed: 5
   rotationSpeed: 50

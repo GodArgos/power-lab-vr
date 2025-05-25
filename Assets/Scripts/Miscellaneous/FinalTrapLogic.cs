@@ -25,6 +25,7 @@ public class FinalTrapLogic : NetworkBehaviour
     // HashSet para almacenar jugadores que ya han entrado
     private HashSet<GameObject> playersInTrigger = new HashSet<GameObject>();
 
+    public bool newTest = false;
 
     private void Start()
     {
@@ -40,6 +41,7 @@ public class FinalTrapLogic : NetworkBehaviour
         {
             if (VoiceTriggerNetworked != null)
                 VoiceTriggerNetworked.CmdHandleVoiceTrigger();
+                VoiceTriggerNetworked.relatedVoiceTrigger.OnVoiceClipEnds.AddListener(() => { newTest = true; });
 
             if (isServer)
             {
@@ -85,7 +87,7 @@ public class FinalTrapLogic : NetworkBehaviour
         forceSoundPlayer.CmdPlayPausableSoundForAll("forcefield");
         ActivateForceFields();
 
-        yield return new WaitForSeconds(m_timeForceField);
+        yield return new WaitUntil(() => newTest);
 
         EverythingFalls();
 

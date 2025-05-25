@@ -6,7 +6,7 @@ using UnityEngine;
 public class VoiceTriggerNetworked : NetworkBehaviour
 {
     [Header("Dependencies")]
-    [SerializeField] private VoiceTrigger relatedVoiceTrigger;
+    public VoiceTrigger relatedVoiceTrigger;
 
     [Header("Synchronization Variables")]
     [SyncVar] public bool alreadyPlayed = false;
