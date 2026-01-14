@@ -31,7 +31,7 @@ Evaluar:
 📄 Uso exclusivo para fines de investigación académica
 
 ![PowerLab_1](/Md_Resources/PowerLab_1.PNG)
-![PowerLab_2](/Md_Resources/PowerLab_2.PNG)
+![PowerLab_2](/Md_Resources/PowerLab_2.png)
 
 ---
 
@@ -65,5 +65,5 @@ To evaluate:
 ✔ Completed  
 📄 Research-only project
 
-![PowerLab_3](/Md_Resources/PowerLab_3.PNG)
-![PowerLab_4](/Md_Resources/PowerLab_4.PNG)
+![PowerLab_3](/Md_Resources/PowerLab_3.png)
+![PowerLab_4](/Md_Resources/PowerLab_4.png)
